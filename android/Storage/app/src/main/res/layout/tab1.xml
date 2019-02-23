@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/id_title_bar"
+        layout="@layout/include_main_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_title_bar_height" />
+    <com.bigkoo.convenientbanner.ConvenientBanner
+        android:id="@+id/id_cb"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        >
+        <!--<ImageView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:src="@mipmap/store"-->
+            <!--android:scaleType="fitXY"-->
+            <!--/>-->
+    </com.bigkoo.convenientbanner.ConvenientBanner>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="15"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/id_buyer_tv"
+                style="@style/main_content_item_text_style"
+                android:drawableTop="@drawable/btn_main_gather"
+                android:text="@string/buyerreceive" />
+
+            <TextView
+                android:id="@+id/id_intostore_tv"
+                style="@style/main_content_item_text_style"
+                android:drawableTop="@drawable/btn_main_review"
+                android:text="@string/intostore"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/id_outstore_tv"
+                style="@style/main_content_item_text_style"
+                android:drawableTop="@drawable/btn_main_modify"
+                android:text="@string/outstore"/>
+
+            <TextView
+                android:id="@+id/id_storetake_tv"
+                style="@style/main_content_item_text_style"
+                android:drawableTop="@drawable/btn_main_six"
+                android:text="@string/stocktake"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/id_move_tv"
+                style="@style/main_content_item_text_style"
+                android:drawableTop="@drawable/btn_main_five"
+                android:text="@string/movestore"/>
+
+            <TextView
+                android:id="@+id/id_chek_tv"
+                style="@style/main_content_item_text_style"
+                android:drawableTop="@drawable/btn_main_more"
+                android:text="@string/storecheck"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:mvc="http://www.springframework.org/schema/mvc"
+        xmlns:tx="http://www.springframework.org/schema/tx"
+        xmlns:task="http://www.springframework.org/schema/task"
+        xmlns="http://www.springframework.org/schema/beans"
+        xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.1.xsd
+        http://www.springframework.org/schema/mvc
+    	http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+    	http://www.springframework.org/schema/tx
+    	http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+        http://www.springframework.org/schema/task
+        http://www.springframework.org/schema/task/spring-task-4.1.xsd"
+>
+
+  <!-- 加载资源文件其中包含变量信息，必须在Spring配置文件的最前面加载，即第一个加载! -->
+  <context:property-placeholder location="classpath:database.properties"/>
+
+  <!-- ++启动自动扫描，该包下所有的Bean(@Controller) -->
+  <context:component-scan base-package="com.zthc.ewms"/>
+  <context:component-scan base-package="com.hckj"/>
+  <context:component-scan base-package="org.activiti.rest.editor" />
+  <context:component-scan base-package="org.activiti.rest.diagram"/>
+
+  <!-- 文件上传
+  <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+  -->
+  <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <property name="defaultEncoding" value="UTF-8"></property>
+  </bean>
+  <!-- 数据源 -->
+
+  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+    <property name="url" value="jdbc:oracle:thin:@42.157.4.99:1521:orcl"/><!--60.174.234.117-->
+      <property name="username" value="test"/>
+      <property name="password" value="test"/>
+    <property name="initialSize" value="${initialSize}"/>
+    <property name="maxActive" value="${maxActive}"/>
+    <property name="maxIdle" value="${maxIdle}"/>
+    <property name="minIdle" value="${minIdle}"/>
+  </bean>
+
+  <!-- 配置SessionFactory -->
+  <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="packagesToScan">
+      <list>
+        <value>com.zthc.ewms</value>
+      </list>
+    </property>
+    <property name="hibernateProperties">
+      <props>
+        <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+        <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+        <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+        <!--<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl_auto}</prop>-->
+        <prop key="hibernate.current_session_context_class">${hibernate.current_session}</prop>
+        <prop key="hibernate.connection.autocommit">${hibernate.connection_autocommit}</prop>
+      </props>
+    </property>
+
+  </bean>
+
+  <!-- 配置事务管理 -->
+  <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+  </bean>
+<!--
+  <bean class="org.springframework.remoting.jaxws.SimpleJaxWsServiceExporter">
+    <property name="baseAddress" value="http://127.0.0.1:9043/project"/>
+  </bean>
+  -->
+  <task:annotation-driven/>
+
+  <!-- 采用注解的方式自动处理事务 -->
+  <tx:annotation-driven transaction-manager="txManager" proxy-target-class="true"/>
+  <!-- 自动处理注解映射 -->
+  <mvc:annotation-driven/>
+  <mvc:default-servlet-handler/>
+</beans>

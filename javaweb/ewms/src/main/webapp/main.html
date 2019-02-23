@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<head>
+<link rel="stylesheet" href="plugins/layui/css/layui.css" media="all"/>
+<link rel="stylesheet" href="css/main.css"/>
+<link rel="stylesheet" href="css/public.css" media="all"/>
+    <style>
+        /*table tr{
+            height: 23px;
+            width:160px
+        }*/
+    </style>
+</head>
+<body style="padding: 5px 0 0 0;"><!-- onload="location='system/activitiListener/findProcessing.htm'"-->
+<div class="layui-tab layui-tab-card" lay-filter="yewu">
+    <ul class="layui-tab-title">
+        <li class="layui-this">待办业务</li>
+        <li>已办业务</li>
+    </ul>
+    <div class="layui-tab-content" style="height: 100%">
+        <div class="layui-tab-item layui-show">
+            <table  id="activitiProcessing" lay-filter="activitiProcessing"></table>
+        </div>
+        <div class="layui-tab-item">
+            <table  id="activitiProcessed" lay-filter="activitiProcessed" ></table>
+        </div>
+    </div>
+
+</div>
+</body>
+<script type="text/javascript" src="plugins/layui/layui.js"></script>
+<script type="text/javascript" src="js/system/act/activitiProcess.js"></script>
+
+</html>

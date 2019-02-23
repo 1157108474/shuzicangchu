@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<service name="AxisService">
+    <description>AxisService</description>
+    <parameter name="ServiceClass"> com.zthc.ewms.webservice.provide.EwmsAxisService</parameter>
+    <operation name="planTransformApply">
+        <messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+    </operation>
+    <operation name="planTransformAllocation">
+        <messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+    </operation>
+</service>

@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/normal_title_bar" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="@string/caigoudingdan"
+                android:textSize="@dimen/adapter_font_size"
+                android:gravity="center_vertical"/>
+            <TextView
+                android:id="@+id/caigoudingdan"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="6dp"
+                android:text=""
+                android:textSize="@dimen/adapter_font_size" />
+
+        </LinearLayout>
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="@string/wuliaobianma"
+                android:textSize="@dimen/adapter_font_size"
+                android:gravity="center_vertical"/>
+            <TextView
+                android:id="@+id/id_encode"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="6dp"
+                android:text=""
+                android:textSize="@dimen/adapter_font_size" />
+
+        </LinearLayout>
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/wuliaomiaoshu"
+                android:textSize="@dimen/adapter_font_size"
+                android:gravity="center_vertical"/>
+            <TextView
+                android:id="@+id/id_describe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="6dp"
+                android:text="个人观点个如何如何发的那份孤独的风格和惹人厌认同他的后人发动机有条件的"
+                android:textSize="@dimen/adapter_font_size" />
+
+        </LinearLayout>
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="@string/gongyingshang"
+                android:textSize="@dimen/adapter_font_size"
+                android:gravity="center_vertical"/>
+            <TextView
+                android:id="@+id/gongyingshang"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="6dp"
+                android:text=""
+                android:textSize="@dimen/adapter_font_size" />
+
+        </LinearLayout>
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="@string/unit"
+                    android:textSize="@dimen/adapter_font_size"
+                    android:gravity="center_vertical"/>
+                <TextView
+                    android:id="@+id/id_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="6dp"
+                    android:text=""
+                    android:textSize="@dimen/adapter_font_size" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="@string/sales_type"
+                    android:textSize="@dimen/adapter_font_size"
+                    android:gravity="center_vertical"/>
+                <TextView
+                    android:id="@+id/id_sales_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="6dp"
+                    android:text=""
+                    android:textSize="@dimen/adapter_font_size" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="30dp"
+                android:text="@string/caigoushuliang"
+                android:textSize="@dimen/adapter_font_size"
+                android:gravity="center_vertical"/>
+            <TextView
+                android:id="@+id/id_buy_num"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="6dp"
+                android:text=""
+                android:textSize="@dimen/adapter_font_size" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="50dp"
+                android:text="@string/kejieshoushuliang"
+                android:textSize="@dimen/adapter_font_size"
+                android:gravity="center_vertical"/>
+            <TextView
+                android:id="@+id/id_canreceive_num"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="6dp"
+                android:text=""
+                android:textSize="@dimen/adapter_font_size" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="@string/is_equipment"
+                    android:textSize="@dimen/adapter_font_size"
+                    android:gravity="center_vertical"/>
+                <CheckBox
+                    android:id="@+id/id_is_equipment_cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+
+                    android:textColor="#666666"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="30dp"
+                    android:text="@string/is_serial_number"
+                    android:textSize="@dimen/adapter_font_size"
+                    android:gravity="center_vertical"/>
+                <CheckBox
+                    android:id="@+id/id_is_serial_cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:textColor="#666666"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="@string/jieshoushuliang"
+                android:textSize="@dimen/adapter_font_size"
+                android:gravity="center_vertical"/>
+
+            <EditText
+                android:id="@+id/id_receipt_num"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="6dp"
+                android:text=""
+                android:textSize="@dimen/adapter_font_size"
+                android:background="@drawable/edit_with_btn_bg"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <Button
+                android:id="@+id/btn_accept"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_margin="6dp"
+                android:background="@drawable/btn_shape_orange"
+                android:gravity="center_vertical|center"
+                android:text="@string/accept"
+                android:textColor="@android:color/white"/>
+            <Button
+                android:id="@+id/btn_connect"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_margin="6dp"
+                android:background="@drawable/btn_shape_orange"
+                android:gravity="center_vertical|center"
+                android:text="@string/print_connect"
+                android:textColor="@android:color/white"
+                />
+            <Button
+                android:id="@+id/btn_print"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_margin="6dp"
+                android:background="@drawable/btn_shape_orange"
+                android:gravity="center_vertical|center"
+                android:text="@string/print"
+                android:textColor="@android:color/white"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
+

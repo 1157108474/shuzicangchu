@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.admin.storage">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 网络权限 -->
+    <uses-permission android:name="android.permission.VIBRATE" /> <!-- 震动权限 -->
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- 摄像头权限 -->
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <!-- 自动聚焦权限 -->
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".activity.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.buyer.BuyerReceiveActivity" />
+        <activity android:name=".activity.buyer.BuyerListSelectActivity" />
+        <activity android:name="com.google.zxing.activity.CaptureActivity" />
+        <activity android:name=".activity.buyer.ReceiveDetailActivity" />
+        <activity android:name=".activity.buyer.ReceiveOptActivity" />
+        <activity android:name=".activity.intostore.IntoStoreActivity" />
+        <activity android:name=".activity.intostore.ReceivedListSelectActivity" />
+        <activity android:name=".activity.intostore.IntoStoreListActivity" />
+        <activity android:name=".activity.intostore.IntoStoreOptActivity" />
+        <activity android:name=".activity.outstore.OutStoreActivity" />
+        <activity android:name=".activity.outstore.ApplicationListSelectActivity" />
+        <activity android:name=".activity.outstore.OutStoreListActivity" />
+        <activity android:name=".activity.outstore.OutStoreOptActivity" />
+        <activity android:name=".activity.outstore.MaterialInventoryInfoActivity" />
+        <activity android:name=".activity.check.CheckStoreActivity" />
+        <activity android:name=".activity.check.CheckStoreDetailActivity" />
+        <activity android:name=".activity.check.MaterialCheckActivity" />
+        <activity android:name=".activity.check.AddMaterialCheckActivity" />
+        <activity android:name=".activity.movestore.MoveStoreActivity" />
+        <activity android:name=".activity.movestore.MoveStoreDetailActivity" />
+        <activity android:name=".activity.movestore.YKYWOutStoreOptActivity" />
+        <activity android:name=".activity.movestore.YKYWIntoStoreOptActivity" />
+        <activity android:name=".activity.movestore.AddYKYWActivity" />
+        <activity android:name=".activity.storequery.StoreQueryActivity" />
+        <activity android:name=".activity.movestore.YKYWDetailActivity" />
+        <activity android:name=".activity.movestore.YKYWOptActivity"></activity>
+    </application>
+
+</manifest>

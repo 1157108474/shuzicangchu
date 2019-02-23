@@ -1,0 +1,127 @@
+body {
+    font-family: Tahoma, Verdana, ËÎÌו;
+    font-size: 12px;
+    line-height: 22px;
+}
+
+.formbody {
+    margin-left: 5px;
+}
+
+.btnfbs:hover {
+    height: 23px !important;
+    line-height: 23px !important;
+    width: 46px !important;
+    font-weight: bold !important;
+    /* color: #fff !important; */
+    cursor: pointer !important;
+    border: none !important;
+    background-color: #eef4f9 !important;
+    float: left !important;
+}
+
+.btnfbs {
+    border: none !important;
+    background-color: #eef4f9 !important;
+    display: none;
+    font-weight: normal !important;
+    height: 23px !important;
+    line-height: 23px !important;
+    width: 46px !important;
+    float: left !important;
+    color: #2B7DCA;
+    font-weight: bold;
+}
+.import-btnfbs:hover {
+    height: 23px !important;
+    line-height: 23px !important;
+    width: 46px !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+    border: none !important;
+    background-color: #eef4f9 !important;
+    float: left !important;
+}
+.import-btnfbs{
+    border: none !important;
+    background-color: #eef4f9 !important;
+    font-weight: normal !important;
+    height: 23px !important;
+    line-height: 23px !important;
+    width: 46px !important;
+    float: left !important;
+    color: #2B7DCA;
+    font-weight: bold;
+}
+
+
+.mini-panel-header {
+    width: auto;
+    overflow: hidden;
+
+    color: #04408c;
+    border-bottom: solid 1px #bbb;
+    cursor: default;
+    position: relative;
+    font-weight: bold;
+    zoom: 1;
+}
+
+.mini-buttonedit-input {
+    background: none;
+    border: 0;
+    height: 22px;
+    line-height: 22px;
+    font-family: Verdana;
+    font-size: 9pt;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    z-index: 1;
+    cursor: text;
+    width: 100%;
+    float: right;
+    _position: absolute;
+    _left: 2px;
+    _top: 0px;
+}
+
+.mini-toolbar {
+    /* position: relative; */
+    border: solid 1px #eee;
+    color: black;
+    padding: 5px;
+    _padding-bottom: 4px;
+    background: #eef4f9;
+    /* background: #E7EAEE url(images/toolbar/toolbar.png) repeat-x 0 0; */
+}
+
+.bill-search label {
+    width: 80px !important;
+}
+
+.bill-search div {
+    margin-left: 85px !important;
+}
+
+.bill-td {
+    width: 260px !important;
+}
+
+.bill-button {
+    position: absolute;
+    top: 1px;
+    right: 3px;
+}
+
+.bill-td-button {
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
+.button-line {
+    line-height: 14px !important;
+}
+.label {
+    width: 60px !important;
+}

@@ -1,0 +1,93 @@
+<resources>
+    <string name="app_name">仓库系统</string>
+
+    <string name="buyerreceive">采购接收</string>
+    <string name="intostore">入库上架</string>
+    <string name="outstore">出库下架</string>
+    <string name="stocktake">库存盘点</string>
+    <string name="movestore">移库移位</string>
+    <string name="storecheck">库存查询</string>
+
+    <string name="danju_hint">单据号</string>
+    <string name="wuliaobianma_hint">物料编码</string>
+    <string name="wuliao_kuwei_hint">物料编码/库位编码</string>
+
+    <string name="loginaccount">登录账户</string>
+    <string name="versions">版本号</string>
+    <string name="feedback">反馈邮箱</string>
+
+    <string name="login">登录</string>
+    <string name="outlogin">退出登录</string>
+
+
+    <!--采购接收中的接收单-->
+    <string name="caigoudingdan">采购订单:</string>
+    <string name="gongyingshang">供应商:</string>
+    <string name="dingdanleixing">订单类型:</string>
+    <string name="fafanghao">发放号:</string>
+    <!--采购接收中的物料单-->
+    <string name="wuliaobianma">物料编码:</string>
+    <string name="wuliaomiaoshu">物料描述:</string>
+    <string name="caigoushuliang">采购数量:</string>
+    <string name="kejieshoushuliang">可接收数量:</string>
+    <string name="unit">单位:</string>
+    <string name="jieshoushuliang">接收数量:</string>
+    <string name="sales_type">寄售类型:</string>
+
+    <string name="is_equipment">是否是设备:</string>
+    <string name="is_serial_number">启用序列号:</string>
+
+    <string name="accept">接收</string>
+    <string name="print_connect">连接</string>
+    <string name="print">打印</string>
+
+    <string name="jieshoudanhao">接收单号:</string>
+    <string name="kerukushuliang">可入库数量:</string>
+    <string name="rukushuliang">入库数量:</string>
+    <string name="storage">库房:</string>
+    <string name="plan_storage">计划入库库房:</string>
+    <string name="storage_location">库位:</string>
+    <string name="into_storage_location">入库库位:</string>
+    <string name="storage_location_code">库位编码:</string>
+    <string name="pre_storage_location">原始库位:</string>
+
+    <string name="apply_number">申请单号:</string>
+    <string name="use_unit">使用单位:</string>
+    <string name="apply_num">申领数量:</string>
+    <string name="weichukushuliang">未出库数量:</string>
+    <string name="chukushuliang">出库数量:</string>
+    <string name="kechukushuliang">可出库数量:</string>
+    <string name="shenlingdanhao">申领单号:</string>
+    <string name="apply_unit">申请单位:</string>
+    <string name="zijinlaiyuan">资金来源:</string>
+    <string name="yongtu">用途:</string>
+    <string name="shangjishenpi">上级审批部门:</string>
+
+    <string name="danjubianhao">单据编号:</string>
+    <string name="creator">制单人:</string>
+    <string name="bill_status">制单状态:</string>
+    <string name="weipandian">未盘点个数:</string>
+    <string name="yipandian">已盘点个数:</string>
+    <string name="shuliang">数量:</string>
+    <string name="shijishuliang">实际数量:</string>
+    <string name="shangjiashuliang">上架数量:</string>
+    <string name="xuliehao">序列号:</string>
+
+    <string name="pre_storage">原库房:</string>
+    <string name="old_storage_location">原库位:</string>
+    <string name="yidongshuliang">移动数量:</string>
+    <string name="target_storage_location">目标库位:</string>
+    <string name="target_storage">目标库房:</string>
+
+    <string name="yongyoufang">拥有方:</string>
+
+    <string name="btn_ok">确定</string>
+    <string name="save">保存</string>
+    <string name="modify">修改</string>
+    <string name="btn_search">搜索</string>
+    <string name="btn_scan">扫描</string>
+    <string name="tijiao">提交</string>
+    <string name="chaidan">拆单</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">receivr</string>
+</resources>

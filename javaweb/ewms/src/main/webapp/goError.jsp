@@ -1,0 +1,46 @@
+﻿<%@ page contentType="text/html;charset=gbk" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>单点登录失败！</title>
+
+<style type="text/css">
+body {margin: 0px; padding:0px; font-family:"微软雅黑", Arial, "Trebuchet MS", Verdana, Georgia,Baskerville,Palatino,Times; font-size:16px;}
+div{margin-left:auto; margin-right:auto;}
+a {text-decoration: none; color: #1064A0;}
+a:hover {color: #0078D2;}
+img { border:none; }
+h1,h2,h3,h4 {
+	margin:0;
+	font-weight:normal; 
+	font-family: "微软雅黑", Arial, "Trebuchet MS", Helvetica, Verdana ; 
+}
+h1{font-size:44px; color:#0188DE; padding:20px 0px 10px 0px;}
+h2{color:#0188DE; font-size:16px; padding:10px 0px 40px 0px;}
+
+#page{width:910px; padding:20px 20px 40px 20px; margin-top:80px;}
+.button{width:180px; height:28px; margin-left:0px; margin-top:10px; background:#009CFF; border-bottom:4px solid #0188DE; text-align:center;}
+.button a{width:180px; height:28px; display:block; font-size:14px; color:#fff; }
+.button a:hover{ background:#5BBFFF;}
+</style>
+
+</head>
+<body>
+<div id="page" style="border-style:dashed;border-color:#e4e4e4;line-height:30px;background:url(sorry.png) no-repeat right;">
+	<h1>单点登录失败！<c:if test="${param.errorMsg == 1}">
+		<span>需要平台key值</span>
+	</c:if>
+		<c:if test="${param.errorMsg == 2}">
+			<span>需要用户编码</span>
+		</c:if>
+		<c:if test="${param.errorMsg == 3}">
+			<span>与平台key值不匹配</span>
+		</c:if>
+	</h1>
+	<br/><br/>
+</div>
+</body>
+</html>

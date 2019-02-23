@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/main"
+    >
+    <include layout="@layout/normal_title_bar"/>
+
+    <!--<Button-->
+        <!--android:id="@+id/btn_add"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/cb_checkbox"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:background="@drawable/round_corner_bg"-->
+        <!--android:gravity="center"-->
+        <!--android:padding="10dp"-->
+        <!--android:text="添加接收单"-->
+        <!--android:textColor="#fff"-->
+        <!--android:textSize="18sp" />-->
+
+    <include layout="@layout/search_util"/>
+
+    <LinearLayout
+        android:id="@+id/nocontent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mine_bg"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:text="没有相关内容"
+            android:textSize="20dp"
+            android:layout_marginTop="120dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/id_listview_bill"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+
+
+</LinearLayout>

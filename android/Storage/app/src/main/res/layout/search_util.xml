@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="@drawable/edit_bg"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+        <!--<Button-->
+            <!--android:id="@+id/btn_scan"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:background="@android:color/holo_orange_light"-->
+            <!--android:gravity="center_vertical|center"-->
+            <!--android:text="@string/btn_scan"-->
+            <!--android:textColor="@android:color/white"/>-->
+        <Button
+            android:id="@+id/id_search_bt"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="6dp"
+            android:background="@android:color/holo_orange_light"
+            android:gravity="center_vertical|center"
+            android:text="@string/btn_search"
+            android:textColor="@android:color/white"/>
+        <EditText
+            android:id="@+id/search_et"
+            android:layout_toLeftOf="@+id/btn_scan"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:hint="@string/danju_hint"
+            android:background="@drawable/edit_with_btn_bg"
+            />
+
+
+</RelativeLayout>
