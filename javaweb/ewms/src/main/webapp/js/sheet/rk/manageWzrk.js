@@ -1,5 +1,5 @@
 layui.config({
-    base: '/js/static/' // Ä£¿éÄ¿Â¼
+    base: '/js/static/' // æ¨¡å—ç›®å½•
 }).use(['laydate', 'form', 'table', 'layer', 'element', 'vip_table'], function () {
 
     var layer = layui.layer;
@@ -10,33 +10,33 @@ layui.config({
     var laydate = layui.laydate;
     var vipTable = layui.vip_table;
 
-    //Êı¾İÁĞ±í
+    //æ•°æ®åˆ—è¡¨
     var ordergr = table.render({
         elem: '#rkgrid'
         , url: 'listManageRk.json'
         , cellMinWidth: 80
         , height: "full-160"
         , method: 'post'
-        , page: true   //¿ªÆô·ÖÒ³
-        , limit: 20   //Ä¬ÈÏÊ®ÎåÌõÊı¾İÒ»Ò³
-        , limits: [10, 20, 30]  //Êı¾İ·ÖÒ³Ìõ
+        , page: true   //å¼€å¯åˆ†é¡µ
+        , limit: 20   //é»˜è®¤åäº”æ¡æ•°æ®ä¸€é¡µ
+        , limits: [10, 20, 30]  //æ•°æ®åˆ†é¡µæ¡
         , id: "rkgridTable"
         , cols: [
-            [{type: 'numbers', title: 'ĞòºÅ',fixed: "left", width: 50}
-                , {title: '²Ù×÷', fixed: "left", toolbar: '#bar', width: 120}
-                , {field: 'code', title: 'µ¥¾İ±àºÅ', fixed: "left", align: "center", width: 170}
-                // , {field: 'extendstring6', title: 'ERP½ÓÊÕµ¥ºÅ', align: "center", width: 180}
-                , {field: 'typename', title: 'Èë¿âÀàĞÍ', align: "center", width: 130}
-                , {field: 'ordernum', title: '²É¹º¶©µ¥±àºÅ', align: "center", width: 190}
-                , {field: 'receivenum', title: '½ÓÊÕµ¥ºÅ', align: "center", width: 170}
-                , {field: 'depname', title: '¿â´æ×éÖ¯', align: "center", width: 280}
-                , {field: 'extendstring1', title: '¹©Ó¦ÉÌÃû³Æ', align: "center", width: 230}
-                , {field: 'statusname', title: 'µ¥¾İ×´Ì¬', align: "center", width: 120}
+            [{type: 'numbers', title: 'åºå·',fixed: "left", width: 50}
+                , {title: 'æ“ä½œ', fixed: "left", toolbar: '#bar', width: 120}
+                , {field: 'code', title: 'å•æ®ç¼–å·', fixed: "left", align: "center", width: 170}
+                // , {field: 'extendstring6', title: 'ERPæ¥æ”¶å•å·', align: "center", width: 180}
+                , {field: 'typename', title: 'å…¥åº“ç±»å‹', align: "center", width: 130}
+                , {field: 'ordernum', title: 'é‡‡è´­è®¢å•ç¼–å·', align: "center", width: 190}
+                , {field: 'receivenum', title: 'æ¥æ”¶å•å·', align: "center", width: 170}
+                , {field: 'depname', title: 'åº“å­˜ç»„ç»‡', align: "center", width: 280}
+                , {field: 'extendstring1', title: 'ä¾›åº”å•†åç§°', align: "center", width: 230}
+                , {field: 'statusname', title: 'å•æ®çŠ¶æ€', align: "center", width: 120}
                 , {
-                field: 'createdate', title: 'ÖÆµ¥ÈÕÆÚ', align: "center", width: 180, templet: function (d) {
+                field: 'createdate', title: 'åˆ¶å•æ—¥æœŸ', align: "center", width: 180, templet: function (d) {
                 return datetimeformat(d.createdate);
             }}
-                , {field: 'personname', title: 'ÖÆµ¥ÈË', align: "center", width: 120}
+                , {field: 'personname', title: 'åˆ¶å•äºº', align: "center", width: 120}
             ]
         ]
     });
@@ -44,7 +44,7 @@ layui.config({
     var reload = function (data) {
         table.reload('rkgridTable', {
             page: {
-                curr: 1 //ÖØĞÂ´ÓµÚ 1 Ò³¿ªÊ¼
+                curr: 1 //é‡æ–°ä»ç¬¬ 1 é¡µå¼€å§‹
             },
             where: JSON.parse(JSON.stringify(data.field))
         });
@@ -65,27 +65,27 @@ layui.config({
     });
 
     $("#creatorBtn").on("click", function (e) {
-        vipTable.openPage("ÖÆµ¥ÈË", "../../system/user/publicDepartUser.htm?ztId=" + $("#ztid").val(), '85%', '90%');
+        vipTable.openPage("åˆ¶å•äºº", "../../system/user/publicDepartUser.htm?ztId=" + $("#ztid").val(), '85%', '90%');
         return false;
 
     });
 
-    //¼àÌı¹¤¾ßÌõ
+    //ç›‘å¬å·¥å…·æ¡
     table.on('tool(rkgrid)', function (obj) {
 
         var data = obj.data;
         if (obj.event === 'edit') {
             parent.tab.tabAdd({
-                href: data.url + "?oper=edit", //µØÖ·
-                title: "±à¼­Îï×ÊÈë¿âµ¥" + data.code
+                href: data.url + "?oper=edit", //åœ°å€
+                title: "ç¼–è¾‘ç‰©èµ„å…¥åº“å•" + data.code
             });
         } else if (obj.event === 'show') {
             parent.tab.tabAdd({
-                href: data.url + "?oper=show", //µØÖ·
-                title: "²é¿´Îï×ÊÈë¿âµ¥" + data.code
+                href: data.url + "?oper=show", //åœ°å€
+                title: "æŸ¥çœ‹ç‰©èµ„å…¥åº“å•" + data.code
             });
         } else if (obj.event === 'delete') {
-            layer.confirm('È·¶¨É¾³ıÑ¡ÖĞµÄ¼ÇÂ¼£¿', {icon: 3, title: 'ÌáÊ¾ĞÅÏ¢'}, function (index) {
+            layer.confirm('ç¡®å®šåˆ é™¤é€‰ä¸­çš„è®°å½•ï¼Ÿ', {icon: 3, title: 'æç¤ºä¿¡æ¯'}, function (index) {
                 $.ajax({
                     type: "delete",
                     url: "/sheet/delete-" + data.id,
@@ -93,14 +93,14 @@ layui.config({
                     success: function (ret) {
                         if (ret.status == '1') {
                             ordergr.reload();
-                            layer.msg("É¾³ı³É¹¦£¡");
+                            layer.msg("åˆ é™¤æˆåŠŸï¼");
                             layer.close(index);
                         } else {
-                            layer.alert('É¾³ıÊ§°Ü£º' + ret.message);
+                            layer.alert('åˆ é™¤å¤±è´¥ï¼š' + ret.message);
                         }
                     },
                     error: function (XMLHttpRequest) {
-                        layer.alert("É¾³ıÇëÇó³ö´í£º" + XMLHttpRequest.status + XMLHttpRequest.statusText);
+                        layer.alert("åˆ é™¤è¯·æ±‚å‡ºé”™ï¼š" + XMLHttpRequest.status + XMLHttpRequest.statusText);
                     }
                 });
 
