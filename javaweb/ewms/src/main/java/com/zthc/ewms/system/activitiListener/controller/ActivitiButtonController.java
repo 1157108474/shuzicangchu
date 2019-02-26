@@ -1,20 +1,33 @@
 package com.zthc.ewms.system.activitiListener.controller;
 
 
-import com.zthc.ewms.system.activitiListener.service.ActivitiService;
-import com.zthc.ewms.system.dictionary.entity.guard.Dictionary;
-import com.zthc.ewms.system.dictionary.service.DictionaryService;
-import com.zthc.ewms.system.formTemplateManage.entity.FormTemplate;
-import com.zthc.ewms.system.formTemplateManage.service.FormTemplateService;
-import com.zthc.ewms.system.role.entity.guard.Role;
-import net.sf.json.JSONArray;
-import net.sf.json.JsonConfig;
-import org.activiti.bpmn.model.*;
-import org.activiti.engine.*;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.activiti.bpmn.model.BpmnModel;
+import org.activiti.bpmn.model.FlowElement;
+import org.activiti.bpmn.model.SequenceFlow;
+import org.activiti.bpmn.model.StartEvent;
+import org.activiti.bpmn.model.UserTask;
+import org.activiti.engine.HistoryService;
+import org.activiti.engine.ManagementService;
+import org.activiti.engine.RepositoryService;
+import org.activiti.engine.RuntimeService;
+import org.activiti.engine.TaskService;
 import org.activiti.engine.delegate.Expression;
 import org.activiti.engine.history.HistoricActivityInstance;
 import org.activiti.engine.history.HistoricTaskInstance;
-import org.activiti.engine.history.HistoricTaskInstanceQuery;
 import org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior;
 import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.activiti.engine.impl.pvm.PvmActivity;
@@ -23,23 +36,19 @@ import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.activiti.engine.impl.pvm.process.ProcessDefinitionImpl;
 import org.activiti.engine.impl.pvm.process.TransitionImpl;
 import org.activiti.engine.impl.task.TaskDefinition;
-import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
-import org.apache.commons.lang3.StringUtils;
-import org.codehaus.groovy.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.util.*;
+import com.zthc.ewms.system.activitiListener.service.ActivitiService;
+import com.zthc.ewms.system.dictionary.entity.guard.Dictionary;
+import com.zthc.ewms.system.dictionary.service.DictionaryService;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JsonConfig;
 
 @Controller
 @RequestMapping("/system/activitiButton")

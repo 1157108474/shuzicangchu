@@ -1,41 +1,42 @@
 package com.zthc.ewms.system.activitiManage.controller;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.zthc.ewms.base.page.LayuiPage;
-import com.zthc.ewms.system.activitiManage.controller.guard.ActivitiManageControllerGuard;
-import com.zthc.ewms.system.activitiManage.entity.ActDic;
-import com.zthc.ewms.system.activitiManage.service.ActdicService;
-import com.zthc.ewms.system.dictionary.entity.guard.Dictionary;
-import com.zthc.ewms.system.dictionary.entity.guard.DictionaryEnums;
-import com.zthc.ewms.system.dictionary.service.DictionaryService;
-import drk.system.Log;
-import org.activiti.bpmn.converter.BpmnXMLConverter;
-import org.activiti.bpmn.model.*;
-import org.activiti.editor.language.json.converter.BpmnJsonConverter;
-import org.activiti.engine.RepositoryService;
-import org.activiti.engine.repository.Deployment;
-import org.apache.commons.io.IOUtils;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.activiti.bpmn.converter.BpmnXMLConverter;
+import org.activiti.bpmn.model.BpmnModel;
+import org.activiti.bpmn.model.FlowElement;
+import org.activiti.bpmn.model.SequenceFlow;
+import org.activiti.bpmn.model.StartEvent;
+import org.activiti.editor.language.json.converter.BpmnJsonConverter;
+import org.activiti.engine.RepositoryService;
+import org.activiti.engine.repository.Deployment;
+import org.apache.commons.io.IOUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.zthc.ewms.base.page.LayuiPage;
+import com.zthc.ewms.system.activitiManage.entity.ActDic;
+import com.zthc.ewms.system.activitiManage.service.ActdicService;
+import com.zthc.ewms.system.dictionary.entity.guard.Dictionary;
+import com.zthc.ewms.system.dictionary.entity.guard.DictionaryEnums;
+import com.zthc.ewms.system.dictionary.service.DictionaryService;
+
+import drk.system.Log;
 
 @Controller
 @RequestMapping("/system/activitiManage")

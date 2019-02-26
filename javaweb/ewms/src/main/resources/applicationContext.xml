@@ -38,9 +38,9 @@
 
   <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
     <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-    <property name="url" value="jdbc:oracle:thin:@42.157.4.99:1521:orcl"/><!--60.174.234.117-->
-      <property name="username" value="test"/>
-      <property name="password" value="test"/>
+    <property name="url" value="jdbc:oracle:thin:@140.143.60.230:1521:orcl"/><!--60.174.234.117-->
+      <property name="username" value="ewms"/>
+      <property name="password" value="ewms"/>
     <property name="initialSize" value="${initialSize}"/>
     <property name="maxActive" value="${maxActive}"/>
     <property name="maxIdle" value="${maxIdle}"/>
