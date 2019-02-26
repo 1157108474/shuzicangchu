@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This file contains job definitions in schema version 2.0 format -->
+
+<job-scheduling-data xmlns="http://quartznet.sourceforge.net/JobSchedulingData" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0">
+
+  <processing-directives>
+    <overwrite-existing-data>true</overwrite-existing-data>
+  </processing-directives>
+
+  <schedule>
+    <!--同步基础数据，每天-->
+    <job>
+      <name>SynchBasicData</name>
+      <group>ERP</group>
+      <description>同步基础数据</description>
+      <job-type>EWMS.WinService.Job.SynchBasicData,EWMS.WinService</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <trigger>
+      <cron>
+        <name>SynchBasicDataTrigger</name>
+        <group>ERP</group>
+        <job-name>SynchBasicData</job-name>
+        <job-group>ERP</job-group>
+        <start-time>2017-09-05T00:00:00+08:00</start-time>
+        <!--每天早上2点执行-->
+        <cron-expression>0 0 2 * * ?</cron-expression>
+        <!--每三秒钟-->
+        <!--<cron-expression>0/3 * * * * ?</cron-expression>-->
+      </cron>
+    </trigger>
+    <!--同步业务数据,每十分钟-->
+    <job>
+      <name>SynchBusinessData</name>
+      <group>ERP</group>
+      <description>同步业务数据</description>
+      <job-type>EWMS.WinService.Job.SynchBusinessData,EWMS.WinService</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <trigger>
+      <cron>
+        <name>SynchBusinessDataTrigger</name>
+        <group>ERP</group>
+        <job-name>SynchBusinessData</job-name>
+        <job-group>ERP</job-group>
+        <start-time>2017-09-05T00:00:00+08:00</start-time>
+        <!--每十分钟-->
+        <cron-expression>0 0/1 * * * ?</cron-expression>
+      </cron>
+    </trigger>
+  </schedule>
+</job-scheduling-data>

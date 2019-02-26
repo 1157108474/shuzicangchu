@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WL5G3N0:definitions xmlns:WL5G3N2="http://com/oracle/apps/povendors/POVENDORS.wsdl/types/" xmlns:WL5G3N1="http://www.w3.org/2001/XMLSchema" xmlns:WL5G3N4="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:WL5G3N3="http://com/oracle/apps/povendors/POVENDORS.wsdl" name="POVENDORS" targetNamespace="http://com/oracle/apps/povendors/POVENDORS.wsdl" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/">
+  <WL5G3N0:types>
+    <xsd:schema xmlns:tns0="http://com/oracle/apps/povendors/POVENDORS.wsdl/types/" xmlns:soap11-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://com/oracle/apps/povendors/POVENDORS.wsdl/types/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" elementFormDefault="qualified" targetNamespace="http://com/oracle/apps/povendors/POVENDORS.wsdl/types/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:complexType name="PovendorsRPoVendoresRecUserArray">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="PovendorsRPoVendoresRecUser" nillable="true" type="tns:PovendorsRPoVendoresRecUser" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PovendorsRPoVendoresRecUser">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:PovendorsRPoVendoresRecBase">
+            <xsd:sequence>
+              <xsd:element name="orgType" nillable="true" type="xsd:string" />
+              <xsd:element name="vendorNameAlt" nillable="true" type="xsd:string" />
+              <xsd:element name="siteLastUpdateDate" nillable="true" type="xsd:dateTime" />
+              <xsd:element name="attribute15" nillable="true" type="xsd:string" />
+              <xsd:element name="siteCreationDate" nillable="true" type="xsd:dateTime" />
+              <xsd:element name="vendorNumber" nillable="true" type="xsd:string" />
+              <xsd:element name="num1099" nillable="true" type="xsd:string" />
+              <xsd:element name="vendorSiteCode" nillable="true" type="xsd:string" />
+              <xsd:element name="vendorTypeLookupCode" nillable="true" type="xsd:string" />
+              <xsd:element name="city" nillable="true" type="xsd:string" />
+              <xsd:element name="orgId" nillable="true" type="xsd:decimal" />
+              <xsd:element name="createdByName" nillable="true" type="xsd:string" />
+              <xsd:element name="lastUpdatedByName" nillable="true" type="xsd:string" />
+              <xsd:element name="zip" nillable="true" type="xsd:string" />
+              <xsd:element name="vendorSiteId" nillable="true" type="xsd:decimal" />
+              <xsd:element name="vendorName" nillable="true" type="xsd:string" />
+              <xsd:element name="vatRegistrationNum" nillable="true" type="xsd:string" />
+              <xsd:element name="attributeCategory" nillable="true" type="xsd:string" />
+              <xsd:element name="vendorId" nillable="true" type="xsd:decimal" />
+              <xsd:element name="addressLine1" nillable="true" type="xsd:string" />
+              <xsd:element name="country" nillable="true" type="xsd:string" />
+              <xsd:element name="lastUpdateDate" nillable="true" type="xsd:dateTime" />
+              <xsd:element name="attribute4" nillable="true" type="xsd:string" />
+              <xsd:element name="creationDate" nillable="true" type="xsd:dateTime" />
+              <xsd:element name="attribute5" nillable="true" type="xsd:string" />
+              <xsd:element name="endDateActive" nillable="true" type="xsd:dateTime" />
+              <xsd:element name="attribute6" nillable="true" type="xsd:string" />
+              <xsd:element name="attribute7" nillable="true" type="xsd:string" />
+              <xsd:element name="attribute8" nillable="true" type="xsd:string" />
+              <xsd:element name="employeeNum" nillable="true" type="xsd:string" />
+              <xsd:element name="attribute9" nillable="true" type="xsd:string" />
+              <xsd:element name="attribute10" nillable="true" type="xsd:string" />
+              <xsd:element name="attribute11" nillable="true" type="xsd:string" />
+              <xsd:element name="attribute1" nillable="true" type="xsd:string" />
+              <xsd:element name="attribute12" nillable="true" type="xsd:string" />
+              <xsd:element name="attribute2" nillable="true" type="xsd:string" />
+              <xsd:element name="attribute13" nillable="true" type="xsd:string" />
+              <xsd:element name="attribute3" nillable="true" type="xsd:string" />
+              <xsd:element name="attribute14" nillable="true" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="PovendorsRPoVendoresRecBase">
+        <xsd:sequence />
+      </xsd:complexType>
+    </xsd:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="POVENDORS_poVendorsWsInt">
+    <WL5G3N0:part name="pCompany" type="WL5G3N1:string" />
+    <WL5G3N0:part name="pRequestDate" type="WL5G3N1:string" />
+    <WL5G3N0:part name="xPoVendoresRec_out" type="WL5G3N2:PovendorsRPoVendoresRecUserArray" />
+    <WL5G3N0:part name="xReturnMessage_out" type="WL5G3N1:string" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="POVENDORS_poVendorsWsIntResponse">
+    <WL5G3N0:part name="xPoVendoresRec_out" type="WL5G3N2:PovendorsRPoVendoresRecUserArray" />
+    <WL5G3N0:part name="xReturnMessage_out" type="WL5G3N1:string" />
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="POVENDORS">
+    <WL5G3N0:operation name="poVendorsWsInt" parameterOrder="pCompany pRequestDate xPoVendoresRec_out xReturnMessage_out">
+      <WL5G3N0:input message="WL5G3N3:POVENDORS_poVendorsWsInt" />
+      <WL5G3N0:output message="WL5G3N3:POVENDORS_poVendorsWsIntResponse" />
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="POVENDORS" type="WL5G3N3:POVENDORS">
+    <WL5G3N4:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <WL5G3N0:operation name="poVendorsWsInt">
+      <WL5G3N4:operation soapAction="http://com/oracle/apps/povendors/POVENDORS.wsdl/poVendorsWsInt" />
+      <WL5G3N0:input>
+        <WL5G3N4:body use="literal" namespace="http://com/oracle/apps/povendors/POVENDORS.wsdl" parts="pCompany pRequestDate xPoVendoresRec_out xReturnMessage_out" />
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N4:body use="literal" namespace="http://com/oracle/apps/povendors/POVENDORS.wsdl" parts="xPoVendoresRec_out xReturnMessage_out" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="POVENDORS">
+    <WL5G3N0:port name="POVENDORSPort" binding="WL5G3N3:POVENDORS">
+      <WL5G3N4:address location="http://172.16.3.169:9099/org.gocom.esb.ws.route/erp/scmvendors" />
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>

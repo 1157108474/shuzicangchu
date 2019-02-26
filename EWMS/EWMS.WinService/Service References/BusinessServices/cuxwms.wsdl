@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WL5G3N0:definitions xmlns:WL5G3N2="http://com/oracle/apps/cuxwms/Cuxwms.wsdl" xmlns:WL5G3N1="http://www.w3.org/2001/XMLSchema" xmlns:WL5G3N3="http://schemas.xmlsoap.org/wsdl/soap/" name="cuxwms" targetNamespace="http://com/oracle/apps/cuxwms/Cuxwms.wsdl" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/">
+  <WL5G3N0:types />
+  <WL5G3N0:message name="Cuxwms_invokews">
+    <WL5G3N0:part name="pIfaceCode" type="WL5G3N1:string" />
+    <WL5G3N0:part name="pBatchNumber" type="WL5G3N1:string" />
+    <WL5G3N0:part name="pRequestData" type="WL5G3N1:string" />
+    <WL5G3N0:part name="xReturnCode_out" type="WL5G3N1:string" />
+    <WL5G3N0:part name="xReturnMesg_out" type="WL5G3N1:string" />
+    <WL5G3N0:part name="xResponseData_out" type="WL5G3N1:string" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="Cuxwms_invokewsResponse">
+    <WL5G3N0:part name="xReturnCode_out" type="WL5G3N1:string" />
+    <WL5G3N0:part name="xReturnMesg_out" type="WL5G3N1:string" />
+    <WL5G3N0:part name="xResponseData_out" type="WL5G3N1:string" />
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="cuxwms">
+    <WL5G3N0:operation name="invokews" parameterOrder="pIfaceCode pBatchNumber pRequestData xReturnCode_out xReturnMesg_out xResponseData_out">
+      <WL5G3N0:input message="WL5G3N2:Cuxwms_invokews" />
+      <WL5G3N0:output message="WL5G3N2:Cuxwms_invokewsResponse" />
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="cuxwms" type="WL5G3N2:cuxwms">
+    <WL5G3N3:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <WL5G3N0:operation name="invokews">
+      <WL5G3N3:operation soapAction="http://com/oracle/apps/cuxwms/Cuxwms.wsdl/invokews" />
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal" namespace="http://com/oracle/apps/cuxwms/Cuxwms.wsdl" parts="pIfaceCode pBatchNumber pRequestData xReturnCode_out xReturnMesg_out xResponseData_out" />
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal" namespace="http://com/oracle/apps/cuxwms/Cuxwms.wsdl" parts="xReturnCode_out xReturnMesg_out xResponseData_out" />
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="cuxwms">
+    <WL5G3N0:port name="cuxwmsPort" binding="WL5G3N2:cuxwms">
+      <WL5G3N3:address location="http://172.16.3.169:9099/org.gocom.esb.ws.route/cuxws/wms" />
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>

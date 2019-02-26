@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D3498E04-76F9-4575-B0EA-518399ED080E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EWMS.Service</RootNamespace>
+    <AssemblyName>EWMS.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentData, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\EWMS.Docs\Libs\FluentData.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\EWMS.Docs\Libs\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppCacheManage.cs" />
+    <Compile Include="Base_ApplyDepService.cs" />
+    <Compile Include="Base_AreaService.cs" />
+    <Compile Include="Base_ButtonService.cs" />
+    <Compile Include="Base_Category_AssetService.cs" />
+    <Compile Include="Base_CodeRuleService.cs" />
+    <Compile Include="Base_CompanyService.cs" />
+    <Compile Include="Base_CostUpdateService.cs" />
+    <Compile Include="Base_DataBaseService.cs" />
+    <Compile Include="Base_DepartmentService.cs" />
+    <Compile Include="Base_DepartService.cs" />
+    <Compile Include="Base_DictionaryService.cs" />
+    <Compile Include="Base_DictItemService.cs" />
+    <Compile Include="Base_DictService.cs" />
+    <Compile Include="Base_FormSetService.cs" />
+    <Compile Include="Base_FormSet_BaseService.cs" />
+    <Compile Include="Base_LogService.cs" />
+    <Compile Include="Base_MaterialService.cs" />
+    <Compile Include="Base_MenuButtonService.cs" />
+    <Compile Include="Base_MenuService.cs" />
+    <Compile Include="Base_Offices_ScopeService.cs" />
+    <Compile Include="Base_OffsetInfoService.cs" />
+    <Compile Include="Base_OrganizationService.cs" />
+    <Compile Include="Base_PersonService.cs" />
+    <Compile Include="Base_Person_ScopeService.cs" />
+    <Compile Include="Base_ProviderService.cs" />
+    <Compile Include="Base_ReceiptService.cs" />
+    <Compile Include="Base_RoleMenuButtonService.cs" />
+    <Compile Include="Base_RoleMenuService.cs" />
+    <Compile Include="Base_RoleService.cs" />
+    <Compile Include="Base_RouteStepService.cs" />
+    <Compile Include="Base_SparepartsCateService.cs" />
+    <Compile Include="Base_StockCostUpdateService.cs" />
+    <Compile Include="Base_SysLogService.cs" />
+    <Compile Include="Base_SysParamService.cs" />
+    <Compile Include="Base_UnitConversionService.cs" />
+    <Compile Include="Base_UseDepService.cs" />
+    <Compile Include="Base_UserRoleService.cs" />
+    <Compile Include="Base_UserService.cs" />
+    <Compile Include="Base_UserSettingService.cs" />
+    <Compile Include="Base_WarehouseService.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="Inf_TaskLogService.cs" />
+    <Compile Include="Inf_TaskService.cs" />
+    <Compile Include="KCSZService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryZCGDService.cs" />
+    <Compile Include="Stat_FCPService.cs" />
+    <Compile Include="Stat_RKTJService.cs" />
+    <Compile Include="TradeBackService.cs" />
+    <Compile Include="Trade_TJService.cs" />
+    <Compile Include="ViewStock.cs" />
+    <Compile Include="WZ_AttachfileService.cs" />
+    <Compile Include="WZ_OrderInfoService.cs" />
+    <Compile Include="WZ_PDDetailService.cs" />
+    <Compile Include="WZ_PlanToApplyService.cs" />
+    <Compile Include="WZ_PurchasePlanService.cs" />
+    <Compile Include="WZ_ReceivingLogService.cs" />
+    <Compile Include="WZ_RouteHistoryService.cs" />
+    <Compile Include="WZ_SHEETCKDetailService.cs" />
+    <Compile Include="WZ_SheetCKSubDetailService.cs" />
+    <Compile Include="WZ_SheetDetailService.cs" />
+    <Compile Include="WZ_SHEETRKDetailService.cs" />
+    <Compile Include="WZ_SheetRkSubDetailService.cs" />
+    <Compile Include="WZ_SheetService.cs" />
+    <Compile Include="WZ_SheetSubDetailService.cs" />
+    <Compile Include="WZ_SHEET_CKService.cs" />
+    <Compile Include="WZ_SHEET_RKService.cs" />
+    <Compile Include="WZ_StockService.cs" />
+    <Compile Include="WZ_StockTJ.cs" />
+    <Compile Include="WZ_WaitTaskService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EWMS.Core\EWMS.Core.csproj">
+      <Project>{2ebc00c0-ffa3-4d3f-8893-f87f494d7557}</Project>
+      <Name>EWMS.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EWMS.Entity\EWMS.Entity.csproj">
+      <Project>{02a56bfe-7bda-4f52-ad75-83f92323478c}</Project>
+      <Name>EWMS.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EWMS.Utils\EWMS.Utils.csproj">
+      <Project>{5960fcf3-9744-4c85-857c-0f5d1c095351}</Project>
+      <Name>EWMS.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

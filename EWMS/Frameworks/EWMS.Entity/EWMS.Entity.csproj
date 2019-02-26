@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{02A56BFE-7BDA-4F52-AD75-83F92323478C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EWMS.Entity</RootNamespace>
+    <AssemblyName>EWMS.Entity</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entity\BaseLogVM.cs" />
+    <Compile Include="Entity\Base_ApplyDep.cs" />
+    <Compile Include="Entity\Base_Area.cs" />
+    <Compile Include="Entity\Base_Button.cs" />
+    <Compile Include="Entity\Base_Category_Asset.cs" />
+    <Compile Include="Entity\Base_CodeRule.cs" />
+    <Compile Include="Entity\Base_Company.cs" />
+    <Compile Include="Entity\Base_CostUpdate.cs" />
+    <Compile Include="Entity\Base_DataBase.cs" />
+    <Compile Include="Entity\Base_Depart.cs" />
+    <Compile Include="Entity\Base_Department.cs" />
+    <Compile Include="Entity\Base_Dict.cs" />
+    <Compile Include="Entity\Base_Dictionary.cs" />
+    <Compile Include="Entity\Base_DictItem.cs" />
+    <Compile Include="Entity\Base_FormSet.cs" />
+    <Compile Include="Entity\Base_FormSet_Base.cs" />
+    <Compile Include="Entity\Base_Log.cs" />
+    <Compile Include="Entity\Base_Material.cs" />
+    <Compile Include="Entity\Base_Menu.cs" />
+    <Compile Include="Entity\Base_MenuButton.cs" />
+    <Compile Include="Entity\Base_Offices_Scope.cs" />
+    <Compile Include="Entity\Base_Offices_ScopeVM.cs" />
+    <Compile Include="Entity\Base_OffsetInfo.cs" />
+    <Compile Include="Entity\Base_Organization.cs" />
+    <Compile Include="Entity\Base_Person.cs" />
+    <Compile Include="Entity\Base_Person_Scope.cs" />
+    <Compile Include="Entity\Base_Person_ScopeVM.cs" />
+    <Compile Include="Entity\Base_Provider.cs" />
+    <Compile Include="Entity\Base_Receipt.cs" />
+    <Compile Include="Entity\Base_Role.cs" />
+    <Compile Include="Entity\Base_RoleMenu.cs" />
+    <Compile Include="Entity\Base_RoleMenuButton.cs" />
+    <Compile Include="Entity\Base_RouteStep.cs" />
+    <Compile Include="Entity\Base_RouteStepVM.cs" />
+    <Compile Include="Entity\Base_SparepartsCate.cs" />
+    <Compile Include="Entity\Base_StockCostUpdate.cs" />
+    <Compile Include="Entity\Base_SysLog.cs" />
+    <Compile Include="Entity\Base_SysParam.cs" />
+    <Compile Include="Entity\Base_UnitConversion.cs" />
+    <Compile Include="Entity\Base_UseDep.cs" />
+    <Compile Include="Entity\Base_User.cs" />
+    <Compile Include="Entity\Base_UserRole.cs" />
+    <Compile Include="Entity\Base_UserSetting.cs" />
+    <Compile Include="Entity\Base_Warehouse.cs" />
+    <Compile Include="Entity\dictionary_treedata.cs" />
+    <Compile Include="Entity\dict_attributes.cs" />
+    <Compile Include="Entity\dict_treedata.cs" />
+    <Compile Include="Entity\Inf_Task.cs" />
+    <Compile Include="Entity\Inf_TaskLog.cs" />
+    <Compile Include="Entity\MenuData.cs" />
+    <Compile Include="Entity\organization_treedata.cs" />
+    <Compile Include="Entity\org_attributes.cs" />
+    <Compile Include="Entity\org_treedata.cs" />
+    <Compile Include="Entity\Query_ZCGD.cs" />
+    <Compile Include="Entity\sparepartscate_attributes.cs" />
+    <Compile Include="Entity\sparepartscate_treedata.cs" />
+    <Compile Include="Entity\Stat_RKTJ.cs" />
+    <Compile Include="Entity\sys_column.cs" />
+    <Compile Include="Entity\sys_table.cs" />
+    <Compile Include="Entity\Trade_TJ.cs" />
+    <Compile Include="Entity\warehouse_treedata.cs" />
+    <Compile Include="Entity\WZ_OrderInfo.cs" />
+    <Compile Include="Entity\WZ_PDDetail.cs" />
+    <Compile Include="Entity\WZ_PlanToApply.cs" />
+    <Compile Include="Entity\WZ_PurchasePlan.cs" />
+    <Compile Include="Entity\WZ_ReceivingLog.cs" />
+    <Compile Include="Entity\WZ_RouteHistory.cs" />
+    <Compile Include="Entity\WZ_Secondarystock.cs" />
+    <Compile Include="Entity\WZ_Sheet.cs" />
+    <Compile Include="Entity\WZ_SHEETCKDetail.cs" />
+    <Compile Include="Entity\WZ_SheetCKSubDetail.cs" />
+    <Compile Include="Entity\WZ_SheetDetail.cs" />
+    <Compile Include="Entity\WZ_SHEETRKDETAIL.cs" />
+    <Compile Include="Entity\WZ_SheetRKSubDetail.cs" />
+    <Compile Include="Entity\WZ_SheetSubDetail.cs" />
+    <Compile Include="Entity\WZ_SHEET_CK.cs" />
+    <Compile Include="Entity\WZ_SHEET_RK.cs" />
+    <Compile Include="Entity\WZ_Stock.cs" />
+    <Compile Include="Entity\WZ_StockSubDetail.cs" />
+    <Compile Include="Entity\WZ_TrayBack.cs" />
+    <Compile Include="Entity\WZ_WaitTask.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WZ_Attachfile.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EWMS.Core\EWMS.Core.csproj">
+      <Project>{2ebc00c0-ffa3-4d3f-8893-f87f494d7557}</Project>
+      <Name>EWMS.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

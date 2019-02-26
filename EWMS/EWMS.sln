@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EWMS.Core", "Frameworks\EWMS.Core\EWMS.Core.csproj", "{2EBC00C0-FFA3-4D3F-8893-F87F494D7557}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EWMS.Entity", "Frameworks\EWMS.Entity\EWMS.Entity.csproj", "{02A56BFE-7BDA-4F52-AD75-83F92323478C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EWMS.Service", "Frameworks\EWMS.Service\EWMS.Service.csproj", "{D3498E04-76F9-4575-B0EA-518399ED080E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EWMS.Utils", "Frameworks\EWMS.Utils\EWMS.Utils.csproj", "{5960FCF3-9744-4C85-857C-0F5D1C095351}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frameworks", "Frameworks", "{9013CE80-7A36-4701-885F-52C7BFFCA191}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EWMS.WinService", "EWMS.WinService\EWMS.WinService.csproj", "{60CCAEB9-A005-47BD-A6DF-C9ED8D685247}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EWMS.Docs", "EWMS.Docs\EWMS.Docs.csproj", "{40F7D61F-9AD0-4096-800C-32F87B849173}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2EBC00C0-FFA3-4D3F-8893-F87F494D7557}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EBC00C0-FFA3-4D3F-8893-F87F494D7557}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EBC00C0-FFA3-4D3F-8893-F87F494D7557}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EBC00C0-FFA3-4D3F-8893-F87F494D7557}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02A56BFE-7BDA-4F52-AD75-83F92323478C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02A56BFE-7BDA-4F52-AD75-83F92323478C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02A56BFE-7BDA-4F52-AD75-83F92323478C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02A56BFE-7BDA-4F52-AD75-83F92323478C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3498E04-76F9-4575-B0EA-518399ED080E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3498E04-76F9-4575-B0EA-518399ED080E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3498E04-76F9-4575-B0EA-518399ED080E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3498E04-76F9-4575-B0EA-518399ED080E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5960FCF3-9744-4C85-857C-0F5D1C095351}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5960FCF3-9744-4C85-857C-0F5D1C095351}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5960FCF3-9744-4C85-857C-0F5D1C095351}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5960FCF3-9744-4C85-857C-0F5D1C095351}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60CCAEB9-A005-47BD-A6DF-C9ED8D685247}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60CCAEB9-A005-47BD-A6DF-C9ED8D685247}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60CCAEB9-A005-47BD-A6DF-C9ED8D685247}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60CCAEB9-A005-47BD-A6DF-C9ED8D685247}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40F7D61F-9AD0-4096-800C-32F87B849173}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40F7D61F-9AD0-4096-800C-32F87B849173}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40F7D61F-9AD0-4096-800C-32F87B849173}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40F7D61F-9AD0-4096-800C-32F87B849173}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2EBC00C0-FFA3-4D3F-8893-F87F494D7557} = {9013CE80-7A36-4701-885F-52C7BFFCA191}
+		{02A56BFE-7BDA-4F52-AD75-83F92323478C} = {9013CE80-7A36-4701-885F-52C7BFFCA191}
+		{D3498E04-76F9-4575-B0EA-518399ED080E} = {9013CE80-7A36-4701-885F-52C7BFFCA191}
+		{5960FCF3-9744-4C85-857C-0F5D1C095351} = {9013CE80-7A36-4701-885F-52C7BFFCA191}
+	EndGlobalSection
+EndGlobal

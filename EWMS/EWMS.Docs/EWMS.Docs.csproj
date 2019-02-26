@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{40F7D61F-9AD0-4096-800C-32F87B849173}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EWMS.Docs</RootNamespace>
+    <AssemblyName>EWMS.Docs</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Libs\ClownFish.dll" />
+    <Content Include="Libs\ClownFishProfilerLib.dll" />
+    <Content Include="Libs\Common.Logging.Core.dll" />
+    <Content Include="Libs\Common.Logging.Core.xml" />
+    <Content Include="Libs\Common.Logging.dll" />
+    <Content Include="Libs\Common.Logging.Log4Net1211.dll" />
+    <Content Include="Libs\Common.Logging.Log4Net1211.pdb" />
+    <Content Include="Libs\Common.Logging.Log4Net1211.xml" />
+    <Content Include="Libs\Common.Logging.xml" />
+    <Content Include="Libs\ECTECH.Common.dll" />
+    <Content Include="Libs\FastReport.Bars.dll" />
+    <Content Include="Libs\FastReport.dll" />
+    <Content Include="Libs\FastReport.Editor.dll" />
+    <Content Include="Libs\FastReport.Web.dll" />
+    <Content Include="Libs\FluentData.dll" />
+    <Content Include="Libs\log4net.dll" />
+    <Content Include="Libs\log4net.xml" />
+    <Content Include="Libs\Newtonsoft.Json.dll" />
+    <Content Include="Libs\Oracle.ManagedDataAccess.dll" />
+    <Content Include="Libs\Quartz.dll" />
+    <Content Include="Libs\Quartz.pdb" />
+    <Content Include="Libs\Quartz.xml" />
+    <Content Include="Libs\ServiceStack.Common.dll" />
+    <Content Include="Libs\ServiceStack.Interfaces.dll" />
+    <Content Include="Libs\ServiceStack.Redis.dll" />
+    <Content Include="Libs\ServiceStack.Text.dll" />
+    <Content Include="Libs\Topshelf.dll" />
+    <Content Include="Libs\Topshelf.Log4Net.dll" />
+    <Content Include="Libs\Topshelf.Log4Net.xml" />
+    <Content Include="Libs\Topshelf.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
