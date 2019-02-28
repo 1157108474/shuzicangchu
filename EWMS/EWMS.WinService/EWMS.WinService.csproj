@@ -38,10 +38,19 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ClownFish, Version=1.2.0.0, Culture=neutral, PublicKeyToken=6d8c6494249e7c4d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Libs\ClownFish.dll</HintPath>
+      <HintPath>..\EWMS.Docs\Libs\ClownFish.dll</HintPath>
     </Reference>
     <Reference Include="Common.Logging">
       <HintPath>..\EWMS.Docs\Libs\Common.Logging.dll</HintPath>
@@ -131,6 +140,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Service References\BusinessServices\cuxwms.wsdl" />
     <None Include="Service References\CategoryServices\CATEGORIES.wsdl" />
     <None Include="Service References\CategoryServices\EWMS.WinService.CategoryServices.CategoriesRCategoriesRecUserArray.datasource">

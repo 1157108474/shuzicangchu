@@ -205,7 +205,7 @@
                         data.Code = node2.SelectSingleNode("ORGANIZATION_NUMBER").InnerText;
                         data.Name = node2.SelectSingleNode("ORGANIZATION_NAME").InnerText;
 						data.LevelCode = node2.SelectSingleNode("ORGANIZATION_LEVEL").InnerText;
-						data.Sort = node2.SelectSingleNode("ORDER_BY_NUMBER").InnerText;
+						data.Sort = int.Parse(node2.SelectSingleNode("ORDER_BY_NUMBER").InnerText);
                         if (data.ExtendInt1 == 21324)//0xb51)
                         {
                             data.ParentID = 0;
