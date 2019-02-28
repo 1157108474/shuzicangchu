@@ -1,9 +1,9 @@
-<%@ page language="java" import="java.util.*" pageEncoding="GBK" %>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>–¬‘ˆŒÔ◊ …Í¡Ïµ•</title>
+    <title>Êñ∞Â¢ûÁâ©ËµÑÁî≥È¢ÜÂçï</title>
     <link rel="stylesheet" href="/plugins/layui/css/layui.css" media="all"/>
     <link rel="stylesheet" href="/css/public.css" media="all"/>
 </head>
@@ -12,17 +12,17 @@
 
     <div id="llSheetHead" class="layui-collapse">
         <div class="layui-colla-item">
-            <h2 class="layui-colla-title">≤È—ØÃıº˛</h2>
+            <h2 class="layui-colla-title">Êü•ËØ¢Êù°‰ª∂</h2>
             <div class="layui-colla-content layui-show">
                 <form class="layui-form " action="">
                     <table   >
                         <tr>
                             <td >
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label">ø‚¥Ê◊È÷Ø£∫</label>
+                                    <label class="layui-form-label">Â∫ìÂ≠òÁªÑÁªáÔºö</label>
                                     <div class="layui-input-block" style="position:relative;">
                                         <select id="ztid" name="ztid">
-                                            <option value="">«Î—°‘Ò...</option>
+                                            <option value="">ËØ∑ÈÄâÊã©...</option>
                                             <c:forEach items="${departList}" var="depart" varStatus="d">
                                                 <option value="${depart.id}">${depart.name}</option>
                                             </c:forEach>
@@ -32,7 +32,7 @@
                             </td>
                             <td class="bill-td">
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label">÷∆µ•»À£∫</label>
+                                    <label class="layui-form-label">Âà∂Âçï‰∫∫Ôºö</label>
                                     <div class="layui-input-block" style="position:relative;">
                                         <input type="text" id="creatorName" class="layui-input" disabled>
                                         <input type="text" id="creator" name="creator" class="layui-hide">
@@ -42,7 +42,7 @@
                             </td>
                             <td >
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label">≤…π∫∂©µ•±‡∫≈£∫</label>
+                                    <label class="layui-form-label">ÈááË¥≠ËÆ¢ÂçïÁºñÂè∑Ôºö</label>
                                     <div class="layui-input-block">
                                         <input type="text" class="layui-input" id="ordernum" name="ordernum">
                                     </div>
@@ -52,7 +52,7 @@
                         <tr>
                             <td >
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label">µ•æ›±‡∫≈:</label>
+                                    <label class="layui-form-label">ÂçïÊçÆÁºñÂè∑:</label>
                                     <div class="layui-input-block">
                                         <input type="text" class="layui-input" id="code" name="code">
                                     </div>
@@ -60,10 +60,10 @@
                             </td>
                             <td class="bill-td">
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label">µ•æ›◊¥Ã¨£∫</label>
+                                    <label class="layui-form-label">ÂçïÊçÆÁä∂ÊÄÅÔºö</label>
                                     <div class="layui-input-block">
                                         <select  name="status" id="status">
-                                            <option value="">«Î—°‘Ò...</option>
+                                            <option value="">ËØ∑ÈÄâÊã©...</option>
                                             <c:forEach items="${orderStatus}" var="d" >
                                                 <option value="${d.id}">${d.name}</option>
                                             </c:forEach>
@@ -73,7 +73,7 @@
                             </td>
                             <td >
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label">ERPΩ” ’µ•∫≈£∫</label>
+                                    <label class="layui-form-label">ERPÊé•Êî∂ÂçïÂè∑Ôºö</label>
                                     <div class="layui-input-block">
                                         <input type="text" class="layui-input" id="extendstring6" name="extendstring6">
                                     </div>
@@ -83,10 +83,10 @@
                         <tr>
                             <td >
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label">»Îø‚¿‡–Õ£∫</label>
+                                    <label class="layui-form-label">ÂÖ•Â∫ìÁ±ªÂûãÔºö</label>
                                     <div class="layui-input-block" style="position:relative;">
                                         <select id="check" lay-filter="isopen" name="typeid">
-                                            <option value="">«Î—°‘Ò...</option>
+                                            <option value="">ËØ∑ÈÄâÊã©...</option>
                                             <c:forEach items="${rkType}" var="r">
                                                 <option value="${r.id}">${r.name}</option>
                                             </c:forEach>
@@ -96,7 +96,7 @@
                             </td>
                             <td class="bill-td">
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label">Ω” ’µ•∫≈£∫</label>
+                                    <label class="layui-form-label">Êé•Êî∂ÂçïÂè∑Ôºö</label>
                                     <div class="layui-input-block" style="position:relative;">
                                         <input type="text" class="layui-input" id="receivenum" name="receivenum">
                                     </div>
@@ -104,13 +104,13 @@
                             </td>
                             <td >
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label">÷∆µ•»’∆⁄£∫</label>
+                                    <label class="layui-form-label">Âà∂ÂçïÊó•ÊúüÔºö</label>
                                     <div class="layui-input-block">
                                         <div style="float: left;width: 80px">
                                             <input type="text" class="layui-input startTime" id="startTime" name="begin"
                                             >
                                         </div>
-                                        <div style="width: 20px;float: left;text-align: center;">÷¡</div>
+                                        <div style="width: 20px;float: left;text-align: center;">Ëá≥</div>
                                         <div style="float: left;width: 80px">
                                             <input type="text" class="layui-input endTime" id="endTime" name="end"
                                             >
@@ -120,8 +120,8 @@
                             </td>
                             <td>
                                 <button class="layui-btn layui-btn-warm bill-td-button" lay-submit lay-filter="formSubmit"
-                                        >≤È—Ø</button>
-                                <button type="reset" class="layui-btn bill-td-button" >÷ÿ÷√</button>
+                                        >Êü•ËØ¢</button>
+                                <button type="reset" class="layui-btn bill-td-button" >ÈáçÁΩÆ</button>
                             </td>
                         </tr>
                     </table>
@@ -131,7 +131,7 @@
     </div>
     <div class="layui-collapse" lay-filter="test">
         <div class="layui-colla-item">
-            <h2 class="layui-colla-title"> ˝æ›¡–±Ì</h2>
+            <h2 class="layui-colla-title">Êï∞ÊçÆÂàóË°®</h2>
             <div class="layui-colla-content layui-show">
                 <table id="rkgrid" lay-filter="rkgrid"></table>
             </div>
@@ -139,12 +139,12 @@
     </div>
 </div>
 <script type="text/html" id="bar">
-    {{# if( d.statusname == '÷∆µ•÷–' && ${userId} == d.creator ) { }}
-    <a lay-event="edit" class="layui-btn  layui-btn-xs">±‡º≠</a>
-    <a lay-event="delete" class="layui-btn layui-btn-danger layui-btn-xs">…æ≥˝</a>
+    {{# if( d.statusname == 'Âà∂Âçï‰∏≠' && ${userId} == d.creator ) { }}
+    <a lay-event="edit" class="layui-btn  layui-btn-xs">ÁºñËæë</a>
+    <a lay-event="delete" class="layui-btn layui-btn-danger layui-btn-xs">Âà†Èô§</a>
     {{# }else{ }}
 
-    <a lay-event="show" class="layui-btn  layui-btn-xs">≤Èø¥</a>
+    <a lay-event="show" class="layui-btn  layui-btn-xs">Êü•Áúã</a>
     {{#} }}
 
 </script>
