@@ -160,7 +160,7 @@
             string str4 = "10000";
             string str5 = "21324";
             StringBuilder builder = new StringBuilder();
-            builder.Append(string.Format("<WSINTERFACE> <HEADER> <DATE_FR>{0}</DATE_FR > <DATE_TO>{1}</DATE_TO> <ORGANIZATION_ID>{2}</ORGANIZATION_ID> </HEADER> </WSINTERFACE> ", this.dateF, this.dateT, str5));
+            builder.Append(string.Format("<WSINTERFACE> <HEADER> <DATE_FR>{0}</DATE_FR > <DATE_TO>{1}</DATE_TO> <ORG_ID>{2}</ORG_ID> </HEADER> </WSINTERFACE> ", this.dateF, this.dateT, str5));
             string str6 = Base64Encrypt.Encrypt("utf-8", builder.ToString());
             string str7 = "同步组织结构接口,接口名称:invokews";
             int num2 = 0;
@@ -202,15 +202,17 @@
                             };
                         }
                         data.ExtendInt1 = int.Parse(node2.SelectSingleNode("ORGANIZATION_ID").InnerText);
-                        data.Code = node2.SelectSingleNode("ORGANIZATION_CODE").InnerText;
+                        data.Code = node2.SelectSingleNode("ORGANIZATION_NUMBER").InnerText;
                         data.Name = node2.SelectSingleNode("ORGANIZATION_NAME").InnerText;
+						data.LevelCode = node2.SelectSingleNode("ORGANIZATION_LEVEL").InnerText;
+						data.Sort = node2.SelectSingleNode("ORDER_BY_NUMBER").InnerText;
                         if (data.ExtendInt1 == 21324)//0xb51)
                         {
                             data.ParentID = 0;
                         }
                         else
                         {
-                            int num5 = int.Parse(node2.SelectSingleNode("PARENT_ORGANIZATION_ID").InnerText);
+                            int num5 = int.Parse(node2.SelectSingleNode("ORGANIZATION_ID_PARENT").InnerText);
                             if (num5 > 0)
                             {
                                 Base_Organization organization2 = Base_OrganizationService.Instance.GetEntity_Fish(" and ExtendInt1=" + num5);
