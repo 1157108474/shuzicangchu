@@ -29,6 +29,8 @@ layui.config({
                 , {field: 'description', title: '物料描述', align: "center", width: 220}
                 , {field: 'detailUnitName', title: '单位', align: "center", width: 50}
                 , {field: 'providerDepName', title: '供应商', align: "center", width: 200}
+                , {field: 'noTaxPrice', title: '不含税价格', align: "center", width: 200}
+                , {field: 'noTaxSum', title: '不含税金额', align: "center", width: 200}
                 , {field: 'oldHouseName', title: '原库房', align: "center", width: 120}
                 , {field: 'extendString6', title: '原库位', align: "center", width: 120}
                 , {field: 'detailCount', title: '移动数量', align: "center",width: 80}
