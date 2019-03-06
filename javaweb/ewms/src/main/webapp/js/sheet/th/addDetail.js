@@ -102,6 +102,7 @@ layui.use(['form', 'table', 'layer'], function () {
             where: {
                 search: 1,
                 materialCode: data.materialCode,
+                sheetCode:data.sheetCode,
                 ownerType: data.ownerType,
                 //sonId: data.sonId,
                 storeId: data.storeId,

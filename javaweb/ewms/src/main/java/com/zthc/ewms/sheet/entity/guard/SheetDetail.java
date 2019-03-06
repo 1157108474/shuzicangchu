@@ -323,7 +323,18 @@ public class SheetDetail implements Cloneable {
     private Integer sonId;
 
 
-    public Integer getId() {
+    private String sheetCode;
+    
+    
+    public String getSheetCode() {
+		return sheetCode;
+	}
+
+	public void setSheetCode(String sheetCode) {
+		this.sheetCode = sheetCode;
+	}
+
+	public Integer getId() {
         return id;
     }
 

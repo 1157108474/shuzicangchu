@@ -202,7 +202,7 @@ public class SheetTHController extends SheetControllerGuard {
                 ret.setCount(0L);
                 ret.setData(null);
             } else {
-
+            	obj.setStoreId(null);
                 ret = this.detailService.addDetailList(obj, condition, ztid, "ThStoreList");
             }
         } catch (Exception e) {

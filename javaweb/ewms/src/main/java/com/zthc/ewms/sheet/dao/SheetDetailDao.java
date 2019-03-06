@@ -20,7 +20,11 @@ import java.util.Map;
 public class SheetDetailDao extends SheetDetailDaoGuard {
 
     public <T> LayuiPage<T> addDetailList(SheetDetail obj, SheetDetailCondition condition, Integer ztId, String className) {
-        LayuiPage<T> ret = new LayuiPage<>();
+        
+    	
+    	
+    	
+    	LayuiPage<T> ret = new LayuiPage<>();
         String hql_count = "select count(id) ";
         String append = " from " + className;
 
