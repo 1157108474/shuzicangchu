@@ -44,9 +44,7 @@
   <PropertyGroup>
     <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="ClownFish, Version=1.2.0.0, Culture=neutral, PublicKeyToken=6d8c6494249e7c4d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -121,6 +119,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\ProductBusinessServices\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ProductCategoryServices\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ProductItemsServices\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ProductVendorServices\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\VendorServices\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -130,6 +148,54 @@
     <Compile Include="SyncJobListener.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\ProductBusinessServices\EWMS.WinService.ProductBusinessServices.invokewsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ProductBusinessServices\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ProductBusinessServices\configuration.svcinfo" />
+    <None Include="Service References\ProductBusinessServices\configuration91.svcinfo" />
+    <None Include="Service References\ProductBusinessServices\ztwms.wsdl" />
+    <None Include="Service References\ProductItemsServices\EWMS.WinService.ProductItemsServices.invItemsWsIntResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ProductItemsServices\EWMS.WinService.ProductItemsServices.ItemsRInvItemsRecUserArray.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ProductItemsServices\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ProductItemsServices\configuration.svcinfo" />
+    <None Include="Service References\ProductItemsServices\configuration91.svcinfo" />
+    <None Include="Service References\ProductCategoryServices\EWMS.WinService.ProductCategoryServices.CategoriesRCategoriesRecUserArray.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ProductCategoryServices\EWMS.WinService.ProductCategoryServices.invCategoriesWsIntResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ProductCategoryServices\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ProductCategoryServices\configuration.svcinfo" />
+    <None Include="Service References\ProductCategoryServices\configuration91.svcinfo" />
+    <None Include="Service References\ProductCategoryServices\CATEGORIES.wsdl" />
+    <None Include="Service References\ProductItemsServices\ITEMS.wsdl" />
+    <None Include="Service References\ProductVendorServices\EWMS.WinService.ProductVendorServices.poVendorsWsIntResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ProductVendorServices\EWMS.WinService.ProductVendorServices.VendorsRPoVendoresRecUserArray.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ProductVendorServices\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ProductVendorServices\configuration.svcinfo" />
+    <None Include="Service References\ProductVendorServices\configuration91.svcinfo" />
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
@@ -140,7 +206,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
-    <None Include="Properties\app.manifest" />
     <None Include="Service References\BusinessServices\cuxwms.wsdl" />
     <None Include="Service References\CategoryServices\CATEGORIES.wsdl" />
     <None Include="Service References\CategoryServices\EWMS.WinService.CategoryServices.CategoriesRCategoriesRecUserArray.datasource">
@@ -156,6 +221,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ItemsServices\ITEMS.wsdl" />
+    <None Include="Service References\ProductVendorServices\VENDORS.wsdl" />
     <None Include="Service References\VendorServices\EWMS.WinService.VendorServices.PovendorsRPoVendoresRecUserArray.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -222,6 +288,10 @@
     <WCFMetadataStorage Include="Service References\BusinessServices\" />
     <WCFMetadataStorage Include="Service References\CategoryServices\" />
     <WCFMetadataStorage Include="Service References\ItemsServices\" />
+    <WCFMetadataStorage Include="Service References\ProductBusinessServices\" />
+    <WCFMetadataStorage Include="Service References\ProductCategoryServices\" />
+    <WCFMetadataStorage Include="Service References\ProductItemsServices\" />
+    <WCFMetadataStorage Include="Service References\ProductVendorServices\" />
     <WCFMetadataStorage Include="Service References\VendorServices\" />
   </ItemGroup>
   <ItemGroup>

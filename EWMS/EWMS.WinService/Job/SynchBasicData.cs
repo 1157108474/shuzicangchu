@@ -10,9 +10,6 @@
     using System.Configuration;
     using System.Text;
     using System.Xml;
-    using ItemsServices;
-    using CategoryServices;
-    using VendorServices;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
@@ -25,12 +22,15 @@
         public string dateT = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         private static int min = int.Parse(ConfigurationManager.AppSettings["1Day"].ToString());
         public string dateF = DateTime.Now.AddMinutes((double)(0 - min)).ToString("yyyy-MM-dd HH:mm:ss");
-        public BusinessServices.cuxwmsClient service = null;
+        public dynamic service = null;
         public bool isLog = false;
 
         public void Execute(IJobExecutionContext context)
         {
-            service = Common.InitWMSClient();
+            if (Common.IsProductWebService)
+                service = Common.InitProductWMSClient();
+            else
+                service = Common.InitWMSClient();
             this._logger.InfoFormat("SynchBasicData(DateF:{0},DateT:{1})", dateF, dateT);
             this.SynchOrganization();
             this.SynchPerson();
@@ -41,7 +41,6 @@
             this.SyncVendors();
             this.SyncMaterialType();
             this.SyncMaterials();
-      
 
             if (service != null)
                 service.Close();
@@ -204,8 +203,8 @@
                         data.ExtendInt1 = int.Parse(node2.SelectSingleNode("ORGANIZATION_ID").InnerText);
                         data.Code = node2.SelectSingleNode("ORGANIZATION_NUMBER").InnerText;
                         data.Name = node2.SelectSingleNode("ORGANIZATION_NAME").InnerText;
-						data.LevelCode = node2.SelectSingleNode("ORGANIZATION_LEVEL").InnerText;
-						data.Sort = int.Parse(node2.SelectSingleNode("ORDER_BY_NUMBER").InnerText);
+                        data.LevelCode = node2.SelectSingleNode("ORGANIZATION_LEVEL").InnerText;
+                        data.Sort = int.Parse(node2.SelectSingleNode("ORDER_BY_NUMBER").InnerText);
                         if (data.ExtendInt1 == 21324)//0xb51)
                         {
                             data.ParentID = 0;
@@ -324,7 +323,7 @@
                         {
                             //ject[] objArray1 = new object[] { " and  ExtendInt1=", node2.SelectSingleNode("PERSON_ID").InnerText, " and ZTID=", organization.ID };
                             object[] objArray1 = new object[] { " and  ExtendInt1=", node2.SelectSingleNode("PERSON_ID").InnerText };
-							data = Base_PersonService.Instance.GetEntity_Fish(string.Concat(objArray1));
+                            data = Base_PersonService.Instance.GetEntity_Fish(string.Concat(objArray1));
                         }
                         else
                         {
@@ -343,8 +342,8 @@
                                 ID = num4,
                                 GUID = Guid.NewGuid().ToString(),
                                 Password = Md5Util.MD5("123"),
-                               //TID = organization.ID,
-							    ZTID = (organization == null ? 0 : organization.ID),
+                                //TID = organization.ID,
+                                ZTID = (organization == null ? 0 : organization.ID),
                                 UserType = 3
                             };
                         }
@@ -762,10 +761,17 @@
 
         public bool SyncMaterials()
         {
-            ItemsServices.TEMSClient client = Common.InitItemClient();
-            string str = "内蒙古中煤远兴能源化工有限公司";// "中天合创能源有限责任公司";//;
+            //ItemsServices.TEMSClient client = Common.InitItemClient();
+            dynamic client = null;
+            if (Common.IsProductWebService)
+                client = Common.InitProductItemClient();
+            else
+                client = Common.InitItemClient();
+            string str = "内蒙古中煤远兴能源化工有限公司";
             string dateF = this.dateF;
-            ItemsRInvItemsRecUserArray array = new ItemsRInvItemsRecUserArray();
+            //ItemsRInvItemsRecUserArray array = new ItemsRInvItemsRecUserArray();
+            dynamic array = null;
+
             string str3 = "";
             int num = 0;
             string str4 = "同步物资接口,接口名称:invItemsWsInt";
@@ -774,10 +780,19 @@
             string str5 = string.Format("业务实体名称:{0};时间戳:{1}", str, dateF);
             try
             {
-                client.invItemsWsInt(str, dateF, ref array, ref str3);
+                ProductItemsServices.ItemsRInvItemsRecUserArray prodArray = new ProductItemsServices.ItemsRInvItemsRecUserArray();
+                ItemsServices.ItemsRInvItemsRecUserArray testArray = new ItemsServices.ItemsRInvItemsRecUserArray();
+                if (Common.IsProductWebService)
+                    client.invItemsWsInt(str, dateF, ref prodArray, ref str3);
+                else
+                    client.invItemsWsInt(str, dateF, ref testArray, ref str3);
+                if (Common.IsProductWebService)
+                    array = prodArray;
+                else
+                    array = testArray;
                 if (array.Count > 0)
                 {
-                    foreach (ItemsRInvItemsRecUser user in array)
+                    foreach (dynamic user in array)
                     {
                         string str6 = "";
                         bool flag2 = false;
@@ -881,10 +896,15 @@
 
         public bool SyncMaterialType()
         {
-            CategoryServices.CATEGORIESClient client = Common.InitCategoryClient();
+            dynamic client = null;
+            if (Common.IsProductWebService)
+                client = Common.InitProductCategoryClient();
+            else
+                Common.InitCategoryClient();
             string str = "内蒙古中煤远兴能源化工有限公司";
             string dateF = this.dateF;
-            CategoriesRCategoriesRecUserArray array = new CategoriesRCategoriesRecUserArray();
+            dynamic array = null;
+
             string str3 = "";
             int num = 0;
             string str4 = "同步物资分类接口,接口名称:invCategoriesWsInt";
@@ -893,10 +913,19 @@
             string str5 = string.Format("业务实体名称:{0};时间戳:{1}", str, dateF);
             try
             {
-                client.invCategoriesWsInt(str, dateF, ref array, ref str3);
+                ProductCategoryServices.CategoriesRCategoriesRecUserArray prodArray = new ProductCategoryServices.CategoriesRCategoriesRecUserArray();
+                CategoryServices.CategoriesRCategoriesRecUserArray testArray = new CategoryServices.CategoriesRCategoriesRecUserArray();
+                if (Common.IsProductWebService)
+                    client.invCategoriesWsInt(str, dateF, ref prodArray, ref str3);
+                else
+                    client.invCategoriesWsInt(str, dateF, ref testArray, ref str3);
+                if (Common.IsProductWebService)
+                    array = prodArray;
+                else
+                    array = testArray;
                 if (array.Count > 0)
                 {
-                    foreach (CategoriesRCategoriesRecUser user in array)
+                    foreach (dynamic user in array)
                     {
                         string str6 = "";
                         bool flag2 = false;
@@ -997,11 +1026,16 @@
 
         public bool SyncVendors()
         {
-            POVENDORSClient client = Common.InitVendorClient();
+            dynamic client = null;
+            if (Common.IsProductWebService)
+                client = Common.InitProductVendorClient();
+            else
+                client = Common.InitVendorClient();
             int num = 0;
             string str = "内蒙古中煤远兴能源化工有限公司";
             string dateF = this.dateF;
-            PovendorsRPoVendoresRecUserArray array = new PovendorsRPoVendoresRecUserArray();
+            dynamic array = null;
+
             string str3 = string.Empty;
             string str4 = "同步供应商接口,接口名称:poVendorsWsInt";
             int num2 = 0;
@@ -1009,10 +1043,19 @@
             string str5 = string.Format("业务实体名称:{0};时间戳:{1}", str, dateF);
             try
             {
-                client.poVendorsWsInt(str, dateF, ref array, ref str3);
+                ProductVendorServices.VendorsRPoVendoresRecUserArray prodArray = new ProductVendorServices.VendorsRPoVendoresRecUserArray();
+                VendorServices.PovendorsRPoVendoresRecUserArray testArray = new VendorServices.PovendorsRPoVendoresRecUserArray();
+                if (Common.IsProductWebService)
+                    client.poVendorsWsInt(str, dateF, ref prodArray, ref str3);
+                else
+                    client.poVendorsWsInt(str, dateF, ref testArray, ref str3);
+                if (Common.IsProductWebService)
+                    array = prodArray;
+                else
+                    array = testArray;
                 if (array.Count > 0)
                 {
-                    foreach (PovendorsRPoVendoresRecUser user in array)
+                    foreach (dynamic user in array)
                     {
                         DateTime? endDateActive = null;
                         DateTime now = DateTime.Now;

@@ -21,18 +21,21 @@
         public string dateT = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         private static int min = int.Parse(ConfigurationManager.AppSettings["10Min"].ToString());
         public string dateF = DateTime.Now.AddMinutes((double)(0 - min)).ToString("yyyy-MM-dd HH:mm:ss");
-        public BusinessServices.cuxwmsClient service = null;
+        public dynamic service = null;
         public bool isLog = false;
         public void Execute(IJobExecutionContext context)
         {
-            service = Common.InitWMSClient();
+            if (Common.IsProductWebService)
+                service = Common.InitProductWMSClient();
+            else
+                service = Common.InitWMSClient();
             this._logger.InfoFormat("SynchBusinessData(DateF:{0},DateT:{1})", dateF, dateT);
             this.SynchOrderInfo();
             this.SynchPurchasePlan();
             //this.SynchCKCostUpdate();
-            this.SynchStockCostUpdate();
+           // this.SynchStockCostUpdate();
             //this.SynchOffsetInfo();
-            this.SynchAssetCategory();
+            //this.SynchAssetCategory();
             //if (service != null)
             //    service.Close();
         }
@@ -171,7 +174,7 @@
                     element6.InnerText = "";
                     node.AppendChild(element6);
                     XmlElement element7 = document2.CreateElement("HEADER_ID");
-                    element7.InnerText = (detail.SheetId ).ToString();  //+ 900000000
+                    element7.InnerText = (detail.SheetId).ToString();  //+ 900000000
                     node.AppendChild(element7);
                     XmlElement element8 = document2.CreateElement("LINE_ID");
                     element8.InnerText = (detail.ID).ToString();
