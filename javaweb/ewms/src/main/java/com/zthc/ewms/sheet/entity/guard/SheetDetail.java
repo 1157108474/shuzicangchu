@@ -322,7 +322,7 @@ public class SheetDetail implements Cloneable {
     @Transient
     private Integer sonId;
 
-
+    @Transient
     private String sheetCode;
     
     

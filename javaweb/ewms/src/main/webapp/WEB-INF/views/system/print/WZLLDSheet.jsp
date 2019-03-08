@@ -64,7 +64,7 @@
         <br>
         <table width="100%">
             <tr class="my_tr">
-                <td >&nbsp;&nbsp;领用中心部门领导：</td>
+                <td >&nbsp;&nbsp;领用中心部门领导：${shenpi}</td>
                 <td >&nbsp;&nbsp;录入人：${sheet.personName}</td>
                 <td >&nbsp;&nbsp;领用人：</td>
             </tr>

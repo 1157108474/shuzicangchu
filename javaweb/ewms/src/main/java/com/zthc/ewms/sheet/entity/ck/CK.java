@@ -39,6 +39,9 @@ public class CK {
 	/**----库房---**/
 	@Column(name="houseName", columnDefinition="nvarchar(200) NULL COMMENT '库房'")
 	private String houseName;
+	/**----库房编码---**/
+	@Column(name="houseCode", columnDefinition="nvarchar(200) NULL COMMENT '库房编码'")
+	private String houseCode;
 
 	/**
 	 * 计划编号
@@ -56,6 +59,14 @@ public class CK {
 
 	public Integer getId() {
 		return id;
+	}
+
+	public String getHouseCode() {
+		return houseCode;
+	}
+
+	public void setHouseCode(String houseCode) {
+		this.houseCode = houseCode;
 	}
 
 	public void setId(Integer id) {

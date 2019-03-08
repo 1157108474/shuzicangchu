@@ -50,7 +50,7 @@
 <body class="childrenBody" style="width: 90%;">
 <form class="" action="">
 	<input type="hidden"  class="layui-input " value="${taskId}" name="taskId" id="taskId">
-	<input type="hidden"  class="layui-input " value="${comment}" name="comment" id="comment">
+	<input type="hidden"  class="layui-input " value="${comment}" >
 	<div class="layui-form-item" style="width: 90%;margin: 6% 10%;">
 		<label class="layui-form-label" style="font-size: 14px">退回环节选择:</label>
 		<div style="padding-left: 120px">
@@ -59,6 +59,11 @@
 					<option value="${hisPart.id}">${hisPart.name}</option>
 				</c:forEach>
 			</select>
+			
+		</div><br/>
+		<label class="layui-form-label" style="font-size: 14px">操作意见:</label>
+		<div style="padding-left: 120px">
+			<textarea name="comment" id="comment" style="width: 70%"></textarea>
 		</div>
 	</div>
 	<a class="layui-btn"  id="gotoNext"  style="float: left;margin-top: 6px;margin-left: 35%;height: 30px;line-height: 30px;width: 50px">确定</a>

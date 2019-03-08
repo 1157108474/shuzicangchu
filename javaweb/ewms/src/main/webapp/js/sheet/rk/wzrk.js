@@ -38,6 +38,7 @@ layui.config({
                         return "不启用"
                     }
             }}
+                , {field: 'extendString1', title: '库房编码', align: "center", width: 120}
                 , {field: 'warehouseName', title: '库房', align: "center", width: 120}
                 /*, {field: 'notaxPrice', title: '不含税单价', align: "center", width: 120}
                 , {field: 'notaxSum', title: '不含税金额', align: "center", width: 120}

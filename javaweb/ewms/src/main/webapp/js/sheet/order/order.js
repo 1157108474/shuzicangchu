@@ -348,13 +348,14 @@ layui.config({
     };
     //打印
     $("#print").on("click", function (e) {
+    	var taskId = $("#taskId").val();
         var printType = $("#printType").val();
         if ($("#id").val() == "" || $("#id").val() == "0") {
             layer.alert("请先保存单据");
         } else if (printType == '') {
             layer.alert("请选择打印类型");
         } else {
-            var url = "/system/print/sheet/WZJS-" + $("#id").val() + "?ordernum=" + $("#ordernum").val() + "&printType=" + printType;
+            var url = "/system/print/sheet/WZJS-" + $("#id").val() + "?ordernum=" + $("#ordernum").val() + "&printType=" + printType + "&taskId=" + taskId;
             vipTable.openPage("打印接收单", url, '800px', '500px');
         }
     });

@@ -125,9 +125,10 @@ public class ApplyDepDao {
      * @return
      */
     public List<ApplyDep> listApplyDepZt(Integer ztId) {
-        String hql = " from ApplyDep where 1 = 1 and ztId = :ztid and status = 1 and deleted != 2 order by id DESC";
+//        String hql = " from ApplyDep where 1 = 1 and ztId = :ztid and status = 1 and deleted != 2 order by id DESC";
+        String hql = " from ApplyDep where 1 = 1  and status = 1 and deleted != 2 order by id DESC";
         Query query = baseDao.createQuery(hql);
-        query.setParameter("ztid", ztId);
+//        query.setParameter("ztid", ztId);
         return query.list();
     }
 

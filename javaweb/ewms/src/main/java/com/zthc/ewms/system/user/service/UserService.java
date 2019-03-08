@@ -38,6 +38,7 @@ public class UserService extends UserServiceGuard {
      *
      * @return
      */
+    @Transactional(readOnly=true)
     public List<User> listUserCodes(String code) {
         return this.dao.listUserCodes(code);
     }

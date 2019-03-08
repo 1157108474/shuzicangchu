@@ -272,7 +272,8 @@ public class ActivitiButtonController {
         //boolean success = false;
         String taskId = request.getParameter("taskId");
         String activitiBackId = request.getParameter("activitiBackId");
-        String comment = "";
+//        String comment = "";
+        String comment = request.getParameter("comment");
         //String comment = request.getParameter("comment");
         //String comment = new String(request.getParameter("comment").getBytes("iso8859-1"), "gbk");
 

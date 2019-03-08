@@ -89,9 +89,8 @@
         <br>
         <table width="100%">
             <tr>
-                <td>&nbsp;&nbsp;录入人：${sheet.personName}</td>
-                <td>&nbsp;&nbsp;发料人：</td>
-                <td>&nbsp;&nbsp;领用人：${apply.personName}</td>
+                <td>&nbsp;&nbsp;发料人：${sheet.personName}</td>
+                <td>&nbsp;&nbsp;领用人：</td>
             </tr>
         </table>
         <iframe id="printf" src="" width="0" height="0" frameborder="0"></iframe>

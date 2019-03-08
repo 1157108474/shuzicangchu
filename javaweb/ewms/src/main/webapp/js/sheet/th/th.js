@@ -58,6 +58,7 @@ layui.config({
         , where: {ran: ran++, sheetId: $("#id").val()}
         , cols: [
             [{type: "checkbox", fixed: "left", width: 50}
+            	, {field: 'houseCode', title: '库房编码', align: "center", width: 160}
                 , {field: 'houseName', title: '库房', align: "center", width: 160}
                 , {field: 'storeLocationCode', title: '库位', align: "center", width: 210}
                 , {field: 'detailCount', title: '数量', align: "center", width: 150}

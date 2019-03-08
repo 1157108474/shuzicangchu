@@ -73,7 +73,8 @@ layui.config({
         });
     }
     $("#print").on("click", function (e) {
-        vipTable.openPage("打印物资领料单", "/system/print/sheet/WZLLD-" + $("#id").val()  , '95%', '95%');
+    	var taskId = $("#taskId").val();
+        vipTable.openPage("打印物资领料单", "/system/print/sheet/WZLLD-" + $("#id").val() + "?taskId=" +taskId  , '95%', '95%');
     });
     //保存、修改单据方法
     //type 0:不打开明细页面；1:打开计划明细页面；2:打开无计划明细页面

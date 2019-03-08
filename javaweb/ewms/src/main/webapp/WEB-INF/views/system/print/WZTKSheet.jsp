@@ -89,7 +89,12 @@
         <br>
         <table width="100%">
             <tr>
-                <td>&nbsp;&nbsp;退料人：${sheet.personName}</td>
+                <%-- <td>&nbsp;&nbsp;退料人：${sheet.personName}</td> --%>
+                <tr class="my_tr">
+                <td >&nbsp;&nbsp;部门负责人：${shenpi}</td>
+                <td >&nbsp;&nbsp;录入人：${sheet.personName}</td>
+                <td >&nbsp;&nbsp;退料人：</td>
+            </tr>
             </tr>
         </table>
         <iframe id="printf" src="" width="0" height="0" frameborder="0"></iframe>

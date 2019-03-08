@@ -148,12 +148,23 @@ public class TKDetail {
 	private String unitName;
 	@Column(name="houseName")
 	private String houseName;
+	@Column(name="houseCode")
+	private String houseCode;
 
 	@Column(name="providerName")
 	private String providerName;
 
 	@Column(name = "enableSn")
 	private Integer enableSn;
+
+	
+	public String getHouseCode() {
+		return houseCode;
+	}
+
+	public void setHouseCode(String houseCode) {
+		this.houseCode = houseCode;
+	}
 
 	public Integer getEnableSn() {
 		return enableSn;

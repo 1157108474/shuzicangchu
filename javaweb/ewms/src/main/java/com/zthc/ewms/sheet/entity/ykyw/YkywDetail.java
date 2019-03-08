@@ -142,10 +142,14 @@ public class YkywDetail {
 
 	@Column(name="newhousename", columnDefinition="nvarchar(20) NULL COMMENT '单位'")
 	private String newHouseName;
+	@Column(name="newhouseCode", columnDefinition="nvarchar(20) NULL COMMENT '单位'")
+	private String newHouseCode;
 
 
 	@Column(name="oldhousename", columnDefinition="nvarchar(20) NULL COMMENT '单位'")
 	private String oldHouseName;
+	@Column(name="oldhouseCode", columnDefinition="nvarchar(20) NULL COMMENT '单位'")
+	private String oldHouseCode;
 
 	@Column(name="personname", columnDefinition="nvarchar(20) NULL COMMENT '单位'")
 	private String personName;
@@ -153,6 +157,22 @@ public class YkywDetail {
 	@Column(name="providerDepname", columnDefinition="nvarchar(20) NULL COMMENT '单位'")
 	private String providerDepName;
 
+
+	public String getNewHouseCode() {
+		return newHouseCode;
+	}
+
+	public void setNewHouseCode(String newHouseCode) {
+		this.newHouseCode = newHouseCode;
+	}
+
+	public String getOldHouseCode() {
+		return oldHouseCode;
+	}
+
+	public void setOldHouseCode(String oldHouseCode) {
+		this.oldHouseCode = oldHouseCode;
+	}
 
 	public Integer getId() {
 		return id;

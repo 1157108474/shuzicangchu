@@ -27,6 +27,7 @@ layui.config({
                 , {field: 'description', title: '物料描述', align: "center", width: 300}
                 , {field: 'detailCount', title: '退库数量', align: "center",width: 80}
                 , {field: 'detailUnitName', title: '单位', align: "center", width: 80}
+                , {field: 'houseCode', title: '库房编码', align: "center", width: 120}
                 , {field: 'houseName', title: '库房', align: "center", width: 120}
                 , {field: 'providerName', title: '供应商', align: "center", width: 160}
                 , {field: 'noTaxPriceDouble', title: '不含税单价', align: "center", width: 100}
@@ -175,7 +176,8 @@ layui.config({
     });
 
     $("#print").on("click", function (e) {
-            vipTable.openPage("打印退货单", "/system/print/sheet/WZTK-" + $("#id").val()  , '95%', '95%');
+    	var taskId = $("#taskId").val();
+            vipTable.openPage("打印退货单", "/system/print/sheet/WZTK-" + $("#id").val() + "?taskId=" + taskId  , '95%', '95%');
     });
 
 

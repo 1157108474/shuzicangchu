@@ -1,5 +1,6 @@
 package com.zthc.ewms.system.print.controller;
 
+import com.zthc.ewms.base.page.LayuiPage;
 import com.zthc.ewms.base.util.StringUtils;
 import com.zthc.ewms.sheet.entity.apply.ApplyPrint;
 import com.zthc.ewms.sheet.entity.apply.ManageApply;
@@ -16,9 +17,12 @@ import com.zthc.ewms.sheet.entity.th.ThPrint;
 import com.zthc.ewms.sheet.entity.tk.TKDetail;
 import com.zthc.ewms.sheet.entity.tk.TKPrint;
 import com.zthc.ewms.sheet.service.*;
+import com.zthc.ewms.system.activitiListener.service.ActivitiService;
 import com.zthc.ewms.system.print.entity.guard.PrintEnums;
 import com.zthc.ewms.system.print.service.BarCodeService;
+
 import drk.system.Log;
+
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,9 +36,11 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/system/print")
@@ -47,7 +53,8 @@ public class PrintController {
     public SheetService sheetService;
     @Resource(name = "sheetDetailService")
     public SheetDetailService detailService;
-
+    @Resource(name = "activitiService")
+    public ActivitiService activitiService;
     @Autowired
     private SheetCGService sheetCGService;
     @Autowired
@@ -99,6 +106,7 @@ public class PrintController {
 
         //获取打印类型
         String typeObject = request.getParameter("printType");
+        String taskId = request.getParameter("taskId");
         Integer printType = 0;
         if (typeObject != null) {
             printType = Integer.valueOf(typeObject);
@@ -108,10 +116,10 @@ public class PrintController {
             printWZTH(model, id);
         } else if (type.equals("WZTK")) {
             //打印物资退库
-            printWZTK(model, id);
+            printWZTK(model, id,request,response,taskId);
         } else if (type.equals("WZJS")) {
             //打印物资接收
-            type = printWZJS(printType, model, id);
+            type = printWZJS(printType, model, id,request,response,taskId);
         } else if (type.equals("JSRK")) {
             //打印接收入库
             printJSRK(model, id);
@@ -124,10 +132,10 @@ public class PrintController {
             model.addAttribute("num", num);
         } else if (type.equals("WZLLD")) {
             //打印物资领料单
-            printWZLLD(model, id);
+            printWZLLD(model, id,request,response,taskId);
         } else if (type.equals("WZCK")) {
             //打印物资出库
-            printWZCK(model, id);
+            printWZCK(model, id,request,response,taskId);
         }
         return "system/print/" + type + "Sheet";
     }
@@ -160,13 +168,20 @@ public class PrintController {
      *
      * @param model
      * @param id
+     * @param taskId 
+     * @param response 
+     * @param request 
      */
-    private void printWZLLD(Model model, Integer id) {
+    private void printWZLLD(Model model, Integer id, HttpServletRequest request, HttpServletResponse response, String taskId) {
         ApplyPrint sheet = this.sheetService.getApplyPrintOne(id);
         sheet.setCreateDateStr(new DateTime(sheet.getCreateDate()).toString("yyyy-MM-dd"));
         model.addAttribute("sheet", sheet);
         List<SheetDetail> details = this.detailService.printDetails(id, null, "SheetDetail");
         model.addAttribute("details", details);
+        LayuiPage<Map<String, Object>> historicActivityInstances = activitiService.historyActInstanceList(taskId,0,100);
+        List<Map<String,Object>> data = historicActivityInstances.getData();
+        
+		model.addAttribute("shenpi", data.get(data.size()-1).get("assignee"));
     }
 
     /**
@@ -174,8 +189,11 @@ public class PrintController {
      *
      * @param model
      * @param id
+     * @param taskId 
+     * @param response 
+     * @param request 
      */
-    private void printWZCK(Model model, Integer id) {
+    private void printWZCK(Model model, Integer id, HttpServletRequest request, HttpServletResponse response, String taskId) {
         SheetCKD sheet = this.sheetService.getSheetCKDOne(id);
         sheet.setCreateDateStr(new DateTime(sheet.getCreatedate()).toString("yyyy-MM-dd"));
         model.addAttribute("sheet", sheet);
@@ -185,6 +203,9 @@ public class PrintController {
 
         List<SheetCKDETAIL> details = this.sheetCKService.printCKDetails(id);
         model.addAttribute("details", details);
+        LayuiPage<Map<String, Object>> historicActivityInstances = activitiService.historyActInstanceList(taskId,0,100);
+        List<Map<String,Object>> data = historicActivityInstances.getData();
+				model.addAttribute("zhidanren", data.get(0).get("assignee"));
     }
 
     /**
@@ -192,14 +213,21 @@ public class PrintController {
      *
      * @param model
      * @param id
+     * @param taskId 
+     * @param response 
+     * @param request 
      * @return
      */
-    private void printWZTK(Model model, Integer id) {
+    private void printWZTK(Model model, Integer id, HttpServletRequest request, HttpServletResponse response, String taskId) {
         TKPrint sheet = this.sheetService.getTKPrintSheetOne(id);
         sheet.setCreateDateStr(new DateTime(sheet.getCreateDate()).toString("yyyy-MM-dd"));
         model.addAttribute("sheet", sheet);
         List<TKDetail> details = this.detailService.printDetails(id, null, "TKDetail");
         model.addAttribute("details", details);
+        LayuiPage<Map<String, Object>> historicActivityInstances = activitiService.historyActInstanceList(taskId,0,100);
+        List<Map<String,Object>> data = historicActivityInstances.getData();
+				model.addAttribute("zhidanren", data.get(0).get("assignee"));
+				model.addAttribute("shenpi", data.get(data.size()-1).get("assignee"));
     }
 
     /**
@@ -224,9 +252,12 @@ public class PrintController {
      * @param printType
      * @param model
      * @param id
+     * @param response 
+     * @param request 
+     * @param taskId2 
      * @return
      */
-    private String printWZJS(Integer printType, Model model, Integer id) {
+    private String printWZJS(Integer printType, Model model, Integer id, HttpServletRequest request, HttpServletResponse response, String taskId) {
 
         OrderPrint sheet = this.sheetService.getOrderPrintSheetOne(id);
         if (sheet != null) {
@@ -241,6 +272,21 @@ public class PrintController {
         if (printType.equals(PrintEnums.WZJSEnum.EQUIPMENT_SPARE.getType())) {
             return "WZJSEquipmentSpare";
         } else if (printType.equals(PrintEnums.WZJSEnum.ORIGINAL_AUXILIARY.getType())) {
+            LayuiPage<Map<String, Object>> historicActivityInstances = activitiService.historyActInstanceList(taskId,0,100);
+            List<Map<String,Object>> data = historicActivityInstances.getData();
+				model.addAttribute("fqr", data.get(0).get("assignee"));
+            for (Map<String, Object> map : data) {
+				
+				if("一审".equals(map.get("activityName"))){
+					model.addAttribute("shenpi1", map.get("assignee"));
+				}
+				if("二审".equals(map.get("activityName"))){
+					model.addAttribute("shenpi2", map.get("assignee"));
+				}
+				if("三审".equals(map.get("activityName"))){
+					model.addAttribute("shenpi3", map.get("assignee"));
+				}
+			}
             return "WZJSoriginalAuxiliary";
         } else if (printType.equals(PrintEnums.WZJSEnum.SAFETY_MATERIALS.getType())) {
             return "WZJSafetyMaterials";

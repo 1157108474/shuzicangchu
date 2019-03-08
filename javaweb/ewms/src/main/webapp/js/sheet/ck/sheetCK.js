@@ -26,6 +26,7 @@ layui.config({
                 , {field: 'materialCode', title: '物料编码', align: "center", width: 120}
                 , {field: 'detailUnitName', title: '计量单位', align: "center", width: 180}
                 , {field: 'detailCount', title: '出库数量', align: "center", width: 100}
+                , {field: 'houseCode', title: '库房编码', align: "center", width: 120}
                 , {field: 'houseName', title: '库房', align: "center", width: 150}
                 , {field: 'extendstring1', title: '计划编号', align: "center", width: 100}
                 , {field: 'noTaxPriceDouble', title: '不含税单价', align: "center", width: 100}
@@ -59,7 +60,8 @@ layui.config({
         });
     }
     $("#print").on("click", function (e) {
-        vipTable.openPage("打印物资出库单", "/system/print/sheet/WZCK-" + $("#id").val()  , '95%', '95%');
+    	var taskId = $("#taskId").val();
+        vipTable.openPage("打印物资出库单", "/system/print/sheet/WZCK-" + $("#id").val() + "?taskId=" + taskId  , '95%', '95%');
     });
     // 监听select事件
     form.on('select(ckType)', function (data) {

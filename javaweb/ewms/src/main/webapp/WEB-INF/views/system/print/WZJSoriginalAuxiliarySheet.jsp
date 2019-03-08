@@ -68,15 +68,15 @@
                     <td>${detail.description}</td>
                     <td>${detail.detailUnitName}</td>
                     <td>${detail.detailCount}</td>
+                    <td>${fqr }</td>
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td>${shenpi1 }</td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>${shenpi2 }</td>
                 </tr>
             </c:forEach>
             <tr class="my_tr">

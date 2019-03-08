@@ -32,6 +32,8 @@ public class ThDetail {
     private String guid;
     @Column(name = "houseName")
     private String houseName;
+    @Column(name = "houseCode")
+    private String houseCode;
     /**
      * ----µ¥¾ÝID---
      **/
@@ -224,7 +226,15 @@ public class ThDetail {
     @Column(name = "extendInt8")
     private Integer extendInt8;
 
-    public Integer getExtendInt8() {
+    public String getHouseCode() {
+		return houseCode;
+	}
+
+	public void setHouseCode(String houseCode) {
+		this.houseCode = houseCode;
+	}
+
+	public Integer getExtendInt8() {
         return extendInt8;
     }
 

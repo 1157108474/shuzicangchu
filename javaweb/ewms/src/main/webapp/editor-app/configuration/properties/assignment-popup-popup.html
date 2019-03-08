@@ -37,11 +37,12 @@
 					    	</thead>
 					    	<tbody>
 					    		<tr ng-repeat="account in accounts">
-					    			<td>
-					    				<input ng-if="choseAssignmentFlag=='assignee'" type="radio" ng-model="formData.assignee" name="accountId" ng-value="{{account.code}}">
+									<td>
+										<input ng-if="choseAssignmentFlag=='assignee'" type="radio" ng-model="formData.assignee" name="accountId" ng-value="{{account.code}}"
+											   ng-click="selectRadio(account)">
 										<input ng-if="choseAssignmentFlag=='assignees'" type="checkbox" ng-model="account.selected" name="accountId" ne-true-value="{{account.code}}"
-											   ng-false-value="false">
-					    			</td>
+											   ng-false-value="false" ng-click="selectRadio(account)">
+									</td>
 					    			<td>{{account.code}}</td>
 					    			<td  ng-value="{{account.name}}">{{account.name}}</td>
 					    		</tr>
