@@ -322,8 +322,9 @@
                         Base_Organization organization = Base_OrganizationService.Instance.GetEntity_Fish(" and ExtendInt1=" + innerText);
                         if (organization != null)
                         {
-                            object[] objArray1 = new object[] { " and  ExtendInt1=", node2.SelectSingleNode("PERSON_ID").InnerText, " and ZTID=", organization.ID };
-                            data = Base_PersonService.Instance.GetEntity_Fish(string.Concat(objArray1));
+                            //ject[] objArray1 = new object[] { " and  ExtendInt1=", node2.SelectSingleNode("PERSON_ID").InnerText, " and ZTID=", organization.ID };
+                            object[] objArray1 = new object[] { " and  ExtendInt1=", node2.SelectSingleNode("PERSON_ID").InnerText };
+							data = Base_PersonService.Instance.GetEntity_Fish(string.Concat(objArray1));
                         }
                         else
                         {
@@ -342,7 +343,8 @@
                                 ID = num4,
                                 GUID = Guid.NewGuid().ToString(),
                                 Password = Md5Util.MD5("123"),
-                                ZTID = organization.ID,
+                               //TID = organization.ID,
+							    ZTID = (organization == null ? 0 : organization.ID),
                                 UserType = 3
                             };
                         }
