@@ -26,7 +26,10 @@ namespace EWMS.WinService
 
         private void button1_Click(object sender, EventArgs e)
         {
-            sync.service = Common.InitWMSClient();
+            if (Common.IsProductWebService)
+                sync.service = Common.InitProductWMSClient();
+            else
+                sync.service = Common.InitWMSClient();
             sync.dateF = dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss");
             sync.dateT = dateTimePicker2.Value.ToString("yyyy-MM-dd HH:mm:ss");
             sync.isLog = checkBox1.Checked;
@@ -38,7 +41,10 @@ namespace EWMS.WinService
 
         private void button2_Click(object sender, EventArgs e)
         {
-            sync.service = Common.InitWMSClient();
+            if (Common.IsProductWebService)
+                sync.service = Common.InitProductWMSClient();
+            else
+                sync.service = Common.InitWMSClient();
             sync.dateF = dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss");
             sync.dateT = dateTimePicker2.Value.ToString("yyyy-MM-dd HH:mm:ss");
             sync.isLog = checkBox1.Checked;
@@ -50,7 +56,10 @@ namespace EWMS.WinService
 
         private void button3_Click(object sender, EventArgs e)
         {
-            sync.service = Common.InitWMSClient();
+            if (Common.IsProductWebService)
+                sync.service = Common.InitProductWMSClient();
+            else
+                sync.service = Common.InitWMSClient();
             sync.dateF = dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss");
             sync.dateT = dateTimePicker2.Value.ToString("yyyy-MM-dd HH:mm:ss");
             sync.isLog = checkBox1.Checked;
@@ -62,7 +71,10 @@ namespace EWMS.WinService
 
         private void button4_Click(object sender, EventArgs e)
         {
-            sync.service = Common.InitWMSClient();
+            if (Common.IsProductWebService)
+                sync.service = Common.InitProductWMSClient();
+            else
+                sync.service = Common.InitWMSClient();
             sync.dateF = dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss");
             sync.dateT = dateTimePicker2.Value.ToString("yyyy-MM-dd HH:mm:ss");
             sync.isLog = checkBox1.Checked;
@@ -74,7 +86,10 @@ namespace EWMS.WinService
 
         private void button5_Click(object sender, EventArgs e)
         {
-            sync.service = Common.InitWMSClient();
+            if (Common.IsProductWebService)
+                sync.service = Common.InitProductWMSClient();
+            else
+                sync.service = Common.InitWMSClient();
             sync.dateF = dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss");
             sync.dateT = dateTimePicker2.Value.ToString("yyyy-MM-dd HH:mm:ss");
             sync.isLog = checkBox1.Checked;
@@ -86,7 +101,10 @@ namespace EWMS.WinService
 
         private void button6_Click(object sender, EventArgs e)
         {
-            sync.service = Common.InitWMSClient();
+            if (Common.IsProductWebService)
+                sync.service = Common.InitProductWMSClient();
+            else
+                sync.service = Common.InitWMSClient();
             sync.dateF = dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss");
             sync.dateT = dateTimePicker2.Value.ToString("yyyy-MM-dd HH:mm:ss");
             sync.isLog = checkBox1.Checked;
@@ -98,7 +116,10 @@ namespace EWMS.WinService
 
         private void button7_Click(object sender, EventArgs e)
         {
-            sync.service = Common.InitWMSClient();
+            if (Common.IsProductWebService)
+                sync.service = Common.InitProductWMSClient();
+            else
+                sync.service = Common.InitWMSClient();
             sync.dateF = dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss");
             sync.dateT = dateTimePicker2.Value.ToString("yyyy-MM-dd HH:mm:ss");
             sync.isLog = checkBox1.Checked;
@@ -110,7 +131,10 @@ namespace EWMS.WinService
 
         private void button8_Click(object sender, EventArgs e)
         {
-            sync.service = Common.InitWMSClient();
+            if (Common.IsProductWebService)
+                sync.service = Common.InitProductWMSClient();
+            else
+                sync.service = Common.InitWMSClient();
             sync.dateF = dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss");
             sync.dateT = dateTimePicker2.Value.ToString("yyyy-MM-dd HH:mm:ss");
             sync.isLog = checkBox1.Checked;
@@ -122,7 +146,10 @@ namespace EWMS.WinService
 
         private void button9_Click(object sender, EventArgs e)
         {
-            sync.service = Common.InitWMSClient();
+            if (Common.IsProductWebService)
+                sync.service = Common.InitProductWMSClient();
+            else
+                sync.service = Common.InitWMSClient();
             sync.dateF = dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss");
             sync.dateT = dateTimePicker2.Value.ToString("yyyy-MM-dd HH:mm:ss");
             sync.isLog = checkBox1.Checked;
@@ -134,7 +161,10 @@ namespace EWMS.WinService
 
         private void button10_Click(object sender, EventArgs e)
         {
-            buss.service = Common.InitWMSClient();
+            if (Common.IsProductWebService)
+                buss.service = Common.InitProductWMSClient();
+            else
+                buss.service = Common.InitWMSClient();
             buss.dateF = dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss");
             buss.dateT = dateTimePicker2.Value.ToString("yyyy-MM-dd HH:mm:ss");
             buss.isLog = checkBox1.Checked;
@@ -146,7 +176,10 @@ namespace EWMS.WinService
 
         private void button11_Click(object sender, EventArgs e)
         {
-            buss.service = Common.InitWMSClient();
+            if (Common.IsProductWebService)
+                buss.service = Common.InitProductWMSClient();
+            else
+                buss.service = Common.InitWMSClient();
             buss.dateF = dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss");
             buss.dateT = dateTimePicker2.Value.ToString("yyyy-MM-dd HH:mm:ss");
             buss.isLog = checkBox1.Checked;
@@ -158,7 +191,10 @@ namespace EWMS.WinService
 
         private void button12_Click(object sender, EventArgs e)
         {
-            buss.service = Common.InitWMSClient();
+            if (Common.IsProductWebService)
+                buss.service = Common.InitProductWMSClient();
+            else
+                buss.service = Common.InitWMSClient();
             buss.dateF = dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss");
             buss.dateT = dateTimePicker2.Value.ToString("yyyy-MM-dd HH:mm:ss");
             buss.isLog = checkBox1.Checked;
@@ -170,7 +206,10 @@ namespace EWMS.WinService
 
         private void button13_Click(object sender, EventArgs e)
         {
-            buss.service = Common.InitWMSClient();
+            if (Common.IsProductWebService)
+                buss.service = Common.InitProductWMSClient();
+            else
+                buss.service = Common.InitWMSClient();
             buss.dateF = dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss");
             buss.dateT = dateTimePicker2.Value.ToString("yyyy-MM-dd HH:mm:ss");
             buss.isLog = checkBox1.Checked;
@@ -182,7 +221,10 @@ namespace EWMS.WinService
 
         private void button14_Click(object sender, EventArgs e)
         {
-            buss.service = Common.InitWMSClient();
+            if (Common.IsProductWebService)
+                buss.service = Common.InitProductWMSClient();
+            else
+                buss.service = Common.InitWMSClient();
             buss.dateF = dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss");
             buss.dateT = dateTimePicker2.Value.ToString("yyyy-MM-dd HH:mm:ss");
             buss.isLog = checkBox1.Checked;
@@ -194,7 +236,10 @@ namespace EWMS.WinService
 
         private void button15_Click(object sender, EventArgs e)
         {
-            buss.service = Common.InitWMSClient();
+            if (Common.IsProductWebService)
+                buss.service = Common.InitProductWMSClient();
+            else
+                buss.service = Common.InitWMSClient();
             buss.dateF = dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss");
             buss.dateT = dateTimePicker2.Value.ToString("yyyy-MM-dd HH:mm:ss");
             buss.isLog = checkBox1.Checked;

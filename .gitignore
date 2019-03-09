@@ -1,0 +1,16 @@
+﻿################################################################################
+# 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
+################################################################################
+
+/EWMS/EWMS.WinService/bin/Debug
+/EWMS/EWMS.WinService/obj/Debug
+/EWMS/EWMS.Docs/obj/Debug
+/EWMS/Frameworks/EWMS.Core/bin/Debug
+/EWMS/Frameworks/EWMS.Core/obj/Debug
+/EWMS/Frameworks/EWMS.Entity/bin/Debug
+/EWMS/Frameworks/EWMS.Entity/obj/Debug
+/EWMS/Frameworks/EWMS.Service/bin/Debug
+/EWMS/Frameworks/EWMS.Service/obj/Debug
+/EWMS/Frameworks/EWMS.Utils/bin/Debug
+/EWMS/Frameworks/EWMS.Utils/obj/Debug
+/EWMS/packages
