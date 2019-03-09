@@ -82,7 +82,6 @@ layui.config({
     table.on('tool(sheetgrid)', function (obj) {
 
         var data = obj.data;
-
         if (obj.event === 'edit') {
             parent.tab.tabAdd({
                 href: data.url+"?oper=edit", //µÿ÷∑

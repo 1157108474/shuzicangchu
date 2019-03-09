@@ -993,7 +993,7 @@ public class SheetService extends SheetServiceGuard {
             lineElement.addElement("ITEM_DESC").addText(detail.getDescription());
             wareHouse = this.wareHouseService.getWareHouse(detail.getStoreId());
             lineElement.addElement("SUBINV_CODE").addText(wareHouse == null ? "" : wareHouse.getCode());
-
+//            ret = this.detailService.sheetDetails(sheetId, condition, "YkywDetail");
             Boolean isExistWarehouse = this.wareHouseService.isExistWarehouse(wareHouse.getId());
             if (isExistWarehouse){
                 //ªÒ»°ø‚Œª
