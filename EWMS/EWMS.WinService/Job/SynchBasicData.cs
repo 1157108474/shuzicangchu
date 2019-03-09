@@ -12,6 +12,8 @@
     using System.Xml;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
+    using System.Windows.Forms;
+    using System.Collections.Generic;
 
     [DisallowConcurrentExecution]
     public sealed class SynchBasicData : IJob
@@ -177,6 +179,7 @@
                     XmlNodeList childNodes = document.SelectSingleNode("WSINTERFACE").ChildNodes;
                     foreach (System.Xml.XmlNode node2 in childNodes)
                     {
+
                         string str9 = JsonConvert.SerializeXmlNode(node2);
                         str8 = str9;
                         string str10 = string.Empty;
@@ -262,6 +265,10 @@
                             {
                                 Inf_TaskLogService.WriteLog(str7, num2, iD, str9, 2, flag2 ? "更新失败" : "插入失败");
                             }
+                        }
+                        else
+                        {
+                            Inf_TaskLogService.WriteLog(str7, num2, iD, str9, 2, str10);
                         }
                     }
                     //EWMS.WinService.Common.UpdateLeve("base_organization");
@@ -761,17 +768,15 @@
 
         public bool SyncMaterials()
         {
-            //ItemsServices.TEMSClient client = Common.InitItemClient();
-            dynamic client = null;
+            ProductItemsServices.TEMSClient prodClient = null;
+            ItemsServices.TEMSClient testClient = null;
             if (Common.IsProductWebService)
-                client = Common.InitProductItemClient();
+                prodClient = Common.InitProductItemClient();
             else
-                client = Common.InitItemClient();
+                testClient = Common.InitItemClient();
             string str = "内蒙古中煤远兴能源化工有限公司";
             string dateF = this.dateF;
             //ItemsRInvItemsRecUserArray array = new ItemsRInvItemsRecUserArray();
-            dynamic array = null;
-
             string str3 = "";
             int num = 0;
             string str4 = "同步物资接口,接口名称:invItemsWsInt";
@@ -783,102 +788,194 @@
                 ProductItemsServices.ItemsRInvItemsRecUserArray prodArray = new ProductItemsServices.ItemsRInvItemsRecUserArray();
                 ItemsServices.ItemsRInvItemsRecUserArray testArray = new ItemsServices.ItemsRInvItemsRecUserArray();
                 if (Common.IsProductWebService)
-                    client.invItemsWsInt(str, dateF, ref prodArray, ref str3);
+                    prodClient.invItemsWsInt(str, dateF, ref prodArray, ref str3);
                 else
-                    client.invItemsWsInt(str, dateF, ref testArray, ref str3);
+                    testClient.invItemsWsInt(str, dateF, ref testArray, ref str3);
                 if (Common.IsProductWebService)
-                    array = prodArray;
-                else
-                    array = testArray;
-                if (array.Count > 0)
                 {
-                    foreach (dynamic user in array)
+                    if (prodArray.Count > 0)
                     {
-                        string str6 = "";
-                        bool flag2 = false;
-                        string str7 = JsonConvert.SerializeObject(user);
-                        str5 = str7;
-                        int num4 = 0;
-                        string str8 = user.organizationId.ToString();
-                        string categoryConcatSegs = user.categoryConcatSegs;
-                        Base_Organization organization = Base_OrganizationService.Instance.GetEntity_Fish(" and ExtendInt1=" + str8);
-                        Base_Material data = new Base_Material();
-                        if (organization != null)
+                        foreach (var user in prodArray)
                         {
-                            object[] objArray1 = new object[] { " and ExtendInt1=", user.inventoryItemId, " and ZTID=", organization.ID };
-                            data = Base_MaterialService.Instance.GetEntity_Fish(string.Concat(objArray1));
-                        }
-                        else
-                        {
-                            data = null;
-                            str6 = str6 + string.Format("数据库中不存在此账套,ID:{0}", str8);
-                        }
-                        Base_SparepartsCate cate = Base_SparepartsCateService.Instance.GetEntity_Fish(" and CODE='" + categoryConcatSegs + "'");
-                        if (cate == null)
-                        {
-                            str6 = str6 + string.Format("数据库中不存在此物料类型,CODE:{0}", categoryConcatSegs);
-                        }
-                        if (!string.IsNullOrEmpty(str6))
-                        {
-                            Inf_TaskLogService.WriteLog(str4, num2, iD, str7, 2, str6);
-                        }
-                        else
-                        {
-                            if (data != null)
+                            string str6 = "";
+                            bool flag2 = false;
+                            string str7 = JsonConvert.SerializeObject(user);
+                            str5 = str7;
+                            int num4 = 0;
+                            string str8 = user.organizationId.ToString();
+                            string categoryConcatSegs = user.categoryConcatSegs;
+                            Base_Organization organization = Base_OrganizationService.Instance.GetEntity_Fish(" and ExtendInt1=" + str8);
+                            Base_Material data = new Base_Material();
+                            if (organization != null)
                             {
-                                flag2 = true;
-                                data.UpdateDate = DateTime.Now;
+                                object[] objArray1 = new object[] { " and ExtendInt1=", user.inventoryItemId, " and ZTID=", organization.ID };
+                                data = Base_MaterialService.Instance.GetEntity_Fish(string.Concat(objArray1));
                             }
                             else
                             {
-                                num4 = int.Parse(Base_SparepartsCateService.Instance.GetDataTable_Fish("select BASEMATERIAL_SEQUENCE.nextval from dual").Rows[0][0].ToString());
-                                data = new Base_Material
+                                data = null;
+                                str6 = str6 + string.Format("数据库中不存在此账套,ID:{0}", str8);
+                            }
+                            Base_SparepartsCate cate = Base_SparepartsCateService.Instance.GetEntity_Fish(" and CODE='" + categoryConcatSegs + "'");
+                            if (cate == null)
+                            {
+                                str6 = str6 + string.Format("数据库中不存在此物料类型,CODE:{0}", categoryConcatSegs);
+                            }
+                            if (!string.IsNullOrEmpty(str6))
+                            {
+                                Inf_TaskLogService.WriteLog(str4, num2, iD, str7, 2, str6);
+                            }
+                            else
+                            {
+                                if (data != null)
                                 {
-                                    ID = num4,
-                                    GUID = Guid.NewGuid().ToString(),
-                                    CreateDate = DateTime.Now
-                                };
-                            }
-                            data.ZTID = organization.ID;
-                            data.SparescateID = cate.ID;
-                            data.ExtendInt1 = Convert.ToInt32(user.inventoryItemId);
-                            data.Code = user.itemNumber;
-                            data.Name = user.itemDescription.Replace("'", "");
-                            data.Description = user.itemDescription.Replace("'", "");
-                            data.Model = user.attribute22 == null ? "" : user.attribute22.Replace("'", "");
-                            data.Specifications = user.attribute21 == null ? "" : user.attribute21.Replace("'", "");
-                            data.Unit = user.uom;
+                                    flag2 = true;
+                                    data.UpdateDate = DateTime.Now;
+                                }
+                                else
+                                {
+                                    num4 = int.Parse(Base_SparepartsCateService.Instance.GetDataTable_Fish("select BASEMATERIAL_SEQUENCE.nextval from dual").Rows[0][0].ToString());
+                                    data = new Base_Material
+                                    {
+                                        ID = num4,
+                                        GUID = Guid.NewGuid().ToString(),
+                                        CreateDate = DateTime.Now
+                                    };
+                                }
+                                data.ZTID = organization.ID;
+                                data.SparescateID = cate.ID;
+                                data.ExtendInt1 = Convert.ToInt32(user.inventoryItemId);
+                                data.Code = user.itemNumber;
+                                data.Name = user.itemDescription.Replace("'", "");
+                                data.Description = user.itemDescription.Replace("'", "");
+                                data.Model = user.attribute22 == null ? "" : user.attribute22.Replace("'", "");
+                                data.Specifications = user.attribute21 == null ? "" : user.attribute21.Replace("'", "");
+                                data.Unit = user.uom;
 
-                            data.ConfigMemo = user.attribute24;
-                            data.StockUp = Convert.ToDecimal(user.maxMinmaxQuantity);
-                            data.StockDown = Convert.ToDecimal(user.minMinmaxQuantity);
-                            data.IsUseAlarm = ((data.StockUp == decimal.Zero) && (data.StockDown == decimal.Zero)) ? 0 : 1;
-                            data.Status = (user.inventoryItemStatusCode == "Active") ? 1 : 0;
+                                data.ConfigMemo = user.attribute24;
+                                data.StockUp = Convert.ToDecimal(user.maxMinmaxQuantity);
+                                data.StockDown = Convert.ToDecimal(user.minMinmaxQuantity);
+                                data.IsUseAlarm = ((data.StockUp == decimal.Zero) && (data.StockDown == decimal.Zero)) ? 0 : 1;
+                                data.Status = (user.inventoryItemStatusCode == "Active") ? 1 : 0;
 
-                            if (flag2)
-                            {
-                                num = Base_MaterialService.Instance.Update(data);
-                            }
-                            else
-                            {
-                                num = Base_MaterialService.Instance.Insert(data);
-                            }
-                            if (num > 0)
-                            {
-                                Inf_TaskLogService.WriteLog(str4, num2, iD, str7, 1, "");
-                            }
-                            else
-                            {
-                                string str10 = flag2 ? "更新数据失败" : "插入数据失败";
-                                Inf_TaskLogService.WriteLog(str4, num2, iD, str7, 2, str10);
+                                if (flag2)
+                                {
+                                    num = Base_MaterialService.Instance.Update(data);
+                                }
+                                else
+                                {
+                                    num = Base_MaterialService.Instance.Insert(data);
+                                }
+                                if (num > 0)
+                                {
+                                    Inf_TaskLogService.WriteLog(str4, num2, iD, str7, 1, "");
+                                }
+                                else
+                                {
+                                    string str10 = flag2 ? "更新数据失败" : "插入数据失败";
+                                    Inf_TaskLogService.WriteLog(str4, num2, iD, str7, 2, str10);
+                                }
                             }
                         }
                     }
+                    else if (str3 != "无数据!")
+                    {
+                        Inf_TaskLogService.WriteLog(str4, num2, iD, str5, 2, str3);
+                    }
                 }
-                else if (str3 != "无数据!")
+                else
                 {
-                    Inf_TaskLogService.WriteLog(str4, num2, iD, str5, 2, str3);
+                    if (testArray.Count > 0)
+                    {
+                        foreach (var user in testArray)
+                        {
+                            string str6 = "";
+                            bool flag2 = false;
+                            string str7 = JsonConvert.SerializeObject(user);
+                            str5 = str7;
+                            int num4 = 0;
+                            string str8 = user.organizationId.ToString();
+                            string categoryConcatSegs = user.categoryConcatSegs;
+                            Base_Organization organization = Base_OrganizationService.Instance.GetEntity_Fish(" and ExtendInt1=" + str8);
+                            Base_Material data = new Base_Material();
+                            if (organization != null)
+                            {
+                                object[] objArray1 = new object[] { " and ExtendInt1=", user.inventoryItemId, " and ZTID=", organization.ID };
+                                data = Base_MaterialService.Instance.GetEntity_Fish(string.Concat(objArray1));
+                            }
+                            else
+                            {
+                                data = null;
+                                str6 = str6 + string.Format("数据库中不存在此账套,ID:{0}", str8);
+                            }
+                            Base_SparepartsCate cate = Base_SparepartsCateService.Instance.GetEntity_Fish(" and CODE='" + categoryConcatSegs + "'");
+                            if (cate == null)
+                            {
+                                str6 = str6 + string.Format("数据库中不存在此物料类型,CODE:{0}", categoryConcatSegs);
+                            }
+                            if (!string.IsNullOrEmpty(str6))
+                            {
+                                Inf_TaskLogService.WriteLog(str4, num2, iD, str7, 2, str6);
+                            }
+                            else
+                            {
+                                if (data != null)
+                                {
+                                    flag2 = true;
+                                    data.UpdateDate = DateTime.Now;
+                                }
+                                else
+                                {
+                                    num4 = int.Parse(Base_SparepartsCateService.Instance.GetDataTable_Fish("select BASEMATERIAL_SEQUENCE.nextval from dual").Rows[0][0].ToString());
+                                    data = new Base_Material
+                                    {
+                                        ID = num4,
+                                        GUID = Guid.NewGuid().ToString(),
+                                        CreateDate = DateTime.Now
+                                    };
+                                }
+                                data.ZTID = organization.ID;
+                                data.SparescateID = cate.ID;
+                                data.ExtendInt1 = Convert.ToInt32(user.inventoryItemId);
+                                data.Code = user.itemNumber;
+                                data.Name = user.itemDescription.Replace("'", "");
+                                data.Description = user.itemDescription.Replace("'", "");
+                                data.Model = user.attribute22 == null ? "" : user.attribute22.Replace("'", "");
+                                data.Specifications = user.attribute21 == null ? "" : user.attribute21.Replace("'", "");
+                                data.Unit = user.uom;
+
+                                data.ConfigMemo = user.attribute24;
+                                data.StockUp = Convert.ToDecimal(user.maxMinmaxQuantity);
+                                data.StockDown = Convert.ToDecimal(user.minMinmaxQuantity);
+                                data.IsUseAlarm = ((data.StockUp == decimal.Zero) && (data.StockDown == decimal.Zero)) ? 0 : 1;
+                                data.Status = (user.inventoryItemStatusCode == "Active") ? 1 : 0;
+
+                                if (flag2)
+                                {
+                                    num = Base_MaterialService.Instance.Update(data);
+                                }
+                                else
+                                {
+                                    num = Base_MaterialService.Instance.Insert(data);
+                                }
+                                if (num > 0)
+                                {
+                                    Inf_TaskLogService.WriteLog(str4, num2, iD, str7, 1, "");
+                                }
+                                else
+                                {
+                                    string str10 = flag2 ? "更新数据失败" : "插入数据失败";
+                                    Inf_TaskLogService.WriteLog(str4, num2, iD, str7, 2, str10);
+                                }
+                            }
+                        }
+                    }
+                    else if (str3 != "无数据!")
+                    {
+                        Inf_TaskLogService.WriteLog(str4, num2, iD, str5, 2, str3);
+                    }
                 }
+
                 return true;
             }
             catch (Exception exception)
@@ -889,22 +986,23 @@
             }
             finally
             {
-                if (client != null)
-                    client.Close();
+                if (prodClient != null)
+                    prodClient.Close();
+                if (testClient != null)
+                    testClient.Close();
             }
         }
 
         public bool SyncMaterialType()
         {
-            dynamic client = null;
+            ProductCategoryServices.CATEGORIESClient prodClient = null;
+            CategoryServices.CATEGORIESClient testClient = null;
             if (Common.IsProductWebService)
-                client = Common.InitProductCategoryClient();
+                prodClient = Common.InitProductCategoryClient();
             else
-                Common.InitCategoryClient();
+                testClient = Common.InitCategoryClient();
             string str = "内蒙古中煤远兴能源化工有限公司";
             string dateF = this.dateF;
-            dynamic array = null;
-
             string str3 = "";
             int num = 0;
             string str4 = "同步物资分类接口,接口名称:invCategoriesWsInt";
@@ -916,99 +1014,188 @@
                 ProductCategoryServices.CategoriesRCategoriesRecUserArray prodArray = new ProductCategoryServices.CategoriesRCategoriesRecUserArray();
                 CategoryServices.CategoriesRCategoriesRecUserArray testArray = new CategoryServices.CategoriesRCategoriesRecUserArray();
                 if (Common.IsProductWebService)
-                    client.invCategoriesWsInt(str, dateF, ref prodArray, ref str3);
+                    prodClient.invCategoriesWsInt(str, dateF, ref prodArray, ref str3);
                 else
-                    client.invCategoriesWsInt(str, dateF, ref testArray, ref str3);
+                    testClient.invCategoriesWsInt(str, dateF, ref testArray, ref str3);
                 if (Common.IsProductWebService)
-                    array = prodArray;
-                else
-                    array = testArray;
-                if (array.Count > 0)
                 {
-                    foreach (dynamic user in array)
+                    if (prodArray.Count > 0)
                     {
-                        string str6 = "";
-                        bool flag2 = false;
-                        string str7 = JsonConvert.SerializeObject(user);
-                        str5 = str7;
-                        int num4 = 0;
-                        Base_SparepartsCate data = Base_SparepartsCateService.Instance.GetEntity_Fish(" and Code='" + user.lbbm + "'");
-                        if (data != null)
+                        foreach (var user in prodArray)
                         {
-                            flag2 = true;
-                            data.UpdateDate = new DateTime?(DateTime.Now);
-                        }
-                        else
-                        {
-                            num4 = int.Parse(Base_SparepartsCateService.Instance.GetDataTable_Fish("select BASESPAREPARTSCATE_SEQUENCE.nextval from dual").Rows[0][0].ToString());
+                            string str6 = "";
+                            bool flag2 = false;
+                            string str7 = JsonConvert.SerializeObject(user);
+                            str5 = str7;
+                            int num4 = 0;
+                            Base_SparepartsCate data = Base_SparepartsCateService.Instance.GetEntity_Fish(" and Code='" + user.lbbm + "'");
+                            if (data != null)
+                            {
+                                flag2 = true;
+                                data.UpdateDate = new DateTime?(DateTime.Now);
+                            }
+                            else
+                            {
+                                num4 = int.Parse(Base_SparepartsCateService.Instance.GetDataTable_Fish("select BASESPAREPARTSCATE_SEQUENCE.nextval from dual").Rows[0][0].ToString());
 
-                            data = new Base_SparepartsCate
-                            {
-                                ID = num4,
-                                GUID = Guid.NewGuid().ToString()
-                            };
-                        }
-                        data.Code = user.lbbm;
-                        data.Name = user.categoryDescription;
-                        if (!data.Code.IsNullOrEmpty())
-                        {
-                            if (data.Code.Length > 2)
-                            {
-                                string str8 = data.Code.Substring(0, data.Code.Length - 2);
-                                Base_SparepartsCate cate2 = Base_SparepartsCateService.Instance.GetEntity_Fish(" and CODE='" + str8 + "'");
-                                if (cate2 != null)
+                                data = new Base_SparepartsCate
                                 {
-                                    data.ParentID = cate2.ID;
+                                    ID = num4,
+                                    GUID = Guid.NewGuid().ToString()
+                                };
+                            }
+                            data.Code = user.lbbm;
+                            data.Name = user.categoryDescription;
+                            if (!data.Code.IsNullOrEmpty())
+                            {
+                                if (data.Code.Length > 2)
+                                {
+                                    string str8 = data.Code.Substring(0, data.Code.Length - 2);
+                                    Base_SparepartsCate cate2 = Base_SparepartsCateService.Instance.GetEntity_Fish(" and CODE='" + str8 + "'");
+                                    if (cate2 != null)
+                                    {
+                                        data.ParentID = cate2.ID;
+                                    }
+                                    else
+                                    {
+                                        str6 = str6 + string.Format("数据库中不存在此备件分类,CODE:{0}", str8);
+                                    }
                                 }
                                 else
                                 {
-                                    str6 = str6 + string.Format("数据库中不存在此备件分类,CODE:{0}", str8);
+                                    data.ParentID = 0;
                                 }
                             }
                             else
                             {
-                                data.ParentID = 0;
+                                str6 = str6 + "编码为null;";
                             }
-                        }
-                        else
-                        {
-                            str6 = str6 + "编码为null;";
-                        }
-                        data.EndFlag = 1;
-                        data.Status = (user.validateFlag == "Y") ? 1 : 0;
-                        data.CreateDate = user.creationDate.ToString().IsNullOrEmpty() ? new DateTime?(DateTime.Now) : user.creationDate;
-                        if (str6.IsNullOrEmpty())
-                        {
-                            if (flag2)
+                            data.EndFlag = 1;
+                            data.Status = (user.validateFlag == "Y") ? 1 : 0;
+                            data.CreateDate = user.creationDate.ToString().IsNullOrEmpty() ? new DateTime?(DateTime.Now) : user.creationDate;
+                            if (str6.IsNullOrEmpty())
                             {
-                                num = Base_SparepartsCateService.Instance.Update(data);
+                                if (flag2)
+                                {
+                                    num = Base_SparepartsCateService.Instance.Update(data);
+                                }
+                                else
+                                {
+                                    num = Base_SparepartsCateService.Instance.Insert(data);
+                                }
+                                if (num > 0)
+                                {
+                                    Base_OrganizationService.Instance.ExecuteNonQuery_Fish(" update Base_Organization set EndFlag=0 where id=" + data.ParentID);
+                                    Inf_TaskLogService.WriteLog(str4, num2, iD, str7, 1, "");
+                                }
+                                else
+                                {
+                                    string str9 = flag2 ? "更新数据失败" : "插入数据失败";
+                                    Inf_TaskLogService.WriteLog(str4, num2, iD, str7, 2, str9);
+                                }
                             }
                             else
                             {
-                                num = Base_SparepartsCateService.Instance.Insert(data);
-                            }
-                            if (num > 0)
-                            {
-                                Base_OrganizationService.Instance.ExecuteNonQuery_Fish(" update Base_Organization set EndFlag=0 where id=" + data.ParentID);
-                                Inf_TaskLogService.WriteLog(str4, num2, iD, str7, 1, "");
-                            }
-                            else
-                            {
-                                string str9 = flag2 ? "更新数据失败" : "插入数据失败";
-                                Inf_TaskLogService.WriteLog(str4, num2, iD, str7, 2, str9);
+                                Inf_TaskLogService.WriteLog(str4, num2, iD, str7, 2, str6);
                             }
                         }
-                        else
-                        {
-                            Inf_TaskLogService.WriteLog(str4, num2, iD, str7, 2, str6);
-                        }
+                        EWMS.WinService.Common.UpdateLeve("base_sparepartscate");
                     }
-                    EWMS.WinService.Common.UpdateLeve("base_sparepartscate");
+                    else if (str3 != "无数据!")
+                    {
+                        Inf_TaskLogService.WriteLog(str4, num2, iD, str5, 2, str3);
+                    }
                 }
-                else if (str3 != "无数据!")
+                else
                 {
-                    Inf_TaskLogService.WriteLog(str4, num2, iD, str5, 2, str3);
+                    if (testArray.Count > 0)
+                    {
+                        foreach (var user in testArray)
+                        {
+                            string str6 = "";
+                            bool flag2 = false;
+                            string str7 = JsonConvert.SerializeObject(user);
+                            str5 = str7;
+                            int num4 = 0;
+                            Base_SparepartsCate data = Base_SparepartsCateService.Instance.GetEntity_Fish(" and Code='" + user.lbbm + "'");
+                            if (data != null)
+                            {
+                                flag2 = true;
+                                data.UpdateDate = new DateTime?(DateTime.Now);
+                            }
+                            else
+                            {
+                                num4 = int.Parse(Base_SparepartsCateService.Instance.GetDataTable_Fish("select BASESPAREPARTSCATE_SEQUENCE.nextval from dual").Rows[0][0].ToString());
+
+                                data = new Base_SparepartsCate
+                                {
+                                    ID = num4,
+                                    GUID = Guid.NewGuid().ToString()
+                                };
+                            }
+                            data.Code = user.lbbm;
+                            data.Name = user.categoryDescription;
+                            if (!data.Code.IsNullOrEmpty())
+                            {
+                                if (data.Code.Length > 2)
+                                {
+                                    string str8 = data.Code.Substring(0, data.Code.Length - 2);
+                                    Base_SparepartsCate cate2 = Base_SparepartsCateService.Instance.GetEntity_Fish(" and CODE='" + str8 + "'");
+                                    if (cate2 != null)
+                                    {
+                                        data.ParentID = cate2.ID;
+                                    }
+                                    else
+                                    {
+                                        str6 = str6 + string.Format("数据库中不存在此备件分类,CODE:{0}", str8);
+                                    }
+                                }
+                                else
+                                {
+                                    data.ParentID = 0;
+                                }
+                            }
+                            else
+                            {
+                                str6 = str6 + "编码为null;";
+                            }
+                            data.EndFlag = 1;
+                            data.Status = (user.validateFlag == "Y") ? 1 : 0;
+                            data.CreateDate = user.creationDate.ToString().IsNullOrEmpty() ? new DateTime?(DateTime.Now) : user.creationDate;
+                            if (str6.IsNullOrEmpty())
+                            {
+                                if (flag2)
+                                {
+                                    num = Base_SparepartsCateService.Instance.Update(data);
+                                }
+                                else
+                                {
+                                    num = Base_SparepartsCateService.Instance.Insert(data);
+                                }
+                                if (num > 0)
+                                {
+                                    Base_OrganizationService.Instance.ExecuteNonQuery_Fish(" update Base_Organization set EndFlag=0 where id=" + data.ParentID);
+                                    Inf_TaskLogService.WriteLog(str4, num2, iD, str7, 1, "");
+                                }
+                                else
+                                {
+                                    string str9 = flag2 ? "更新数据失败" : "插入数据失败";
+                                    Inf_TaskLogService.WriteLog(str4, num2, iD, str7, 2, str9);
+                                }
+                            }
+                            else
+                            {
+                                Inf_TaskLogService.WriteLog(str4, num2, iD, str7, 2, str6);
+                            }
+                        }
+                        EWMS.WinService.Common.UpdateLeve("base_sparepartscate");
+                    }
+                    else if (str3 != "无数据!")
+                    {
+                        Inf_TaskLogService.WriteLog(str4, num2, iD, str5, 2, str3);
+                    }
                 }
+
                 return true;
             }
             catch (Exception exception)
@@ -1019,23 +1206,24 @@
             }
             finally
             {
-                if (client != null)
-                    client.Close();
+                if (prodClient != null)
+                    prodClient.Close();
+                if (testClient != null)
+                    testClient.Close();
             }
         }
 
         public bool SyncVendors()
         {
-            dynamic client = null;
+            ProductVendorServices.VENDORSClient prodClient = null;
+            VendorServices.POVENDORSClient testClient = null;
             if (Common.IsProductWebService)
-                client = Common.InitProductVendorClient();
+                prodClient = Common.InitProductVendorClient();
             else
-                client = Common.InitVendorClient();
+                testClient = Common.InitVendorClient();
             int num = 0;
             string str = "内蒙古中煤远兴能源化工有限公司";
             string dateF = this.dateF;
-            dynamic array = null;
-
             string str3 = string.Empty;
             string str4 = "同步供应商接口,接口名称:poVendorsWsInt";
             int num2 = 0;
@@ -1046,74 +1234,138 @@
                 ProductVendorServices.VendorsRPoVendoresRecUserArray prodArray = new ProductVendorServices.VendorsRPoVendoresRecUserArray();
                 VendorServices.PovendorsRPoVendoresRecUserArray testArray = new VendorServices.PovendorsRPoVendoresRecUserArray();
                 if (Common.IsProductWebService)
-                    client.poVendorsWsInt(str, dateF, ref prodArray, ref str3);
+                    prodClient.poVendorsWsInt(str, dateF, ref prodArray, ref str3);
                 else
-                    client.poVendorsWsInt(str, dateF, ref testArray, ref str3);
+                    testClient.poVendorsWsInt(str, dateF, ref testArray, ref str3);
                 if (Common.IsProductWebService)
-                    array = prodArray;
-                else
-                    array = testArray;
-                if (array.Count > 0)
                 {
-                    foreach (dynamic user in array)
+                    if (prodArray.Count > 0)
                     {
-                        DateTime? endDateActive = null;
-                        DateTime now = DateTime.Now;
-                        string str6 = JsonConvert.SerializeObject(user);
-                        str5 = str6;
-                        bool flag2 = false;
-                        int num4 = 0;
-                        Base_Provider data = Base_ProviderService.Instance.GetEntity_Fish(" and ExtendInt2=" + user.vendorSiteId);
-                        if (data != null)
+                        foreach (var user in prodArray)
                         {
-                            num4 = data.ID;
-                            flag2 = true;
-                        }
-                        else
-                        {
-                            num4 = int.Parse(Base_ProviderService.Instance.GetDataTable_Fish("select BASEPROVIDER_SEQUENCE.nextval from dual").Rows[0][0].ToString());
-                            data = new Base_Provider
+                            DateTime? endDateActive = null;
+                            DateTime now = DateTime.Now;
+                            string str6 = JsonConvert.SerializeObject(user);
+                            str5 = str6;
+                            bool flag2 = false;
+                            int num4 = 0;
+                            Base_Provider data = Base_ProviderService.Instance.GetEntity_Fish(" and ExtendInt2=" + user.vendorSiteId);
+                            if (data != null)
                             {
-                                ID = num4,
-                                GUID = Guid.NewGuid().ToString()
-                            };
-                        }
-                        data.ExtendInt1 = Convert.ToInt32(user.vendorId);
-                        data.Code = user.vendorNumber;
-                        data.Name = user.vendorName;
-                        data.ExtendInt2 = Convert.ToInt32(user.vendorSiteId);
-                        data.ExtendString1 = user.vendorSiteCode;
-                        if (user.endDateActive.HasValue)
-                        {
-                            endDateActive = user.endDateActive;
-                            now = DateTime.Now;
-                        }
-                        data.Status = (endDateActive.HasValue ? (endDateActive.GetValueOrDefault() <= now) : false) ? 1 : 0;
-                        data.CreateDate = user.creationDate;
-                        data.UpdateDate = user.lastUpdateDate;
-                        if (flag2)
-                        {
-                            num = Base_ProviderService.Instance.Update(data);
-                        }
-                        else
-                        {
-                            num = Base_ProviderService.Instance.Insert(data);
-                        }
-                        if (num > 0)
-                        {
-                            Inf_TaskLogService.WriteLog(str4, num2, iD, str6, 1, "");
-                        }
-                        else
-                        {
-                            string str7 = flag2 ? "更新数据失败" : "插入数据失败";
-                            Inf_TaskLogService.WriteLog(str4, num2, iD, str6, 2, str7);
+                                num4 = data.ID;
+                                flag2 = true;
+                            }
+                            else
+                            {
+                                num4 = int.Parse(Base_ProviderService.Instance.GetDataTable_Fish("select BASEPROVIDER_SEQUENCE.nextval from dual").Rows[0][0].ToString());
+                                data = new Base_Provider
+                                {
+                                    ID = num4,
+                                    GUID = Guid.NewGuid().ToString()
+                                };
+                            }
+                            data.ExtendInt1 = Convert.ToInt32(user.vendorId);
+                            data.Code = user.vendorNumber;
+                            data.Name = user.vendorName;
+                            data.ExtendInt2 = Convert.ToInt32(user.vendorSiteId);
+                            data.ExtendString1 = user.vendorSiteCode;
+                            if (user.endDateActive.HasValue)
+                            {
+                                endDateActive = user.endDateActive;
+                                now = DateTime.Now;
+                            }
+                            data.Status = (endDateActive.HasValue ? (endDateActive.GetValueOrDefault() <= now) : false) ? 1 : 0;
+                            data.CreateDate = user.creationDate;
+                            data.UpdateDate = user.lastUpdateDate;
+                            if (flag2)
+                            {
+                                num = Base_ProviderService.Instance.Update(data);
+                            }
+                            else
+                            {
+                                num = Base_ProviderService.Instance.Insert(data);
+                            }
+                            if (num > 0)
+                            {
+                                Inf_TaskLogService.WriteLog(str4, num2, iD, str6, 1, "");
+                            }
+                            else
+                            {
+                                string str7 = flag2 ? "更新数据失败" : "插入数据失败";
+                                Inf_TaskLogService.WriteLog(str4, num2, iD, str6, 2, str7);
+                            }
                         }
                     }
+                    else if (str3 != "无数据!")
+                    {
+                        Inf_TaskLogService.WriteLog(str4, num2, iD, str5, 2, str3);
+                    }
                 }
-                else if (str3 != "无数据!")
+                else
                 {
-                    Inf_TaskLogService.WriteLog(str4, num2, iD, str5, 2, str3);
+                    if (testArray.Count > 0)
+                    {
+                        foreach (var user in testArray)
+                        {
+                            DateTime? endDateActive = null;
+                            DateTime now = DateTime.Now;
+                            string str6 = JsonConvert.SerializeObject(user);
+                            str5 = str6;
+                            bool flag2 = false;
+                            int num4 = 0;
+                            Base_Provider data = Base_ProviderService.Instance.GetEntity_Fish(" and ExtendInt2=" + user.vendorSiteId);
+                            if (data != null)
+                            {
+                                num4 = data.ID;
+                                flag2 = true;
+                            }
+                            else
+                            {
+                                num4 = int.Parse(Base_ProviderService.Instance.GetDataTable_Fish("select BASEPROVIDER_SEQUENCE.nextval from dual").Rows[0][0].ToString());
+                                data = new Base_Provider
+                                {
+                                    ID = num4,
+                                    GUID = Guid.NewGuid().ToString()
+                                };
+                            }
+                            data.ExtendInt1 = Convert.ToInt32(user.vendorId);
+                            data.Code = user.vendorNumber;
+                            data.Name = user.vendorName;
+                            data.ExtendInt2 = Convert.ToInt32(user.vendorSiteId);
+                            data.ExtendString1 = user.vendorSiteCode;
+                            if (user.endDateActive.HasValue)
+                            {
+                                endDateActive = user.endDateActive;
+                                now = DateTime.Now;
+                            }
+                            data.Status = (endDateActive.HasValue ? (endDateActive.GetValueOrDefault() <= now) : false) ? 1 : 0;
+                            data.CreateDate = user.creationDate;
+                            data.UpdateDate = user.lastUpdateDate;
+                            if (flag2)
+                            {
+                                num = Base_ProviderService.Instance.Update(data);
+                            }
+                            else
+                            {
+                                num = Base_ProviderService.Instance.Insert(data);
+                            }
+                            if (num > 0)
+                            {
+                                Inf_TaskLogService.WriteLog(str4, num2, iD, str6, 1, "");
+                            }
+                            else
+                            {
+                                string str7 = flag2 ? "更新数据失败" : "插入数据失败";
+                                Inf_TaskLogService.WriteLog(str4, num2, iD, str6, 2, str7);
+                            }
+                        }
+                    }
+                    else if (str3 != "无数据!")
+                    {
+                        Inf_TaskLogService.WriteLog(str4, num2, iD, str5, 2, str3);
+                    }
                 }
+
                 return true;
             }
             catch (Exception exception)
@@ -1124,8 +1376,10 @@
             }
             finally
             {
-                if (client != null)
-                    client.Close();
+                if (prodClient != null)
+                    prodClient.Close();
+                if (testClient != null)
+                    testClient.Close();
             }
         }
     }
