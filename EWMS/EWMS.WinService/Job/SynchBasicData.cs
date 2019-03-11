@@ -189,6 +189,7 @@
                         string str11 = Guid.NewGuid().ToString();
                         int num4 = 0;
                         Base_Organization data = Base_OrganizationService.Instance.GetEntity_Fish(" and  ExtendInt1=" + node2.SelectSingleNode("ORGANIZATION_ID").InnerText);
+                        
                         if (data != null)
                         {
                             flag2 = true;
@@ -326,6 +327,7 @@
                         Base_Person data = new Base_Person();
                         string innerText = node2.SelectSingleNode("ORGANIZATION_ID").InnerText;
                         Base_Organization organization = Base_OrganizationService.Instance.GetEntity_Fish(" and ExtendInt1=" + innerText);
+                        Base_Organization parentOrg = Base_OrganizationService.Instance.GetEntity_Fish(" and  PARENTID=0");
                         if (organization != null)
                         {
                             //ject[] objArray1 = new object[] { " and  ExtendInt1=", node2.SelectSingleNode("PERSON_ID").InnerText, " and ZTID=", organization.ID };
@@ -350,7 +352,7 @@
                                 GUID = Guid.NewGuid().ToString(),
                                 Password = Md5Util.MD5("123"),
                                 //TID = organization.ID,
-                                ZTID = (organization == null ? 0 : organization.ID),
+                                ZTID = parentOrg.ID,//(organization == null ? 0 : organization.ID),
                                 UserType = 3
                             };
                         }
@@ -365,7 +367,8 @@
                         data.CreateDate = new DateTime?(Convert.ToDateTime(node2.SelectSingleNode("ASS_CREATION_DATE").InnerText));
                         data.UpdateDate = new DateTime?(Convert.ToDateTime(node2.SelectSingleNode("ASS_LAST_UPDATE_DATE").InnerText));
                         data.Status = (node2.SelectSingleNode("STATUS").InnerText == "有效") ? 1 : 0;
-                        data.DepartID = data.ZTID;
+                        data.ZTID = parentOrg.ID;
+                        data.DepartID = (organization == null ? 0 : organization.ID);
                         if (str10 == "")
                         {
                             if (flag2)
