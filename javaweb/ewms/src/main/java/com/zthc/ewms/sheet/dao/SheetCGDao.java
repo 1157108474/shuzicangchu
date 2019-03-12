@@ -10,15 +10,20 @@ import com.zthc.ewms.sheet.entity.order.OrderDetails;
 import com.zthc.ewms.sheet.entity.order.OrderHistory;
 import com.zthc.ewms.sheet.entity.query.VCgddEntity;
 import com.zthc.ewms.sheet.entity.query.VCgddEntityCondition;
+import com.zthc.ewms.system.dept.entity.guard.Organization;
+import com.zthc.ewms.system.dept.service.OrganizationService;
 import com.zthc.ewms.system.material.entity.guard.Material;
 import com.zthc.ewms.system.user.dao.UserScopeDao;
 import com.zthc.ewms.system.user.entity.guard.UserEnums;
+
 import drk.util.TextUtil;
+
 import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -33,6 +38,8 @@ public class SheetCGDao extends SheetCGDaoGuard {
     public UserScopeDao userScopeDao;
     @Autowired
     ComDao comDao;
+    @Resource(name = "organizationService")
+    public OrganizationService orgService;
     /**
      * 获取采购订单通用调用列表
      *
@@ -362,20 +369,30 @@ public class SheetCGDao extends SheetCGDaoGuard {
 
         if (userScopeZTID == null || userScopeZTID.size() == 0) {
 
-            hql += " and creator =  :creator";
-            param.put("creator", userId);
+//            hql += " and creator =  :creator";
+//            param.put("creator", userId);
         } else {
-            String ztids = "";
-            int i = 0;
-            for (Integer ztid : userScopeZTID) {
-                if (i == 0) {
-                    hql += " and  ( stockorgid =  :ztid" + i;
-
-                } else {
-                    hql += " or stockorgid =  :ztid" + i;
-                }
-                param.put("ztid" + i++, ztid);
+        	Organization organization = orgService.getOrganizationOne(userScopeZTID.get(0));
+            if(organization.getParentId() != 0){
+            	Organization ogtion = orgService.getOrganizationOne(organization.getParentId());
+            	hql += " and stockorgid =  :ztid";
+            	param.put("ztid", ogtion.getId());
+            }else{
+            	hql += " and stockorgid =  :ztid";
+            	param.put("ztid", organization.getId());
             }
+        	
+//            String ztids = "";
+//            int i = 0;
+//            for (Integer ztid : userScopeZTID) {
+//                if (i == 0) {
+//                    hql += " and  ( stockorgid =  :ztid" + i;
+//
+//                } else {
+//                    hql += " or stockorgid =  :ztid" + i;
+//                }
+//                param.put("ztid" + i++, ztid);
+//            }
             hql += " ) ";
 
         }

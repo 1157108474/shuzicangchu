@@ -50,7 +50,7 @@ public class VCkcxEntityDao extends VCkcxEntityDaoGuard {
                         ztids.add(list.get(i).getId());
                     }
                 }else{
-                    ztids.add(userService.getUserOne(userId).getParent().getId());
+                    ztids.add(userService.getUserOne(userId).getZtId());
                 }
                 if(!StringUtils.isEmpty(ztids)){
                     int i = 0;

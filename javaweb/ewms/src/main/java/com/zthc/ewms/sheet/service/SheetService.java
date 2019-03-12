@@ -92,7 +92,6 @@ public class SheetService extends SheetServiceGuard {
     @Resource(name = "sheetPDDao")
     public SheetPDDao sheetPDDao;
 
-
     @Autowired
     private RuntimeService runtimeService;
     @Resource(name = "dictionaryService")
@@ -532,12 +531,22 @@ public class SheetService extends SheetServiceGuard {
         //headerElement.addElement("TRANS_DATE").addText("2018-06-06 14:20:21");
 
         Organization org = orgService.getOrganizationOne(sheet.getDepartId());
-        headerElement.addElement("ORGANIZATION_ID").addText(org.getExtendint1().toString());
+        if(org.getParentId() != 0){
+        	Organization ogtion = organizationService.getOrganizationOne(org.getParentId());
+        	headerElement.addElement("ORGANIZATION_ID").addText(ogtion.getExtendint1().toString());
+        	headerElement.addElement("TRANSFER_ORGANIZATION_ID").addText(ogtion.getExtendint1() + "");
+        }else{
+        	headerElement.addElement("ORGANIZATION_ID").addText(org.getExtendint1().toString());
+        	headerElement.addElement("TRANSFER_ORGANIZATION_ID").addText(org.getExtendint1() + "");
+        }
 
-        headerElement.addElement("TRANSFER_ORGANIZATION_ID").addText(org.getExtendint1() + "");
         headerElement.addElement("DEPT_ID").addText(org.getExtendint1() + "");
         User user = userService.getUserOne(sheet.getCreator());
-        headerElement.addElement("MAKER_ID").addText(user.getExtendint1() + "");
+        if(user.getExtendint1()!=null){
+        	headerElement.addElement("MAKER_ID").addText(user.getExtendint1().toString());
+        }else{
+        	headerElement.addElement("MAKER_ID").addText(sheet.getCreator().toString());
+        }
         headerElement.addElement("MAKER_NAME").addText(user.getName());
         headerElement.addElement("MAKER_DATE").addText(simpleDate.format(new Date(sheet.getCreateDate().getTime())));
 
@@ -619,13 +628,27 @@ public class SheetService extends SheetServiceGuard {
         headerElement.addElement("DOC_NUM").addText(sheet.getCode());
         headerElement.addElement("TRANS_DATE").addText(simpleDate.format(new Date()));
         Organization org = orgService.getOrganizationOne(sheet.getExtendInt1());
-        headerElement.addElement("ORGANIZATION_ID").addText(org.getExtendint1() + "");
+        if(org.getParentId() != 0){
+        	Organization ogtion = organizationService.getOrganizationOne(org.getParentId());
+        	headerElement.addElement("ORGANIZATION_ID").addText(ogtion.getExtendint1().toString());
+        }else{
+        	headerElement.addElement("ORGANIZATION_ID").addText(org.getExtendint1().toString());
+        }
         org = orgService.getOrganizationOne(sheet.getExtendInt2());
-        headerElement.addElement("TRANSFER_ORGANIZATION_ID").addText(org.getExtendint1() + "");
+        if(org.getParentId() != 0){
+        	Organization ogtion = organizationService.getOrganizationOne(org.getParentId());
+        	headerElement.addElement("TRANSFER_ORGANIZATION_ID").addText(ogtion.getExtendint1() + "");
+        }else{
+        	headerElement.addElement("TRANSFER_ORGANIZATION_ID").addText(org.getExtendint1() + "");
+        }
         org = orgService.getOrganizationOne(sheet.getDepartId());
         headerElement.addElement("DEPT_ID").addText(org.getExtendint1() + "");
         User user = userService.getUserOne(sheet.getCreator());
-        headerElement.addElement("MAKER_ID").addText(user.getExtendint1() + "");
+        if(user.getExtendint1()!=null){
+        	headerElement.addElement("MAKER_ID").addText(user.getExtendint1().toString());
+        }else{
+        	headerElement.addElement("MAKER_ID").addText(sheet.getCreator().toString());
+        }
         headerElement.addElement("MAKER_NAME").addText(user.getName());
         headerElement.addElement("MAKER_DATE").addText(simpleDate.format(sheet.getCreateDate()));
 
@@ -706,7 +729,12 @@ public class SheetService extends SheetServiceGuard {
             //防止数据混乱,900000001开始的流水号
             headerElement.addElement("LINE_ID").addText(StringUtils.getHeaderId(detail.getId()));
             Organization org = orgService.getOrganizationOne(detail.getZtId());
-            headerElement.addElement("ORGANIZATION_ID").addText(org.getExtendint1() + "");
+            if(org.getParentId() != 0){
+            	Organization ogtion = organizationService.getOrganizationOne(org.getParentId());
+            	headerElement.addElement("ORGANIZATION_ID").addText(ogtion.getExtendint1().toString());
+            }else{
+            	headerElement.addElement("ORGANIZATION_ID").addText(org.getExtendint1().toString());
+            }
             headerElement.addElement("ITEM_NO").addText(detail.getMaterialCode());
             //TODO
             //headerElement.addElement("QUANTITY").addText(detail.getExtentInt5());
@@ -766,7 +794,12 @@ public class SheetService extends SheetServiceGuard {
             //防止数据混乱,900000001开始的流水号
             headerElement.addElement("LINE_ID").addText(StringUtils.getHeaderId(detail.getId()));
             Organization org = orgService.getOrganizationOne(detail.getZTID());
-            headerElement.addElement("ORGANIZATION_ID").addText(org.getExtendint1() + "");
+            if(org.getParentId() != 0){
+            	Organization ogtion = organizationService.getOrganizationOne(org.getParentId());
+            	headerElement.addElement("ORGANIZATION_ID").addText(ogtion.getExtendint1().toString());
+            }else{
+            	headerElement.addElement("ORGANIZATION_ID").addText(org.getExtendint1().toString());
+            }
             headerElement.addElement("ITEM_NO").addText(detail.getMaterialCode());
             //TODO
 //            headerElement.addElement("QUANTITY").addText(detail.getExtendInt5()+"");
@@ -814,7 +847,12 @@ public class SheetService extends SheetServiceGuard {
         headerElement.addElement("TRANS_DATE").addText(simpleDate.format(new Date()));
         //headerElement.addElement("TRANS_DATE").addText("2018-06-03 15:23:22");
         Organization org = orgService.getOrganizationOne(sheet.getZtId());
-        headerElement.addElement("ORGANIZATION_ID").addText(org.getExtendint1() + "");
+        if(org.getParentId() != 0){
+        	Organization ogtion = organizationService.getOrganizationOne(org.getParentId());
+        	headerElement.addElement("ORGANIZATION_ID").addText(ogtion.getExtendint1().toString());
+        }else{
+        	headerElement.addElement("ORGANIZATION_ID").addText(org.getExtendint1().toString());
+        }
 
 //        Element transferElement = headerElement.addElement("TRANSFER_ORGANIZATION_ID");
 //        transferElement.addText(org.getExtendint1()+"");
@@ -822,7 +860,11 @@ public class SheetService extends SheetServiceGuard {
         org = orgService.getOrganizationOne(sheet.getDepartId());
         headerElement.addElement("DEPT_ID").addText(org.getExtendint1() + "");
         User user = userService.getUserOne(sheet.getCreator());
-        headerElement.addElement("MAKER_ID").addText(user.getExtendint1() + "");
+        if(user.getExtendint1()!=null){
+        	headerElement.addElement("MAKER_ID").addText(user.getExtendint1().toString());
+        }else{
+        	headerElement.addElement("MAKER_ID").addText(sheet.getCreator().toString());
+        }
         headerElement.addElement("MAKER_NAME").addText(user.getName());
         headerElement.addElement("MAKER_DATE").addText(simpleDate.format(sheet.getCreateDate()));
 
@@ -930,7 +972,12 @@ public class SheetService extends SheetServiceGuard {
         headerElement.addElement("DOC_NUM").addText(sheet.getCode());
 
         Organization org = orgService.getOrganizationOne(sheet.getZtId());
-        headerElement.addElement("ORGANIZATION_ID").addText(org.getExtendint1().toString());
+        if(org.getParentId() != 0){
+        	Organization ogtion = organizationService.getOrganizationOne(org.getParentId());
+        	headerElement.addElement("ORGANIZATION_ID").addText(ogtion.getExtendint1().toString());
+        }else{
+        	headerElement.addElement("ORGANIZATION_ID").addText(org.getExtendint1().toString());
+        }
 
         Provider provider = providerService.getProviderOne(sheet.getExtendString1());
         headerElement.addElement("VENDOR_ID").addText(provider == null ? "" : provider.getErpId() + "");
@@ -943,7 +990,11 @@ public class SheetService extends SheetServiceGuard {
         headerElement.addElement("DEPT_ID").addText(org.getExtendint1().toString());
 
         User user = userService.getUserOne(sheet.getCreator());
-        headerElement.addElement("MAKER_ID").addText(user.getExtendint1() + "");
+        if(user.getExtendint1()!=null){
+        	headerElement.addElement("MAKER_ID").addText(user.getExtendint1().toString());
+        }else{
+        	headerElement.addElement("MAKER_ID").addText(sheet.getCreator().toString());
+        }
         headerElement.addElement("MAKER_NAME").addText(user.getName());
         headerElement.addElement("MAKER_DATE").addText(simpleDate.format(sheet.getCreateDate()));
         //headerElement.addElement("MAKER_DATE").addText("2018-06-11 10:29:20");
@@ -1055,7 +1106,13 @@ public class SheetService extends SheetServiceGuard {
         /*node.addElement("ORGANIZATION_ID").addText(rkData.getZtId().toString());*/
         Organization organization = organizationService.getOrganizationOne(rkData.getZtId());
         String store = detailList.get(0).getExtendstring1();
-        node.addElement("ORGANIZATION_ID").addText(organization.getExtendint1().toString());
+        if(organization.getParentId() != 0){
+        	Organization ogtion = organizationService.getOrganizationOne(organization.getParentId());
+        	node.addElement("ORGANIZATION_ID").addText(ogtion.getExtendint1().toString());
+        }else{
+        	node.addElement("ORGANIZATION_ID").addText(organization.getExtendint1().toString());
+        }
+        
 
         Provider provider = providerService.getProviderOne(rkData.getExtendString1());
         String vendor_id = provider == null ? "" : provider.getErpId().toString();
@@ -1070,7 +1127,11 @@ public class SheetService extends SheetServiceGuard {
         node.addElement("DEPT_ID").addText(organization.getExtendint1().toString());
 
         User user = userService.getUserOne(rkData.getCreator());
-        node.addElement("MAKER_ID").addText(user.getExtendint1().toString());
+        if(user.getExtendint1()!=null){
+        	node.addElement("MAKER_ID").addText(user.getExtendint1().toString());
+        }else{
+        	node.addElement("MAKER_ID").addText(rkData.getCreator().toString());
+        }
         //node.addElement("MAKER_ID").addText(user.getCode());
         node.addElement("MAKER_NAME").addText(user.getName());
         //node.addElement("MAKER_NAME").addText(user.getCode());

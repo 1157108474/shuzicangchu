@@ -9,7 +9,9 @@ import com.zthc.ewms.sheet.entity.guard.SheetDetailCondition;
 import com.zthc.ewms.sheet.entity.query.*;
 import com.zthc.ewms.sheet.service.*;
 import com.zthc.ewms.system.dept.entity.guard.Depart;
+import com.zthc.ewms.system.dept.entity.guard.Organization;
 import com.zthc.ewms.system.dept.service.DepartService;
+import com.zthc.ewms.system.dept.service.OrganizationService;
 import com.zthc.ewms.system.dictionary.entity.guard.Dictionary;
 import com.zthc.ewms.system.dictionary.entity.guard.DictionaryEnums;
 import com.zthc.ewms.system.dictionary.service.DictionaryService;
@@ -18,7 +20,9 @@ import com.zthc.ewms.system.user.service.UserScopeService;
 import com.zthc.ewms.system.user.service.UserService;
 import com.zthc.ewms.system.warehouse.entity.guard.WareHouse;
 import com.zthc.ewms.system.warehouse.service.WareHouseService;
+
 import drk.system.Log;
+
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +34,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.SQLException;
@@ -73,6 +78,8 @@ public class SheetQueryController {
     public SheetApplyService sheetApplyService;
     @Resource(name = "userService")
     public UserService userService;
+    @Resource(name = "organizationService")
+    public OrganizationService orgService;
 
     /**
      * 进入库存查询页面
@@ -189,7 +196,7 @@ public class SheetQueryController {
         HttpSession session = request.getSession();
         Object requestUserId = session.getAttribute("userId");
         Integer userId = (null == requestUserId ? 0 : Integer.valueOf(requestUserId.toString()));
-        List<WareHouse> wareHouseList = wareHouseService.getStores(userService.getUserOne(userId).getParent().getId());
+        List<WareHouse> wareHouseList = wareHouseService.getStores(userService.getUserOne(userId).getZtId());
         model.addAttribute("wareHouseList", wareHouseList);
         return "sheet/query/queryKCSZ";
     }
@@ -224,6 +231,9 @@ public class SheetQueryController {
         //TODO:需获取当前登录人部门ID查询
         LayuiPage<VKcdetailEntity> ret = null;
         try {
+        	
+        	
+        	
             String data = request.getParameter("appFlag");
             Integer userId  ;
             if (data != null && "1".equals(data)) {
@@ -233,6 +243,36 @@ public class SheetQueryController {
                 Object requestUserId = session.getAttribute("userId");
                 userId = (null == requestUserId ? 0 : Integer.valueOf(requestUserId.toString()));
             }
+            if(obj.getZtid()!=null){
+        		Organization organization = orgService.getOrganizationOne(obj.getZtid().intValue());
+        		if(organization.getParentId() != 0){
+        			Organization ogtion = orgService.getOrganizationOne(organization.getParentId());
+        			obj.setZtid(ogtion.getZtId().longValue());
+        		}else{
+        			obj.setZtid(organization.getZtId().longValue());
+        		}
+        		
+        	}else{
+        		List<Depart> list =userScopeService.listUserScopes(userId, "Depart", UserEnums.ScopeTypeEnum.ORGANIZATION.getType());
+                if(list.size()>0){
+                	if(list.get(0).getZtId() != 0){
+                    	Organization organization = orgService.getOrganizationOne(list.get(0).getZtId());
+                		if(organization.getParentId() != 0){
+                			Organization ogtion = orgService.getOrganizationOne(organization.getParentId());
+                			obj.setZtid(ogtion.getZtId().longValue());
+                		}else{
+                			obj.setZtid(organization.getZtId().longValue());
+                		}
+                    }else{
+                    	obj.setZtid(list.get(0).getId().longValue());
+                    }
+                }else{
+                	obj.setZtid(200301L);
+                }
+        		
+                
+        	}
+            
             ret = vKcdetailEntityService.KCList(userId, obj, condition);
         } catch (Exception e) {
             log.error("获取库存查询列表方法失败");

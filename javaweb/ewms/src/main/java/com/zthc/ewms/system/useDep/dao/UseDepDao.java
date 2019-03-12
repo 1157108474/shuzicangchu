@@ -67,8 +67,8 @@ public class UseDepDao {
             param.put("name","%%" + useDep.getName().trim() + "%%");
         }
 
-        hql += "and (u.ztId = o.id or u.organizationId = o.id) order by u.id DESC";
-        //hql += "and u.organizationId = o.id order by u.id DESC";
+        //hql += "and (u.ztId = o.id or u.organizationId = o.id) order by u.id DESC";
+        hql += "and u.organizationId = o.id order by u.id DESC";
 
         String totalsql = " select count(u.id) "+hql;
 

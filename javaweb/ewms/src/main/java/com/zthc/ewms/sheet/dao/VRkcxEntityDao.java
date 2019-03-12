@@ -6,12 +6,15 @@ import com.zthc.ewms.sheet.dao.guard.VRkcxEntityDaoGuard;
 import com.zthc.ewms.sheet.entity.query.VRkcxEntity;
 import com.zthc.ewms.sheet.entity.query.VRkcxEntityCondition;
 import com.zthc.ewms.system.dept.entity.guard.Depart;
+import com.zthc.ewms.system.user.entity.guard.User;
 import com.zthc.ewms.system.user.entity.guard.UserEnums;
 import com.zthc.ewms.system.user.service.UserScopeService;
 import com.zthc.ewms.system.user.service.UserService;
+
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -51,7 +54,8 @@ public class VRkcxEntityDao extends VRkcxEntityDaoGuard {
                         ztids.add(list.get(i).getId());
                     }
                 } else {
-                    ztids.add(userService.getUserOne(userId).getParent().getId());
+                	User userOne = userService.getUserOne(userId);
+                    ztids.add(userService.getUserOne(userId).getZtId());
                 }
                 if (!StringUtils.isEmpty(ztids)) {
                     int i = 0;

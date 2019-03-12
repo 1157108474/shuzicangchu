@@ -205,25 +205,29 @@ var KisBpmChoseAssignmentCtrl = ['$scope', '$http', function ($scope, $http) {
             && $scope.property.value.assignment !== undefined
             && $scope.property.value.assignment !== null) {
             $scope.assignment = $scope.property.value.assignment;
+            
+            
         } else {
             $scope.assignment = {};
         }
-
-        var userCodes =   $scope.assignment.candidateUsers[0].value;
-        var userNames =  $scope.assignment.candidateUsers[0].valueName;
-        console.log(userCodes);
-        console.log(userNames);
-        userCodes = userCodes.split(",");
-        userNames = userNames.split(",");
-
-        var i = userCodes.length;
-        while (i--) {
-            chooseUsers.push({code: userCodes[i], name: userNames[i]});
-        }
-        console.log($scope.assignment);
-        console.log(userCodes);
-        console.log(userNames);
-        console.log(chooseUsers);
+       if($scope.assignment.candidateUsers != undefined && $scope.assignment.candidateUsers.length != 0){
+    	var userCodes =   $scope.assignment.candidateUsers[0].value;
+    	var userNames =  $scope.assignment.candidateUsers[0].valueName;
+    	console.log(userCodes);
+    	console.log(userNames);
+    	userCodes = userCodes.split(",");
+    	userNames = userNames.split(",");
+    	
+    	var i = userCodes.length;
+    	while (i--) {
+    		chooseUsers.push({code: userCodes[i], name: userNames[i]});
+    	}
+    	console.log($scope.assignment);
+    	console.log(userCodes);
+    	console.log(userNames);
+    	console.log(chooseUsers);
+    	
+    }
         $http.get(projectName + "/activitipart/getRole.htm").success(function (res) {
             for (var i = 0; i < res.length; i++) {
                 if (i == 0) {
@@ -451,6 +455,8 @@ var KisBpmChoseAssignmentCtrl = ['$scope', '$http', function ($scope, $http) {
             var choseAssigneesStr = "";
             var choseAssigneesStrName = "";
             /*TODO checkUser();*/
+//            $scope.property.value=$scope;
+//            $scope.property.value.assignment=$scope.assignment;
             choseAssignees = chooseUsers;
             for (var i = 0; i < choseAssignees.length; i++) {
                 choseAssigneesStr += choseAssignees[i].code + ",";
@@ -545,7 +551,7 @@ var KisBpmChosePermissionCtrl = ['$scope', '$http', function ($scope, $http) {
             .success(function (data, status, headers, config) {
                 var obj = data;
                 for (var i = 0; i < obj.length; i++) {
-                    permissions.push({id: obj[i].code, name: obj[i].name});
+                    permissions.push({id: obj[i].id, name: obj[i].name});
                 }
                 $scope.permissions = permissions;
             })

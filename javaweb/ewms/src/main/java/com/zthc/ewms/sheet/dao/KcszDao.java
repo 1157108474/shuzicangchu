@@ -91,7 +91,7 @@ public class KcszDao extends KcszDaoGuard {
                 map.put("bqckcount",bqckcount);
                 map.put("bqckmoney",bqckmoney);
                 map.put("qmcount",Integer.parseInt(startcount)+Integer.parseInt(bqrcount)-Integer.parseInt(bqckcount));
-                map.put("qmmoney",Integer.parseInt(startmoney)+Integer.parseInt(bqrkmoney)-Integer.parseInt(bqckmoney));
+                map.put("qmmoney",Integer.parseInt(startmoney)+Double.parseDouble(bqrkmoney)-Integer.parseInt(bqckmoney));
                 list.add(map);
             }
 

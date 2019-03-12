@@ -109,6 +109,25 @@
                                     </div>
                                 </div>
                             </td>
+                            <td class="bill-td">
+                            <div class="layui-form-item">
+                            	 <label class="layui-form-label">¥Ú”°¿‡–Õ£∫</label>
+                            	 <div class="layui-input-block">
+                            	 <span id="sp">
+				                     <select  id="extendInt6" lay-filter="extendInt6" name="extendInt6">
+				                          <option value=""></option>
+				                              <c:forEach items="${printTypes}" var="printType" varStatus="t">
+				                                  <option value="${printType.key}">${printType.value}</option>
+				                              </c:forEach>
+				                     </select>
+				                     </span>
+				                      <input type="hidden"  class="layui-input" id="dytype" 
+                                               value="${sheetValue.extendint6}">
+				                      <input type="hidden"  class="layui-input" id="dytypeName" 
+                                               value="" disabled>
+				                     </div>
+				             </div>
+				             </td>
                         </tr>
                         <tr>
                             <td style="width: 360px">

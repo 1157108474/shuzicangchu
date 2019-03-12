@@ -102,6 +102,11 @@ public class ManageOrder {
      **/
     @Column(name="extendint1", columnDefinition="Integer NULL COMMENT '备用int字段'")
     private Integer extendint1;
+    /**
+     * ----打印类型---
+     **/
+    @Column(name="extendint6", columnDefinition="Integer NULL COMMENT '备用int字段'")
+    private Integer extendint6;
 
     /**----供应商名称---**/
     @Column(name="extendstring1", columnDefinition="nvarchar2(255) NULL COMMENT '备用string字段'")
@@ -150,7 +155,16 @@ public class ManageOrder {
     @Transient
     private String createDateStr;
 
-    @Column(name = "url")
+    
+    public Integer getExtendint6() {
+		return extendint6;
+	}
+
+	public void setExtendint6(Integer extendint6) {
+		this.extendint6 = extendint6;
+	}
+
+	@Column(name = "url")
     private String url;
 
     public String getUrl() {

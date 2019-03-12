@@ -3,6 +3,8 @@ package com.zthc.ewms.system.user.controller.guard;
 import com.hckj.base.mvc.BaseLocal;
 import com.zthc.ewms.base.resp.HttpResponse;
 import com.zthc.ewms.system.dept.entity.guard.Depart;
+import com.zthc.ewms.system.dept.entity.guard.Organization;
+import com.zthc.ewms.system.dept.service.OrganizationService;
 import com.zthc.ewms.system.log.entity.SystemLogEnums;
 import com.zthc.ewms.system.log.service.LogService;
 import com.zthc.ewms.system.role.entity.guard.RoleCondition;
@@ -12,8 +14,10 @@ import com.zthc.ewms.system.user.entity.guard.User;
 import com.zthc.ewms.system.user.entity.guard.UserCondition;
 import com.zthc.ewms.system.user.entity.guard.UserEnums;
 import com.zthc.ewms.system.user.service.UserService;
+
 import drk.system.Log;
 import drk.util.MD5Util;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -25,6 +29,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +41,8 @@ public class UserControllerGuard {
     public UserService service;
     @Resource(name = "logService")
     public LogService logService;
+    @Resource(name = "organizationService")
+    public OrganizationService orgService;
     private final static Log log = Log.getLog("com.system.user.controller.guard.UserControllerGuard");
 
 
@@ -73,6 +80,15 @@ public class UserControllerGuard {
         BaseLocal local = UserDaoGuard.getThreadLocal();
         local.setCurrentUserId(userId); // 把当前操作人ID存入当前线程对象中
         UserDaoGuard.setThreadLocal(local);
+        Organization organization = orgService.getOrganizationOne(obj.getParentId());
+        Integer parentId = obj.getParentId();
+        if(organization.getParentId() != 0){
+        	Organization ogtion = orgService.getOrganizationOne(organization.getParentId());
+        	parentId = ogtion.getId();
+        }else{
+        	parentId = organization.getId();
+        }
+        obj.setZtId(parentId);
         //部门赋值
         Depart depart = new Depart(obj.getParentId());
         obj.setParent(depart);
