@@ -635,6 +635,25 @@ public class SheetCGDao extends SheetCGDaoGuard {
         query.setParameter("id", sheet.getId());
         query.executeUpdate();
     }
+    
+    public void editSheetDetails(SheetDetail sheetDetail){
+    	String hql = "update SheetDetail set hanliang = :hanliang,inpre = :inpre,jielun1 = :jielun1,"
+    			+ "yanshou1 = :yanshou1,ysyq = :ysyq,outpi = :outpi,szyb = :szyb,outpre = :outpre,"
+    			+ "jielun2 = :jielun2,yanshou2 = :yanshou2 where id = :id";
+    	Query query = baseDao.createQuery(hql);
+        query.setParameter("hanliang", sheetDetail.getHanliang());
+        query.setParameter("inpre", sheetDetail.getInpre());
+        query.setParameter("jielun1", sheetDetail.getJielun1());
+        query.setParameter("yanshou1", sheetDetail.getYanshou1());
+        query.setParameter("ysyq", sheetDetail.getYsyq());
+        query.setParameter("outpi", sheetDetail.getOutpi());
+        query.setParameter("szyb", sheetDetail.getSzyb());
+        query.setParameter("outpre", sheetDetail.getOutpre());
+        query.setParameter("jielun2", sheetDetail.getJielun2());
+        query.setParameter("yanshou2", sheetDetail.getYanshou2());
+        query.setParameter("id", sheetDetail.getId());
+        query.executeUpdate();
+    }
 
     public void savePlanOther(SheetDetail detail) {
         String hql = " update SheetDetail set expirationTime = :expirationTime, extendDate2 = :extendDate2, " +

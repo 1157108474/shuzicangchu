@@ -1,4 +1,4 @@
-ï»¿layui.use(['laydate', 'form', 'layer', 'table', 'laytpl','element'], function () {
+layui.use(['laydate', 'form', 'layer', 'table', 'laytpl','element'], function () {
     var laydate = layui.laydate;
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
@@ -7,7 +7,7 @@
         table = layui.table,
         $ = layui.jquery,
         element = layui.element;
-    //æ•°æ®åˆ—è¡¨
+    //Êı¾İÁĞ±í
    /* var tableIns = table.render({
         elem: '#activitiProcessing',
         url: '',
@@ -20,12 +20,12 @@
         method: 'post',
         cols: [[
             {type: "checkbox", fixed: "left", width: 50},
-            {title: 'åºå·',templet: '#indexTpl',align: "center",width: 50},
-            {field: 'id', title: 'ä»»åŠ¡ID', align: "center",minWidth:120},
-            {field: 'activityName', title: 'ä»»åŠ¡åç§°', align: "center",minWidth:120},
-            {field: 'assignee', title: 'åŠç†äºº', align: "center",minWidth:120},
-            {field: 'startTime', title: 'å¼€å§‹æ—¶é—´', align: "center",minWidth:120},
-            {field: 'endTime', title: 'ç»“æŸæ—¶é—´', align: "center",minWidth:120}
+            {title: 'ĞòºÅ',templet: '#indexTpl',align: "center",width: 50},
+            {field: 'id', title: 'ÈÎÎñID', align: "center",minWidth:120},
+            {field: 'activityName', title: 'ÈÎÎñÃû³Æ', align: "center",minWidth:120},
+            {field: 'assignee', title: '°ìÀíÈË', align: "center",minWidth:120},
+            {field: 'startTime', title: '¿ªÊ¼Ê±¼ä', align: "center",minWidth:120},
+            {field: 'endTime', title: '½áÊøÊ±¼ä', align: "center",minWidth:120}
         ]],
     });*/
     var tableHis = table.render({
@@ -40,34 +40,34 @@
         id: "activitiHisTable",
         method: 'post',
         cols: [[
-            // {title: 'åºå·',templet: '#indexTpl',align: "center",width: 50},
-            {field: 'activityName', title: 'ç¯èŠ‚åç§°', align: "center",minWidth:120},
-            {field: 'assignee', title: 'åŠç†äºº', align: "center",minWidth:100},
-            {field: 'endTime', title: 'åŠç†æ—¶é—´', align: "center",minWidth:120,templet:'<div>{{ layui.laytpl.toDateString(d.endTime) }}</div>'},
-            {field: '', title: 'æ“ä½œç»“æœ', align: "center",minWidth:100,templet:function(d){
+            // {title: 'ĞòºÅ',templet: '#indexTpl',align: "center",width: 50},
+            {field: 'activityName', title: '»·½ÚÃû³Æ', align: "center",minWidth:120},
+            {field: 'assignee', title: '°ìÀíÈË', align: "center",minWidth:100},
+            {field: 'endTime', title: '°ìÀíÊ±¼ä', align: "center",minWidth:120,templet:'<div>{{ layui.laytpl.toDateString(d.endTime) }}</div>'},
+            {field: '', title: '²Ù×÷½á¹û', align: "center",minWidth:100,templet:function(d){
                 if(d.endTime != null){
-                    return "å·²å¤„ç†"
+                    return "ÒÑ´¦Àí"
                 }else{
-                    return "æœªå¤„ç†"
+                    return "Î´´¦Àí"
                 }
             }},
-            {field: 'comment', title: 'æ“ä½œæ„è§', align: "center",minWidth:100}
+            {field: 'comment', title: '²Ù×÷Òâ¼û', align: "center",minWidth:100}
             ]],
         page: true
     });
     window.reloadHis = function(){
 
-        //å¯ä»¥è¢«å¤–éƒ¨å¼•ç”¨
+        //¿ÉÒÔ±»Íâ²¿ÒıÓÃ
         table.reload('activitiHisTable', {
             page: {
-                curr: 1 //é‡æ–°ä»ç¬¬ 1 é¡µå¼€å§‹
+                curr: 1 //ÖØĞÂ´ÓµÚ 1 Ò³¿ªÊ¼
             },
             where: {
                 taskId: $("#taskId").val()
             }
         });
     }
-    $("#submit").on("click", function () {//æäº¤
+    $("#submit").on("click", function () {//Ìá½»
         if($("#taskId").val() != ''){
             $.post("/system/activitiListener/isSheetTrue.json", {'taskId':  $("#taskId").val()},
                 function(data) {
@@ -78,41 +78,82 @@
                     }
                 },"JSON");
         }else{
-            layer.msg('è¯·å…ˆä¿å­˜å•æ®ã€‚', {
+            layer.msg('ÇëÏÈ±£´æµ¥¾İ¡£', {
                 anim: 6
             });
         }
     });
-    $("#review").on("click", function () {//å®¡æ ¸
+    $("#review").on("click", function () {//ÉóºË
+//    	 var checkStatus = table.checkStatus('detailsgridTable');
+    	var detailsgridTable =  layui.table.cache.detailsgridTable;
+         debugger;
+//    	alert(detailsgridTable[0].materialCode);
+    	var details = [];
+    	for (var i = 0; i < detailsgridTable.length; i++) {
+    		var obj = {
+    				id:detailsgridTable[i].id,
+    			sheetId:detailsgridTable[i].sheetId,
+            	hanliang: detailsgridTable[i].hanliang,
+            	inpre: detailsgridTable[i].inpre,
+            	jielun1: detailsgridTable[i].jielun1,
+//            	yanshou1: detailsgridTable[i].yanshou1,
+            	ysyq: detailsgridTable[i].ysyq,
+            	outpi: detailsgridTable[i].outpi,
+            	szyb: detailsgridTable[i].szyb,
+            	outpre: detailsgridTable[i].outpre,
+            	jielun2: detailsgridTable[i].jielun2,
+//            	yanshou2: detailsgridTable[i].yanshou2,
+    		}
+    		 details.push(obj);
+    	}
+    	$.ajax({
+            type: "POST",
+            url: "../detail/updateWZJSDetails",
+            dataType: "json",
+            data: {details: JSON.stringify(details)},
+            success: function (ret) {
+                if (ret.status == '1') {
+                    layer.msg('Ìí¼Ó³É¹¦', function () {
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
+                    });
+                } else {
+                    layer.alert('Ìí¼ÓÊ§°Ü£º' + ret.message);
+                }
+            },
+            error: function (XMLHttpRequest) {
+                layer.alert("ÇëÇó³ö´í£º" + XMLHttpRequest.status + XMLHttpRequest.statusText);
+            }
+        });
         nextPart();
-        //å…ˆåˆ¤æ–­æ˜¯å¦å·²ç»å®¡æ ¸è¿‡ã€æ˜¯å¦æ˜¯æœ€åæœ€åç¯èŠ‚
+        //ÏÈÅĞ¶ÏÊÇ·ñÒÑ¾­ÉóºË¹ı¡¢ÊÇ·ñÊÇ×îºó×îºó»·½Ú
         /* $.post("/system/activitiListener/isTaskTrue.json",{'taskId':taskId},
            function(data) {
-               if(data){//æ˜¯ï¼ˆæç¤ºç‚¹å‡»ç›´æ¥åŠç»“ï¼‰
-                    layer.alert("è¯¥ç¯èŠ‚ä¸ºæœ€åä»»åŠ¡ç¯èŠ‚ï¼Œè¯·ç›´æ¥åŠç»“ã€‚");
-               }else{//ä¸æ˜¯æœ€åç¯èŠ‚
+               if(data){//ÊÇ£¨ÌáÊ¾µã»÷Ö±½Ó°ì½á£©
+                    layer.alert("¸Ã»·½ÚÎª×îºóÈÎÎñ»·½Ú£¬ÇëÖ±½Ó°ì½á¡£");
+               }else{//²»ÊÇ×îºó»·½Ú
                     nextPart();
                }
            },"JSON");*/
     });
-    /*$("#complete").on("click", function () {//åŠç»“
-       //æœ€åä¸€ä¸ªç¯èŠ‚ï¼Œç›´æ¥å®Œæˆä»»åŠ¡
+    /*$("#complete").on("click", function () {//°ì½á
+       //×îºóÒ»¸ö»·½Ú£¬Ö±½ÓÍê³ÉÈÎÎñ
         $.post("/system/activitiListener/completeTask.htm",{'taskId':taskId},
               function(data){
-                 alert("æœ€åç¯èŠ‚");
-                  //å®Œæˆä»»åŠ¡åçš„é¡µé¢å¤„ç†
+                 alert("×îºó»·½Ú");
+                  //Íê³ÉÈÎÎñºóµÄÒ³Ãæ´¦Àí
                },"JSON");
     });*/
-   /* $("#reject").on("click", function (e) {//é©³å›åˆ°ä¸Šç¯èŠ‚
+   /* $("#reject").on("click", function (e) {//²µ»Øµ½ÉÏ»·½Ú
         $.post("/system/activitiButton/taskRollBack.htm",{'taskId':taskId},
             function(data) {
-                //é©³å›ä»»åŠ¡åçš„é¡µé¢å¤„ç†
+                //²µ»ØÈÎÎñºóµÄÒ³Ãæ´¦Àí
             },"JSON");
     });*/
-     $("#reject").on("click", function () {//é©³å›åˆ°æ‰€é€‰ç¯èŠ‚
+     $("#reject").on("click", function () {//²µ»Øµ½ËùÑ¡»·½Ú
          layer.open({
              type: 2,
-             title: 'é©³å›ç¯èŠ‚é€‰æ‹©',
+             title: '²µ»Ø»·½ÚÑ¡Ôñ',
              fixed: false,
              area: ['50%', '40%'],
              content: "system/activitiButton/historyActInstanceList.htm?taskId="+$("#taskId").val()+"&&comment="+$("#comment").val(),
@@ -134,19 +175,19 @@
              }
          });
      });
-    /*$("#saveSheet").on("click", function () {//ä¿å­˜
+    /*$("#saveSheet").on("click", function () {//±£´æ
         $.post("/system/processManage/startProIns.htm",{'menuCode':$("#menuCode").val()},
             function(data) {
                 $("#taskId").val(data);
-                alert("ä¿å­˜æˆåŠŸ");
-                //é©³å›ä»»åŠ¡åçš„é¡µé¢å¤„ç†
+                alert("±£´æ³É¹¦");
+                //²µ»ØÈÎÎñºóµÄÒ³Ãæ´¦Àí
             },"JSON");
 
     });*/
     function nextPart(){
         layer.open({
             type: 2,
-            title: 'ç¯èŠ‚äººå‘˜é€‰æ‹©',
+            title: '»·½ÚÈËÔ±Ñ¡Ôñ',
             fixed: false,
             area: ['60%', '90%'],
             content: "system/activitiListener/findNextPart.htm?taskId="+$("#taskId").val()+"&&comment="+$("#comment").val()+"&&isAdmin=true",
@@ -168,8 +209,8 @@
                /*
                 parent.tab.deleteTab($("#taskId").val());
                 parent.tab.tabAdd({
-                    href:"system/activitiButton/getOnePro.htm?taskId="+$("#taskId").val(), //åœ°å€
-                    title: "ä»»åŠ¡å®Œæˆ"
+                    href:"system/activitiButton/getOnePro.htm?taskId="+$("#taskId").val(), //µØÖ·
+                    title: "ÈÎÎñÍê³É"
                 });*/
             }
 
@@ -198,7 +239,7 @@
             .replace(/ss/g, hms[2]);
     };
 
-//æ•°å­—å‰ç½®è¡¥é›¶
+//Êı×ÖÇ°ÖÃ²¹Áã
     layui.laytpl.digit = function(num, length, end){
         var str = '';
         num = String(num);

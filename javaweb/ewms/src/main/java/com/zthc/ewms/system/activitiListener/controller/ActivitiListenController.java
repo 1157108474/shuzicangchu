@@ -98,8 +98,9 @@ public class ActivitiListenController {
         String outcome = request.getParameter("outcome");
         String userId = request.getParameter("userId");
         String comment = "";
-        //String comment = request.getParameter("comment");
-        //outcome = new String(request.getParameter("outcome").getBytes("iso8859-1"), "utf-8");
+        try {
+//        String comment = request.getParameter("comment");
+        	comment = new String(request.getParameter("comment").getBytes("iso8859-1"), "utf-8");
         //comment = new String(request.getParameter("comment").getBytes("iso8859-1"), "utf-8");
         //在这里处理业务，修改单据状态
         //设置批注
@@ -107,7 +108,7 @@ public class ActivitiListenController {
             activitiService.addComment(taskId, comment);
         }
         //处理完业务，执行下行方法，根据连线和人员，完成任务
-        try {
+        
             activitiService.completeMyPersonalTask(taskId, outcome, userId);
             String userIp = (null == session.getAttribute("userIp") ?
                     null : session.getAttribute("userIp").toString());
@@ -135,6 +136,7 @@ public class ActivitiListenController {
         //PrintWriter out = response.getWriter();
         String taskId = request.getParameter("taskId");
         String outcome = request.getParameter("outcome");
+        String comment = "";
         HttpResponse ret;
         int userId = 0;
         if (session.getAttribute("userId") != null) {
@@ -142,6 +144,14 @@ public class ActivitiListenController {
         }
         //处理完业务，执行下行方法，完成任务
         try {
+        	comment = new String(request.getParameter("comment").getBytes("iso8859-1"), "utf-8");
+            //comment = new String(request.getParameter("comment").getBytes("iso8859-1"), "utf-8");
+            //在这里处理业务，修改单据状态
+            //设置批注
+            if (comment != null && !("".equals(comment))) {
+                activitiService.addComment(taskId, comment);
+            }
+        	
             Map map = activitiService.completeTask(taskId, outcome, userId);
             String userIp = (null == session.getAttribute("userIp") ?
                     null : session.getAttribute("userIp").toString());

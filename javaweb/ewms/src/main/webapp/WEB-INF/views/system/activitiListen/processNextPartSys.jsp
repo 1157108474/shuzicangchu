@@ -50,7 +50,7 @@
 <body>
 <input id="taskId" value="${taskId}" type="hidden">
 <input id="outcome" value="${outcome}" type="hidden">
-<input id="comment" value="${comment}" type="hidden">
+<%-- <input id="comment" value="${comment}" type="hidden"> --%>
 <div class="admin-main">
 	<div style="margin-left: 10px;width:28%;float: left;margin-top: 10px;">
 		<table  id="processNextpart" lay-filter="processNextpart"></table>
@@ -95,6 +95,15 @@
 				</div>
 			</div>
 		</div>
+		<div>
+		<br/><br/>
+		<label class="layui-form-label" style="font-size: 14px;padding-top: 10px;">操作意见:</label>
+		<div style="padding-left: 120px">
+			<textarea name="comment" id="comment" style="width: 99%;height: 70px;"></textarea>
+		</div>
+	</div>
+	</div>
+	
 	</div>
 </div>
 </body>
@@ -124,7 +133,7 @@
             var outcome = $("#outcome").val();
             var taskId = $("#taskId").val();
             var comment = $("#comment").val();
-            $.post("isEndedByOut.json",{'taskId':taskId,'outcome':outcome},
+            $.post("isEndedByOut.json",{'taskId':taskId,'outcome':outcome,'comment':comment},
                 function(data) {
                     if(data==1){//最后环节
                         $.ajax({

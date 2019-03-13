@@ -50,7 +50,7 @@
 <body>
 <input id="taskId" value="${taskId}" type="hidden">
 <input id="outcome" value="${outcome}" type="hidden">
-<input id="comment" value="${comment}" type="hidden">
+<%-- <input id="comment" value="${comment}" type="hidden"> --%>
 <div class="admin-main">
 	<div style="margin-left: 10px;width:28%;float: left;margin-top: 10px;">
 		<table  id="processNextpart" lay-filter="processNextpart"></table>
@@ -64,6 +64,7 @@
 						<form>
 							<div  class="userNames" name="userNames">
 							</div>
+									
 							<a class="layui-btn" type="reset"  id="reset"  style="float: right;margin-left: 3px;margin-top: 6px;">取消</a>
 							<a class="layui-btn"  id="gotoNext"  style="float: right;margin-top: 6px;">确定</a>
 						</form>
@@ -94,7 +95,9 @@
 										</tr>
 									</c:forEach>--%>
 									</tbody>
+									
 								</table>
+									
 
 							</div>
 							<div id="demo1"><input id="userCount" type="hidden" value="${count}"></div>
@@ -103,6 +106,8 @@
 			</div>
 		</div>
 	</div>
+	<div>
+	
 </div>
 </body>
 <script type="text/html" id="indexTpl">

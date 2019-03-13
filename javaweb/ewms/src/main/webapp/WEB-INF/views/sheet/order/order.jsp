@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>新增物资接收单</title>
+    <title id="title">新增物资接收单</title>
     <link rel="stylesheet" href="/plugins/layui/css/layui.css" media="all"/>
     <link rel="stylesheet" href="/css/public.css" media="all"/>
     <style type="text/css">
@@ -77,6 +77,8 @@
                                         <input type="hidden" id="reloadStatus">
                                         <input type="hidden" id="sheetStatus" value="${sheetValue.status}">
                                         <input type="hidden" id="taskId" name="taskId" value="${taskId}">
+                                        <input type="hidden" id="activityName" name="activityName" value="${activityName}">
+                                        <input type="hidden" id="shenpi" name="shenpi" value="${shenpi}">
                                         <input type="hidden" id="menuCode" name="menuCode" value="${menuCode}">
                                         <input type="text" class="layui-input" id="ordernum" name="orderNum"
                                                value="${sheetValue.ordernum}" disabled>
@@ -111,7 +113,7 @@
                             </td>
                             <td class="bill-td">
                             <div class="layui-form-item">
-                            	 <label class="layui-form-label">打印类型：</label>
+                            	 <label class="layui-form-label">物资类型：</label>
                             	 <div class="layui-input-block">
                             	 <span id="sp">
 				                     <select  id="extendInt6" lay-filter="extendInt6" name="extendInt6">
@@ -121,10 +123,15 @@
 				                              </c:forEach>
 				                     </select>
 				                     </span>
-				                      <input type="hidden"  class="layui-input" id="dytype" 
+				                     <span id="sp1">
+				                     <input type="hidden"  class="layui-input" id="dytype" 
                                                value="${sheetValue.extendint6}">
-				                      <input type="hidden"  class="layui-input" id="dytypeName" 
+				                     </span>
+				                      <span id="sp2">
+				                      <input type="text"  class="layui-input" id="dytypeName" 
                                                value="" disabled>
+				                      </span>
+				                      
 				                     </div>
 				             </div>
 				             </td>
@@ -194,6 +201,7 @@
                                     <button id="labelPrint" class="btnfbs"
                                             style="display: inline;width:80px!important;"> 标签打印
                                     </button>
+                                    
                                     <%--<button class="btnfbs" id="addPlanOther"
                                             style="width:80px!important;">填写计划
                                     </button>--%>

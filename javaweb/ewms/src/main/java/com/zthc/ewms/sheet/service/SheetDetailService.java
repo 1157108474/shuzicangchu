@@ -1,19 +1,12 @@
 package com.zthc.ewms.sheet.service;
 
-import com.zthc.ewms.base.page.LayuiPage;
-import com.zthc.ewms.base.util.*;
-import com.zthc.ewms.sheet.dao.SheetDao;
-import com.zthc.ewms.sheet.entity.guard.*;
-import com.zthc.ewms.sheet.entity.order.OrderDetails;
-import com.zthc.ewms.sheet.service.guard.SheetDetailServiceGuard;
-import com.zthc.ewms.system.dictionary.entity.guard.DictionaryEnums;
-import com.zthc.ewms.system.material.entity.guard.Material;
-import com.zthc.ewms.system.material.service.MaterialService;
-import com.zthc.ewms.system.provider.service.ProviderService;
-import com.zthc.ewms.system.warehouse.entity.guard.WareHouse;
-import com.zthc.ewms.system.warehouse.service.WareHouseService;
-import drk.system.AppConfig;
-import drk.system.Log;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -24,12 +17,33 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.SQLException;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import com.zthc.ewms.base.page.LayuiPage;
+import com.zthc.ewms.base.util.AssertUtils;
+import com.zthc.ewms.base.util.DateUtils;
+import com.zthc.ewms.base.util.ExcelImport;
+import com.zthc.ewms.base.util.FileUtils;
+import com.zthc.ewms.base.util.StringUtils;
+import com.zthc.ewms.sheet.dao.SheetCGDao;
+import com.zthc.ewms.sheet.dao.SheetDao;
+import com.zthc.ewms.sheet.entity.guard.SheetCKDETAIL;
+import com.zthc.ewms.sheet.entity.guard.SheetDetail;
+import com.zthc.ewms.sheet.entity.guard.SheetDetailCondition;
+import com.zthc.ewms.sheet.entity.guard.SheetExcel;
+import com.zthc.ewms.sheet.entity.guard.SheetRK;
+import com.zthc.ewms.sheet.entity.guard.SheetRKDETAIL;
+import com.zthc.ewms.sheet.entity.guard.SheetRkSonDetail;
+import com.zthc.ewms.sheet.entity.guard.SheetStock;
+import com.zthc.ewms.sheet.entity.order.OrderDetails;
+import com.zthc.ewms.sheet.service.guard.SheetDetailServiceGuard;
+import com.zthc.ewms.system.dictionary.entity.guard.DictionaryEnums;
+import com.zthc.ewms.system.material.entity.guard.Material;
+import com.zthc.ewms.system.material.service.MaterialService;
+import com.zthc.ewms.system.provider.service.ProviderService;
+import com.zthc.ewms.system.warehouse.entity.guard.WareHouse;
+import com.zthc.ewms.system.warehouse.service.WareHouseService;
+
+import drk.system.AppConfig;
+import drk.system.Log;
 
 
 @Service
@@ -48,6 +62,8 @@ public class SheetDetailService extends SheetDetailServiceGuard {
     SheetRKDETAILService sheetRKDETAILService;
     @Autowired
     public SheetDao sheetDao;
+    @Autowired
+    public SheetCGDao sheetCGDao;
 
 
     private final static Log log = Log.getLog(SheetDetailService.class.getName());
@@ -556,4 +572,10 @@ public class SheetDetailService extends SheetDetailServiceGuard {
 
         sheetRKDETAILService.addSonDetail(sheetRkSonDetail);
     }
+    @Transactional
+	public void editSheetDetails(List<SheetDetail> detailList) {
+		for (SheetDetail sheetDetail : detailList) {
+			sheetCGDao.editSheetDetails(sheetDetail);
+		}
+	}
 }

@@ -64,17 +64,17 @@
                     <td>${detail.description}</td>
                     <td>${detail.detailUnitName}</td>
                     <td>${detail.detailCount}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>${fqr }</td>
+                    <td>${detail.jielun1 }</td>
+                    <td>${shenpi1 }</td>
+                    <td>${detail.jielun2 }</td>
+                    <td>${zuihou }</td>
                 </tr>
             </c:forEach>
             <tr class="my_tr">
-                <td colspan="3">设备主管部门：</td>
-                <td colspan="4">审核意见：</td>
-                <td colspan="3">签字：</td>
+                <td colspan="3">设备主管部门：${activityName}</td>
+                <td colspan="4">审核意见：${comment2 }</td>
+                <td colspan="3">签字：${shenpi2 }</td>
             </tr>
             <tr class="my_tr">
                 <td colspan="10">注：一式三联，第一联为财务入账（白色），第二联为物资入库（粉色），第三联为保管（黄色）。</td>

@@ -69,14 +69,14 @@
                     <td>${detail.detailUnitName}</td>
                     <td>${detail.detailCount}</td>
                     <td>${fqr }</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>${shenpi1 }</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>${shenpi2 }</td>
+                    <td>${detail.hanliang}</td>
+                    <td>${detail.inpre}</td>
+                    <td>${detail.jielun1}</td>
+                    <td>${shenpi1}</td>
+                    <td>${detail.ysyq}</td>
+                    <td>${detail.outpi}</td>
+                    <td>${detail.outpre}</td>
+                    <td>${zuihou}</td>
                 </tr>
             </c:forEach>
             <tr class="my_tr">
@@ -87,11 +87,18 @@
                 <td colspan="14">注：一式三联，第一联为财务入账（白色），第二联为物资入库（粉色），第三联为保管（黄色）。</td>
             </tr>
         </table>
+        <input id="inp" type="hidden" value="${shenpi1 }">
         <iframe id="printf" src="" width="0" height="0" frameborder="0"></iframe>
     </div>
 </div>
 </body>
 <script type="text/javascript" src="/plugins/layui/layui.js"></script>
 <script type="text/javascript" src="/js/system/print/JSPrint.js"></script>
-
+<script type="text/javascript">
+	$(function(){
+		if($("#inp").val()==null){
+			
+		}
+	})
+</script>
 </html>

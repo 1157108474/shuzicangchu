@@ -1,12 +1,14 @@
 package com.zthc.ewms.sheet.entity.guard;
 
 import com.zthc.ewms.base.util.NumberUtils;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 import java.util.Date;
 
 @Entity
@@ -213,6 +215,108 @@ public class SheetJSDDetails {
      **/
     @Column(name = "thCount", columnDefinition = "Integer NULL COMMENT '退货数量'")
     private Integer thCount;
+
+	@Column(name = "hanliang", columnDefinition = "nvarchar2(200) NULL COMMENT 'ID'")
+    private String hanliang;
+    @Column(name = "inpre", columnDefinition = "nvarchar2(200) NULL COMMENT 'ID'")
+    private String inpre;
+    @Column(name = "jielun1", columnDefinition = "nvarchar2(200) NULL COMMENT 'ID'")
+    private String jielun1;
+    @Column(name = "yanshou1", columnDefinition = "nvarchar2(200) NULL COMMENT 'ID'")
+    private String yanshou1;
+    @Column(name = "ysyq", columnDefinition = "nvarchar2(200) NULL COMMENT 'ID'")
+    private String ysyq;
+    @Column(name = "outpi", columnDefinition = "nvarchar2(200) NULL COMMENT 'ID'")
+    private String outpi;
+    @Column(name = "szyb", columnDefinition = "nvarchar2(200) NULL COMMENT 'ID'")
+    private String szyb;
+    @Column(name = "outpre", columnDefinition = "nvarchar2(200) NULL COMMENT 'ID'")
+    private String outpre;
+    @Column(name = "jielun2", columnDefinition = "nvarchar2(200) NULL COMMENT 'ID'")
+    private String jielun2;
+    @Column(name = "yanshou2", columnDefinition = "nvarchar2(200) NULL COMMENT 'ID'")
+    private String yanshou2;
+    
+
+    public String getHanliang() {
+		return hanliang;
+	}
+
+	public void setHanliang(String hanliang) {
+		this.hanliang = hanliang;
+	}
+
+	public String getInpre() {
+		return inpre;
+	}
+
+	public void setInpre(String inpre) {
+		this.inpre = inpre;
+	}
+
+	public String getJielun1() {
+		return jielun1;
+	}
+
+	public void setJielun1(String jielun1) {
+		this.jielun1 = jielun1;
+	}
+
+	public String getYanshou1() {
+		return yanshou1;
+	}
+
+	public void setYanshou1(String yanshou1) {
+		this.yanshou1 = yanshou1;
+	}
+
+	public String getYsyq() {
+		return ysyq;
+	}
+
+	public void setYsyq(String ysyq) {
+		this.ysyq = ysyq;
+	}
+
+	public String getOutpi() {
+		return outpi;
+	}
+
+	public void setOutpi(String outpi) {
+		this.outpi = outpi;
+	}
+
+	public String getSzyb() {
+		return szyb;
+	}
+
+	public void setSzyb(String szyb) {
+		this.szyb = szyb;
+	}
+
+	public String getOutpre() {
+		return outpre;
+	}
+
+	public void setOutpre(String outpre) {
+		this.outpre = outpre;
+	}
+
+	public String getJielun2() {
+		return jielun2;
+	}
+
+	public void setJielun2(String jielun2) {
+		this.jielun2 = jielun2;
+	}
+
+	public String getYanshou2() {
+		return yanshou2;
+	}
+
+	public void setYanshou2(String yanshou2) {
+		this.yanshou2 = yanshou2;
+	}
 
     public String getPlanDepartName() {
         return planDepartName;

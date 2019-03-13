@@ -30,8 +30,10 @@ import com.zthc.ewms.system.user.entity.guard.User;
 import com.zthc.ewms.system.user.entity.guard.UserEnums;
 import com.zthc.ewms.system.user.service.UserScopeService;
 import com.zthc.ewms.system.user.service.UserService;
+
 import drk.system.AppConfig;
 import drk.system.Log;
+
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,10 +44,12 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/sheet/wzjs")
@@ -139,9 +143,21 @@ public class SheetCGController extends SheetCGControllerGuard {
      */
     @RequestMapping("{id}")
     public String edit(@PathVariable("id") Integer id, HttpServletRequest request, HttpServletResponse response, Model model) {
+    	String taskId = request.getParameter("taskId");
+    	if(taskId != null){
+    		LayuiPage<Map<String, Object>> historicActivityInstances = activitiService.historyActInstanceList(taskId, 0, 100);
+    		List<Map<String,Object>> data = historicActivityInstances.getData();
+    		for (Map<String, Object> map : data) {
+    			if(map.get("endTime") == null){
+    				model.addAttribute("activityName", map.get("activityName").toString());
+    			}
+    		}
+    	}
         ManageOrder sheet = this.service.getOrderOne(id);
+        String shenpi = request.getParameter("shenpi");
         sheet.setCreateDateStr(new DateTime(sheet.getCreatedate()).toString("yyyy年MM月dd日 HH:mm:ss"));
         model.addAttribute("sheetValue", sheet);
+        model.addAttribute("shenpi", shenpi);
         //物资接收模板打印类型
         model.addAttribute("printTypes", PrintEnums.WZJSEnum.getMap());
         return this.getUrl(request, sheet.getRouteid().intValue() + "", model, "sheet/order/order");

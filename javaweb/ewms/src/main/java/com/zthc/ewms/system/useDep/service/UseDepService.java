@@ -139,7 +139,9 @@ public class UseDepService {
             userIds.add(user.getId());
         }
         Integer scopeType = ScopeTypeEnum.SPAREPARTSCATE.getType();
-        this.userScopeService.delUserScopesByIdsAndType(userIds,scopeType);
+        if(userIds.size()>0){
+        	this.userScopeService.delUserScopesByIdsAndType(userIds,scopeType);
+        }
         Date now = new Date();
         OfficesScope officesScope;
         UserScope userScope ;

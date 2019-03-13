@@ -377,8 +377,10 @@ public class SheetCKDETAIL {
      **/
     @Column(name = "storeid", columnDefinition = "Integer NULL COMMENT '¿â·¿ID'")
     private Integer storeId;
+    
+   
 
-    /**
+	/**
      * ----¿â·¿Ãû³Æ---
      **/
     @Transient

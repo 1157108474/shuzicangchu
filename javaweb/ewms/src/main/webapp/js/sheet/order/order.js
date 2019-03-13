@@ -16,6 +16,48 @@ layui.config({
         , url: 'listJSDDetails.json'
         , cellMinWidth: 80
         , height: "full-160"
+        ,done: function(value, date, endDate){
+            $('#detailsgrid').change();  // 一定要加上这句！！！不然没有回调！！！
+            var shenpi = $("#shenpi").val();
+            var tables = $("#detailsgrid").next().find(".layui-table-box"); 
+            if(shenpi != 'shenpi'){
+                tables.find("[data-field='jielun1']").css("display","none");
+                tables.find("[data-field='jielun2']").css("display","none");
+                tables.find("[data-field='yanshou2']").css("display","none");
+                tables.find("[data-field='inpre']").css("display","none");
+	           	 tables.find("[data-field='hanliang']").css("display","none");
+	           	 tables.find("[data-field='yanshou1']").css("display","none");
+	           	 tables.find("[data-field='ysyq']").css("display","none");
+	           	 tables.find("[data-field='outpi']").css("display","none");
+	           	 tables.find("[data-field='szyb']").css("display","none");
+	           	 tables.find("[data-field='outpre']").css("display","none");
+//                tables.find("[data-field='jielun3']").css("display","none");
+            }
+            var dytype = $("#dytype").val();
+            if(dytype==='1'){
+            	 tables.find("[data-field='inpre']").css("display","none");
+            	 tables.find("[data-field='hanliang']").css("display","none");
+            	 tables.find("[data-field='inpre']").css("display","none");
+            	 tables.find("[data-field='ysyq']").css("display","none");
+            	 tables.find("[data-field='outpi']").css("display","none");
+            	 tables.find("[data-field='szyb']").css("display","none");
+            	 tables.find("[data-field='outpre']").css("display","none");
+    		}else if(dytype==='2'){
+    			 tables.find("[data-field='szyb']").css("display","none");
+    			 tables.find("[data-field='jielun2']").css("display","none");
+    		}else if(dytype==='3'){
+    			 tables.find("[data-field='inpre']").css("display","none");
+           	     tables.find("[data-field='ysyq']").css("display","none");
+           	     tables.find("[data-field='outpre']").css("display","none");
+    		}else{
+    			tables.find("[data-field='inpre']").css("display","none");
+    			tables.find("[data-field='ysyq']").css("display","none");
+           	 	tables.find("[data-field='outpi']").css("display","none");
+           	 	tables.find("[data-field='szyb']").css("display","none");
+           	 	tables.find("[data-field='outpre']").css("display","none");
+    		}
+            
+        }
         , method: 'post'
         , page: true   //开启分页
         , limit: 10   //默认十五条数据一页
@@ -32,6 +74,7 @@ layui.config({
                     }
                 }
             }*/
+//                , {field: 'id', title: 'id', align: "center", width: 140}
                 , {field: 'materialCode', title: '物料编码', align: "center", width: 140}
                 , {field: 'description', title: '物料描述', align: "center", width: 140}
                 , {field: 'detailUnitName', title: '单位', align: "center", width: 140}
@@ -57,11 +100,57 @@ layui.config({
                 }
             }
                 , {field: 'noTaxPriceDuble', title: '单价', align: "center", width: 120}
+                , {field: 'hanliang', title: '主要指标/含量', align: "center", width: 130, edit: 'text', event: 'countCheck'}
+                , {field: 'inpre', title: '进场原材料检验报告', align: "center", width: 150, edit: 'text', event: 'countCheck'}
+                , {field: 'jielun1', title: '验收结论', align: "center", width: 150, edit: 'text', event: 'countCheck'}
+//                , {field: 'yanshou1', title: '验收人', align: "center", width: 120, edit: 'text', event: 'countCheck'}
+                , {field: 'ysyq', title: '一书一签', align: "center", width: 120, edit: 'text', event: 'countCheck'}
+                , {field: 'outpi', title: '出场/生产批号', align: "center", width: 130, edit: 'text', event: 'countCheck'}
+                , {field: 'szyb', title: '三证一标', align: "center", width: 160, edit: 'text', event: 'countCheck'}
+                , {field: 'outpre', title: '出场检查报告/合格证', align: "center", width: 160, edit: 'text', event: 'countCheck'}
+                , {field: 'jielun2', title: '验收结论', align: "center", width: 150, edit: 'text', event: 'countCheck'}
+//                , {field: 'yanshou2', title: '采购员', align: "center", width: 120, edit: 'text', event: 'countCheck'}
+//                , {field: 'jielun3', title: '三审验收结论', align: "center", width: 110, edit: 'text', event: 'countCheck'}
 
             ]
         ]
     });
 
+    // 监听单元格编辑
+    table.on('edit(detailsgrid)', function (obj) {
+    	
+        var data = obj.data; //所在行的所有相关数据
+        var field = obj.field; //当前编辑的字段名
+//        if($("#activityName").val()==='一审'){
+//        	
+//        }
+        
+//        var value = obj.value; //得到修改后的值
+//        if (value > data.isCount) {
+//            layer.alert("可接收数量是:" + data.isCount + ",接收数量不能大于可接收数量,请重新填写接收数量!");
+//            return false;
+//        }
+//        if (value > data.baseunitcount) {
+//            layer.alert("接收数量不能大于采购数量,请重新填写接收数量!");
+//            return false;
+//        }
+//        if (!/^[0-9]+.?[0-9]*$/.test(value) || value == "0") {
+//            layer.alert("接收数量不是有效数字,请重新填写接收数量!");
+//            return false;
+//        }
+//        if (value == "" || value == null) {
+//            layer.alert("接收数量为空,请填写接收数量!");
+//            return false;
+//        }
+//        if(check.isDot(value)){
+//            if(!check.isAllowDecimal(data.detailunit)){
+//                layer.alert(data.detailunit+"单位不允许填小数");
+//                data[field] = 0;
+//                return;
+//            }
+//        }
+    });
+    
     var reload = function () {
         table.reload('detailsgridTable', {
             page: {
@@ -198,10 +287,15 @@ layui.config({
         //获取单据table中所有信息,拼装JSON
         var orderTable = document.getElementById("orderTable");
         var orderTableValue = orderTable.getElementsByTagName("input");
+        var extendInt6 = $("#extendInt6").val();
+        var extendInt6Name = 'extendInt6';
         var param1 = "{";
+        param1 += "\"" + extendInt6Name + "\":\"" + extendInt6 + "\",";
         for (var i = 0; i < orderTableValue.length; i++) {
-            param1 += "\"" + orderTableValue[i].name + "\":\"" + orderTableValue[i].value + "\",";
+        		param1 += "\"" + orderTableValue[i].name + "\":\"" + orderTableValue[i].value + "\",";
+            
         }
+        
         param1 = param1.substring(0, param1.length - 1);
         param1 += "}";
         var orderJson = JSON.parse(JSON.stringify(param1));
@@ -234,9 +328,12 @@ layui.config({
     $("#addDetails").on("click", function (e) {
         var check = $("#orderId").val();
         var sheetId = $("#id").val();
+        var extendInt6 = $("#extendInt6").val();
         if (check == "") {
             layer.alert("请先填写订单编号！");
-        } else {
+        }else if(extendInt6 == ""){
+        	layer.alert("请选择打印类型！");
+        }else {
             if (sheetId == "") {
                 // 先判断当前单据是否已保存,如果未保存,先执行保存
                 saveSheet();
@@ -349,12 +446,15 @@ layui.config({
     //打印
     $("#print").on("click", function (e) {
     	var taskId = $("#taskId").val();
-        var printType = $("#printType").val();
+    	var printType = $("#dytype").val();
+//        var printType = $("#printType").val();
         if ($("#id").val() == "" || $("#id").val() == "0") {
             layer.alert("请先保存单据");
-        } else if (printType == '') {
-            layer.alert("请选择打印类型");
-        } else {
+        } 
+//        else if (printType == '') {
+//            layer.alert("请选择打印类型");
+//        } 
+        else {
             var url = "/system/print/sheet/WZJS-" + $("#id").val() + "?ordernum=" + $("#ordernum").val() + "&printType=" + printType + "&taskId=" + taskId;
             vipTable.openPage("打印接收单", url, '800px', '500px');
         }
@@ -416,4 +516,27 @@ function deleteFile(id, path) {
         })
     })
 }
-
+$(function(){
+	if($("#dytype").val()!=''&&$("#dytype").val()!=null){
+		$("#sp").hide();
+		$("#sp2").show();
+//		document.getElementById("extendInt6").style.display="none";
+//		document.getElementById("dytypeName").style.display="block";
+		if($("#dytype").val()==='1'){
+			$("#dytypeName").val("设备、备品件及材料类");
+		}else if($("#dytype").val()==='2'){
+			$("#dytypeName").val("原辅材料");
+		}else if($("#dytype").val()==='3'){
+			$("#dytypeName").val("安全物资");
+		}else{
+			$("#dytypeName").val("其他物资");
+		}
+	}else{
+		$("#sp").show();
+		$("#sp2").hide();
+//		$("#extendInt6").show();
+//		$("#dytypeName").hide();
+//		document.getElementById("dytypeName").style.display="block";
+//		document.getElementById("extendInt6").style.display="none";
+	}
+})

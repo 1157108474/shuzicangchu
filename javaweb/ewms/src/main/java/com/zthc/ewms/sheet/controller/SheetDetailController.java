@@ -1,26 +1,39 @@
 package com.zthc.ewms.sheet.controller;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.zthc.ewms.base.resp.HttpResponse;
 import com.zthc.ewms.base.util.StringUtils;
 import com.zthc.ewms.sheet.controller.guard.SheetDetailControllerGuard;
+import com.zthc.ewms.sheet.entity.guard.SheetCKDETAIL;
 import com.zthc.ewms.sheet.entity.guard.SheetDetail;
 import com.zthc.ewms.sheet.entity.guard.SheetDetailCondition;
 import com.zthc.ewms.sheet.entity.order.OrderDetails;
 import com.zthc.ewms.system.log.entity.SystemLogEnums;
 import com.zthc.ewms.system.warehouse.entity.guard.WareHouse;
 import com.zthc.ewms.system.warehouse.service.WareHouseService;
-import drk.system.Log;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.util.*;
+import drk.system.Log;
 
 @Controller
 @RequestMapping("/sheet/detail")
@@ -45,6 +58,53 @@ public class SheetDetailController extends SheetDetailControllerGuard {
 		
 		return super.editSheetDetail(obj, condition, request, response, model);
 	}
+	
+	/**
+     * 执行方法_修改明细
+     */
+    @RequestMapping(value = "/update{type}Details", method = RequestMethod.POST)
+    @ResponseBody
+    public HttpResponse updateDetails( HttpServletRequest request, HttpServletResponse
+            response) {
+    	 HttpResponse ret;
+         log.debug("修改明细");
+         try {
+             JSONArray detailJson = JSONArray.fromObject(request.getParameter("details"));
+             Collection collection = JSONArray.toCollection(detailJson);
+             if (collection != null && !collection.isEmpty()) {
+                 Iterator it = collection.iterator();
+                 SheetDetail detail = null;
+                 List<SheetDetail> detailList = new ArrayList<>();
+                 Date now = new Date();
+                 String locationCode;
+                 WareHouse location;
+                 Double detailCount;
+                 while (it.hasNext()) {
+                     JSONObject jsonObj = JSONObject.fromObject(it.next());
+                     detail = (SheetDetail) JSONObject.toBean(jsonObj, SheetDetail.class);
+                     if (detail == null) {
+                         detail = new SheetDetail();
+                     }
+                     detailList.add(detail);
+                 }
+                 this.service.editSheetDetails(detailList);
+                 /*logService.addSystemLog(1, SystemLogEnums.LogObject.getByType(type).getCode(), SystemLogEnums
+                                 .LogAction.ADD_DETAIL.getCode(),
+                         type + "单据:" + detail.getId(), userIp, userId);*/
+             }
+             ret = new HttpResponse(HttpResponse.Status.SUCCESS, "保存成功", null);
+         }catch (RuntimeException e) {
+             log.error(e.getMessage());
+             ret = new HttpResponse(HttpResponse.Status.FAILURE, e.getMessage(), null);
+         } catch (Exception e) {
+             log.error("保存记录出错！");
+             log.errorPrintStacktrace(e);
+             ret = new HttpResponse(HttpResponse.Status.FAILURE, e.getMessage(), null);
+         }
+         return ret;
+    	
+    }
+	
 	/**********************************************************/
 
     /**

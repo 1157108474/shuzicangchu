@@ -1,4 +1,4 @@
-﻿layui.use(['laydate', 'form', 'layer', 'table', 'laytpl', 'element'], function () {
+layui.use(['laydate', 'form', 'layer', 'table', 'laytpl', 'element'], function () {
     var laydate = layui.laydate;
     var form = layui.form,
         $ = layui.jquery,
@@ -72,13 +72,13 @@
             function (obj) {
                 if (obj) {//已完成的任务
                     parent.tab.tabAdd({
-                        href: "/system/activitiButton/getOnePro.htm?taskId=" + data.id, //地址
+                        href: "/system/activitiButton/getOnePro.htm?taskId=" + data.id+"&shenpi=shenpi", //地址
                         title: "审批页面" + data.id,
                         id: data.id
                     });
                 } else {
                     parent.tab.tabAdd({
-                        href: data.url + "?taskId=" + data.id, //地址 href:data.url+"?taskId="+data.id,
+                        href: data.url + "?taskId=" + data.id+"&shenpi=shenpi", //地址 href:data.url+"?taskId="+data.id,
                         title: "审批页面" + data.id,
                         id: data.id
                     });

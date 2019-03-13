@@ -65,19 +65,19 @@
                     <td>${detail.description}</td>
                     <td>${detail.detailUnitName}</td>
                     <td>${detail.detailCount}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>${fqr }</td>
+                    <td>${detail.jielun1 }</td>
+                    <td>${shenpi1 }</td>
+                    <td>${detail.outpi }</td>
+                    <td>${detail.szyb }</td>
+                    <td>${zuihou }</td>
                 </tr>
             </c:forEach>
-            <tr class="my_tr">
+            <!-- <tr class="my_tr">
                 <td colspan="3">安全物资主管部门：</td>
                 <td colspan="4">审核意见：</td>
                 <td colspan="4">签字：</td>
-            </tr>
+            </tr> -->
             <tr class="my_tr">
                 <td colspan="11">注：一式三联，第一联为财务入账（白色），第二联为物资入库（粉色），第三联为保管（黄色）。</td>
             </tr>
