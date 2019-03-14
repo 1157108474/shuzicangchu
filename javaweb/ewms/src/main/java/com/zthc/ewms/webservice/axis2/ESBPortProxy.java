@@ -45,7 +45,14 @@ public class ESBPortProxy  {
 		}
 		return null;
 	}
-	
+	public static ZtwmsStub getPayEntitySc() {
+		try {
+			return new ZtwmsStub(makeConfigurationContext(), AppConfig.getProperty("ERPURL"));
+		} catch (AxisFault e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	/**
 	 * 向http Header中注入接口用户信息
 	 * @return
