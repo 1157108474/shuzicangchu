@@ -141,7 +141,7 @@ public class WareHouseDao extends WareHouseDaoGuard {
 
     public WareHouse getWareHouse(Integer id) {
 
-        String hql = "select new WareHouse(w.id,w.code,w.name,p.id,p.code,p.name,w.levelCount,w.property,w.sort,w.status,w.memo,w.ztId,w.erpId,o.name)  " +
+        String hql = "select new WareHouse(w.id,w.code,w.name,p.id,p.code,p.name,w.levelCount,w.property,w.sort,w.status,w.memo,w.ztId,w.erpId,w.whId,o.name)  " +
                 " from WareHouse w , WareHouse p ,Organization o  " +
                 " where w.id = :id  and p.id= w.parentId and w.ztId=o.id";
 //
