@@ -332,12 +332,14 @@ public class SheetApplyController extends SheetControllerGuard {
         }
         condition.setQueryCriteria(queryCriteria);
 //        condition.setOrderBys(" order by materialCode ASC");
+        log.error("开始时间："+new Date().toString());
         try {
-            ret = this.sheetApplyService.publicDetails("NoPlanDetail", "RN", param, condition);
+            ret = this.sheetApplyService.publicDetails("NoPlanDetail", "*", param, condition);
         } catch (Exception e) {
             log.error("获取无计划明细数据列表出错！");
             log.errorPrintStacktrace(e);
         }
+        log.error("结束时间："+new Date().toString());
         return ret;
     }
 

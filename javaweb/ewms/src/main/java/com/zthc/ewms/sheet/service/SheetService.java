@@ -1060,8 +1060,10 @@ public class SheetService extends SheetServiceGuard {
 			if (isExistWarehouse) {
 				// ªÒ»°ø‚Œª
 				wareHouse = wareHouseService.getWareHouse(detail.getStoreLocationId());
-				lineElement.addElement("LOCATOR_ID").addText(wareHouse.getErpId() + "");
-				lineElement.addElement("LOCATOR_CODE").addText(wareHouse.getCode());
+				if (wareHouse.getErpId() != null) {
+					lineElement.addElement("LOCATOR_ID").addText(wareHouse.getErpId() + "");
+					lineElement.addElement("LOCATOR_CODE").addText(wareHouse.getCode());
+				}
 			}
 
 			lineElement.addElement("ASSET_NUMBER");
