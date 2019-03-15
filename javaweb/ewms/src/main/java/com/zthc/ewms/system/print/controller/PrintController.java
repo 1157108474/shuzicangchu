@@ -180,8 +180,13 @@ public class PrintController {
         model.addAttribute("details", details);
         LayuiPage<Map<String, Object>> historicActivityInstances = activitiService.historyActInstanceList(taskId,0,100);
         List<Map<String,Object>> data = historicActivityInstances.getData();
-        
-		model.addAttribute("shenpi", data.get(data.size()-1).get("assignee"));
+        if(!"安全部负责人".equals(data.get(data.size()-1).get("activityName").toString()) && !"技术部负责人".equals(data.get(data.size()-1).get("activityName").toString()) && !"机动部负责人".equals(data.get(data.size()-1).get("activityName").toString())){
+        	model.addAttribute("shenpi", data.get(data.size()-1).get("assignee"));
+        }else{
+        	model.addAttribute("shenpi", data.get(data.size()-3).get("assignee"));
+        	model.addAttribute("shenpi2", data.get(data.size()-2).get("assignee"));
+        	model.addAttribute("shenpi3", data.get(data.size()-1).get("assignee"));
+        }
     }
 
     /**
@@ -273,7 +278,7 @@ public class PrintController {
 
         if (printType.equals(PrintEnums.WZJSEnum.EQUIPMENT_SPARE.getType())) {
         	for (Map<String, Object> map : data) {
-    			if("机械动力部".equals(map.get("activityName")) || "技术质量部".equals(map.get("activityName"))){
+    			if("机械动力部技术验收".equals(map.get("activityName")) || "技术质量部技术验收".equals(map.get("activityName"))){
     				model.addAttribute("shenpi2", map.get("assignee"));
     				model.addAttribute("comment2", map.get("comment"));
     				model.addAttribute("activityName", map.get("activityName"));

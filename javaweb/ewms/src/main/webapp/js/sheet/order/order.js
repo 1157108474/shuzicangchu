@@ -9,112 +9,175 @@ layui.config({
     var $ = layui.$;
     var element = layui.element;
     var ran = Math.random();
-
-    //明细列表
-    var detailsgr = table.render({
-        elem: '#detailsgrid'
-        , url: 'listJSDDetails.json'
-        , cellMinWidth: 80
-        , height: "full-160"
-        ,done: function(value, date, endDate){
-            $('#detailsgrid').change();  // 一定要加上这句！！！不然没有回调！！！
-            var shenpi = $("#shenpi").val();
-            var tables = $("#detailsgrid").next().find(".layui-table-box"); 
-            if(shenpi != 'shenpi'){
-                tables.find("[data-field='jielun1']").css("display","none");
-                tables.find("[data-field='jielun2']").css("display","none");
-                tables.find("[data-field='yanshou2']").css("display","none");
-                tables.find("[data-field='inpre']").css("display","none");
-	           	 tables.find("[data-field='hanliang']").css("display","none");
-	           	 tables.find("[data-field='yanshou1']").css("display","none");
-	           	 tables.find("[data-field='ysyq']").css("display","none");
-	           	 tables.find("[data-field='outpi']").css("display","none");
-	           	 tables.find("[data-field='szyb']").css("display","none");
-	           	 tables.find("[data-field='outpre']").css("display","none");
-//                tables.find("[data-field='jielun3']").css("display","none");
-            }
-            var dytype = $("#dytype").val();
-            if(dytype==='1'){
-            	 tables.find("[data-field='inpre']").css("display","none");
-            	 tables.find("[data-field='hanliang']").css("display","none");
-            	 tables.find("[data-field='inpre']").css("display","none");
-            	 tables.find("[data-field='ysyq']").css("display","none");
-            	 tables.find("[data-field='outpi']").css("display","none");
-            	 tables.find("[data-field='szyb']").css("display","none");
-            	 tables.find("[data-field='outpre']").css("display","none");
-    		}else if(dytype==='2'){
-    			 tables.find("[data-field='szyb']").css("display","none");
-    			 tables.find("[data-field='jielun2']").css("display","none");
-    		}else if(dytype==='3'){
-    			 tables.find("[data-field='inpre']").css("display","none");
-           	     tables.find("[data-field='ysyq']").css("display","none");
-           	     tables.find("[data-field='outpre']").css("display","none");
-    		}else{
-    			tables.find("[data-field='inpre']").css("display","none");
-    			tables.find("[data-field='ysyq']").css("display","none");
-           	 	tables.find("[data-field='outpi']").css("display","none");
-           	 	tables.find("[data-field='szyb']").css("display","none");
-           	 	tables.find("[data-field='outpre']").css("display","none");
-    		}
-            
+    var str = [{type: "checkbox", fixed: "left", width: 50}
+    , {title: '查看历史记录', align: "center", fixed: "left", toolbar: '#bar', width: 148}
+    /*, {
+    field: 'planDepartName', title: '计划部门', align: "center", width: 140, templet: function (d) {
+        if (d.planDepartId == 0 || d.planDepartId == null) {
+            return "未填写";
         }
-        , method: 'post'
-        , page: true   //开启分页
-        , limit: 10   //默认十五条数据一页
-        , limits: [10, 20, 30]  //数据分页条
-        , id: "detailsgridTable"
-        , where: {ran: ran++, sheetId: $("#id").val()}
-        , cols: [
-            [{type: "checkbox", fixed: "left", width: 50}
-                , {title: '查看历史记录', align: "center", fixed: "left", toolbar: '#bar', width: 148}
-                /*, {
-                field: 'planDepartName', title: '计划部门', align: "center", width: 140, templet: function (d) {
-                    if (d.planDepartId == 0 || d.planDepartId == null) {
-                        return "未填写";
-                    }
-                }
-            }*/
-//                , {field: 'id', title: 'id', align: "center", width: 140}
-                , {field: 'materialCode', title: '物料编码', align: "center", width: 140}
-                , {field: 'description', title: '物料描述', align: "center", width: 140}
-                , {field: 'detailUnitName', title: '单位', align: "center", width: 140}
-                , {field: 'detailCount', title: '接收数量', align: "center", width: 120}
-                , {field: 'thCount', title: '退货数量', align: "center", width: 120}
-                , {field: 'ownerName', title: '是否寄售', align: "center", width: 120}
-                , {
-                field: 'isEquipment', title: '是否设备', align: "center", width: 120, templet: function (d) {
-                    if (d.isEquipment == 1) {
-                        return "是";
-                    } else {
-                        return "否";
-                    }
-                }
-            }
-                , {
-                field: 'enableSn', title: '是否启用序列号', align: "center", width: 145, templet: function (d) {
-                    if (d.enableSn == 1) {
-                        return "启用";
-                    } else {
-                        return "不启用";
-                    }
-                }
-            }
-                , {field: 'noTaxPriceDuble', title: '单价', align: "center", width: 120}
-                , {field: 'hanliang', title: '主要指标/含量', align: "center", width: 130, edit: 'text', event: 'countCheck'}
-                , {field: 'inpre', title: '进场原材料检验报告', align: "center", width: 150, edit: 'text', event: 'countCheck'}
-                , {field: 'jielun1', title: '验收结论', align: "center", width: 150, edit: 'text', event: 'countCheck'}
-//                , {field: 'yanshou1', title: '验收人', align: "center", width: 120, edit: 'text', event: 'countCheck'}
-                , {field: 'ysyq', title: '一书一签', align: "center", width: 120, edit: 'text', event: 'countCheck'}
-                , {field: 'outpi', title: '出场/生产批号', align: "center", width: 130, edit: 'text', event: 'countCheck'}
-                , {field: 'szyb', title: '三证一标', align: "center", width: 160, edit: 'text', event: 'countCheck'}
-                , {field: 'outpre', title: '出场检查报告/合格证', align: "center", width: 160, edit: 'text', event: 'countCheck'}
-                , {field: 'jielun2', title: '验收结论', align: "center", width: 150, edit: 'text', event: 'countCheck'}
-//                , {field: 'yanshou2', title: '采购员', align: "center", width: 120, edit: 'text', event: 'countCheck'}
-//                , {field: 'jielun3', title: '三审验收结论', align: "center", width: 110, edit: 'text', event: 'countCheck'}
+    }
+}*/
+//    , {field: 'id', title: 'id', align: "center", width: 140}
+    , {field: 'materialCode', title: '物料编码', align: "center", width: 140}
+    , {field: 'description', title: '物料描述', align: "center", width: 140}
+    , {field: 'detailUnitName', title: '单位', align: "center", width: 140}
+    , {field: 'detailCount', title: '接收数量', align: "center", width: 120}
+    , {field: 'thCount', title: '退货数量', align: "center", width: 120}
+    , {field: 'ownerName', title: '是否寄售', align: "center", width: 120}
+    , {
+    field: 'isEquipment', title: '是否设备', align: "center", width: 120, templet: function (d) {
+        if (d.isEquipment == 1) {
+            return "是";
+        } else {
+            return "否";
+        }
+    }
+}
+    , {
+    field: 'enableSn', title: '是否启用序列号', align: "center", width: 145, templet: function (d) {
+        if (d.enableSn == 1) {
+            return "启用";
+        } else {
+            return "不启用";
+        }
+    }
+}
+    , {field: 'noTaxPriceDuble', title: '单价', align: "center", width: 120}
+//    , {field: 'hanliang', title: '主要指标/含量', align: "center", width: 130, edit: 'text', event: 'countCheck'}
+//    , {field: 'inpre', title: '进场原材料检验报告', align: "center", width: 150, edit: 'text', event: 'countCheck'}
+//    , {field: 'jielun1', title: '验收结论', align: "center", width: 150, edit: 'text', event: 'countCheck'}
+//    , {field: 'yanshou1', title: '验收人', align: "center", width: 120, edit: 'text', event: 'countCheck'}
+//    , {field: 'ysyq', title: '一书一签', align: "center", width: 120, edit: 'text', event: 'countCheck'}
+//    , {field: 'outpi', title: '出场/生产批号', align: "center", width: 130, edit: 'text', event: 'countCheck'}
+//    , {field: 'szyb', title: '三证一标', align: "center", width: 160, edit: 'text', event: 'countCheck'}
+//    , {field: 'outpre', title: '出场检查报告/合格证', align: "center", width: 160, edit: 'text', event: 'countCheck'}
+//    , {field: 'jielun2', title: '验收结论', align: "center", width: 150, edit: 'text', event: 'countCheck'}
+//    , {field: 'yanshou2', title: '采购员', align: "center", width: 120, edit: 'text', event: 'countCheck'}
+//    , {field: 'jielun3', title: '三审验收结论', align: "center", width: 110, edit: 'text', event: 'countCheck'}
 
-            ]
-        ]
+];
+    var taskId = $("#taskId").val();
+    var shenpi = $("#shenpi").val();
+    var tables = $("#detailsgrid").next().find(".layui-table-box"); 
+    $.ajax({
+        type: "POST",
+        url: 'getActivityName.json',
+        dataType: "json",
+        data: {taskId : taskId},
+        success: function (ret) {
+//        	alert(ret.activityName);
+        	
+        	if(ret.activityName != null&&ret.activityName != ''){
+        		if(ret.activityName==='仪电中心'||ret.activityName==='生产运营指挥中心'||ret.activityName==='热动中心'||ret.activityName==='甲醇制造中心'||ret.activityName==='综合办公室'||ret.activityName==='机械动力部'||ret.activityName==='技术质量部'||ret.activityName==='蒙大能源环保'||ret.activityName==='安全环保部'||ret.activityName==='公共工程'||ret.activityName==='供销中心'||ret.activityName==='财务部'||ret.activityName==='计划发展部'||ret.activityName==='党群工作部'){
+        			
+        		}
+        	}
+//        	if(shenpi != 'shenpi'){
+//          }
+          var dytype = $("#dytype").val();
+//          alert("打印类型----"+dytype);
+          if(ret.activityName != null&&ret.activityName != ''){
+          if(dytype==='1'){
+          	
+          		if(ret.activityName==='仪电中心'||ret.activityName==='生产运营指挥中心'||ret.activityName==='热动中心'||ret.activityName==='甲醇制造中心'||ret.activityName==='综合办公室'||ret.activityName==='机械动力部'||ret.activityName==='技术质量部'||ret.activityName==='蒙大能源环保'||ret.activityName==='安全环保部'||ret.activityName==='公共工程'||ret.activityName==='供销中心'||ret.activityName==='财务部'||ret.activityName==='计划发展部'||ret.activityName==='党群工作部'){
+          			str.push({field:'jielun1',title: '验收结论', width:150,edit: 'text'});
+          			str.push({field:'jielun2',title: '验收结论', width:150});
+          		}else if(ret.activityName==='采购员'){
+          			str.push({field:'jielun1',title: '验收结论', width:150});
+          			str.push({field:'jielun2',title: '验收结论', width:150,edit: 'text'});
+          		}else{
+          			str.push({field:'jielun1',title: '验收结论', width:150});
+          			str.push({field:'jielun2',title: '验收结论', width:150});
+          		}
+          	
+      	}else if(dytype==='2'){
+	      		if(ret.activityName==='仪电中心'||ret.activityName==='生产运营指挥中心'||ret.activityName==='热动中心'||ret.activityName==='甲醇制造中心'||ret.activityName==='综合办公室'||ret.activityName==='机械动力部'||ret.activityName==='技术质量部'||ret.activityName==='蒙大能源环保'||ret.activityName==='安全环保部'||ret.activityName==='公共工程'||ret.activityName==='供销中心'||ret.activityName==='财务部'||ret.activityName==='计划发展部'||ret.activityName==='党群工作部'){
+	      		    
+	      			str.push({field:'hanliang',title: '主要指标/含量', width:130,edit: 'text'});
+	      			str.push({field:'inpre',title: '进场原材料检验报告', width:150,edit: 'text'});
+	      			str.push({field:'jielun1',title: '验收结论', width:130,edit: 'text'});
+	      			str.push({field:'ysyq',title: '一书一签', width:130});
+	      			str.push({field:'outpi',title: '出场/生产批号', width:130});
+	      			str.push({field:'outpre',title: '出场检查报告/合格证', width:150});
+	      		}else if(ret.activityName==='采购员'){
+	      			str.push({field:'hanliang',title: '主要指标/含量', width:130});
+	      			str.push({field:'inpre',title: '进场原材料检验报告', width:150});
+	      			str.push({field:'jielun1',title: '验收结论', width:130});
+	      			str.push({field:'ysyq',title: '一书一签', width:130,edit: 'text'});
+	      			str.push({field:'outpi',title: '出场/生产批号', width:130,edit: 'text'});
+	      			str.push({field:'outpre',title: '出场检查报告/合格证', width:150,edit: 'text'});
+	      		}else{
+	      			str.push({field:'hanliang',title: '主要指标/含量', width:130});
+	      			str.push({field:'inpre',title: '进场原材料检验报告', width:150});
+	      			str.push({field:'jielun1',title: '验收结论', width:130});
+	      			str.push({field:'ysyq',title: '一书一签', width:130});
+	      			str.push({field:'outpi',title: '出场/生产批号', width:130});
+	      			str.push({field:'outpre',title: '出场检查报告/合格证', width:150});
+	      		}
+      	}else if(dytype==='3'){
+//      		
+		  		if(ret.activityName==='仪电中心'||ret.activityName==='生产运营指挥中心'||ret.activityName==='热动中心'||ret.activityName==='甲醇制造中心'||ret.activityName==='综合办公室'||ret.activityName==='机械动力部'||ret.activityName==='技术质量部'||ret.activityName==='蒙大能源环保'||ret.activityName==='安全环保部'||ret.activityName==='公共工程'||ret.activityName==='供销中心'||ret.activityName==='财务部'||ret.activityName==='计划发展部'||ret.activityName==='党群工作部'){
+		  			str.push({field:'jielun1',title: '验收结论', width:150,edit: 'text'});
+		  			str.push({field:'outpi',title: '出场/生产批号', width:150});
+		  			str.push({field:'szyb',title: '三证一标', width:150});
+		  		}else if(ret.activityName==='采购员'){
+		  			str.push({field:'jielun1',title: '验收结论', width:150});
+		  			str.push({field:'outpi',title: '出场/生产批号', width:150,edit: 'text'});
+		  			str.push({field:'szyb',title: '三证一标', width:150,edit: 'text'});
+		  		}else{
+		  			str.push({field:'jielun1',title: '验收结论', width:150});
+		  			str.push({field:'outpi',title: '出场/生产批号', width:150});
+		  			str.push({field:'szyb',title: '三证一标', width:150});
+		  		}
+      	}else{
+      		if(ret.activityName==='仪电中心'||ret.activityName==='生产运营指挥中心'||ret.activityName==='热动中心'||ret.activityName==='甲醇制造中心'||ret.activityName==='综合办公室'||ret.activityName==='机械动力部'||ret.activityName==='技术质量部'||ret.activityName==='蒙大能源环保'||ret.activityName==='安全环保部'||ret.activityName==='公共工程'||ret.activityName==='供销中心'||ret.activityName==='财务部'||ret.activityName==='计划发展部'||ret.activityName==='党群工作部'){
+      			str.push({field:'jielun1',title: '验收结论', width:150,edit: 'text'});
+      			str.push({field:'jielun2',title: '验收结论', width:150});
+      		}else if(ret.activityName==='采购员'){
+      			str.push({field:'jielun1',title: '验收结论', width:150});
+      			str.push({field:'jielun2',title: '验收结论', width:150,edit: 'text'});
+      		}else{
+      			str.push({field:'jielun1',title: '验收结论', width:150});
+      			str.push({field:'jielun2',title: '验收结论', width:150});
+      		}
+      	}
+          
+    }
+          //明细列表
+          var detailsgr = table.render({
+              elem: '#detailsgrid'
+              , url: 'listJSDDetails.json'
+              , cellMinWidth: 80
+              , height: "full-160"
+              ,done: function(value, date, endDate){
+                  $('#detailsgrid').change();  // 一定要加上这句！！！不然没有回调！！！
+                  
+                  
+              }
+              , method: 'post'
+              , page: true   //开启分页
+              , limit: 10   //默认十五条数据一页
+              , limits: [10, 20, 30]  //数据分页条
+              , id: "detailsgridTable"
+              , where: {ran: ran++, sheetId: $("#id").val()}
+              , cols: [str]
+          });
+        	
+        	
+        	
+        	
+        	
+        },
+        error: function (XMLHttpRequest) {
+            layer.alert("请求出错：" + XMLHttpRequest.status + XMLHttpRequest.statusText);
+        }
     });
+    
+    
+    
+    
+   
 
     // 监听单元格编辑
     table.on('edit(detailsgrid)', function (obj) {

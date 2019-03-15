@@ -486,6 +486,9 @@ public class SheetApplyController extends SheetControllerGuard {
         LayuiPage<ManageApply> ret = null;
         //查询条件
         String queryCriteria = "";
+        HttpSession session = request.getSession();
+        Object requestUserId = session.getAttribute("userId");
+        Integer userId = (null == requestUserId ? 0 : Integer.valueOf(requestUserId.toString()));
         Map<String, Object> param = new HashMap<>();
         //状态
         if (!StringUtils.isEmpty(obj.getStatus()) && (obj.getStatus() != 0)) {
@@ -521,6 +524,9 @@ public class SheetApplyController extends SheetControllerGuard {
         if (!StringUtils.isEmpty(obj.getCreator()) && (obj.getCreator() != 0)) {
             queryCriteria += " and creator = :creator";
             param.put("creator", obj.getCreator());
+        }else{
+        	queryCriteria += " and creator = :creator";
+            param.put("creator", userId);
         }
         //开始时间
         if (!StringUtils.isEmpty(condition.getBeginDate())) {

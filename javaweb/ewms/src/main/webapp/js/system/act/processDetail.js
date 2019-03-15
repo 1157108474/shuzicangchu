@@ -85,9 +85,9 @@ layui.use(['laydate', 'form', 'layer', 'table', 'laytpl','element'], function ()
     });
     $("#review").on("click", function () {//…Û∫À
 //    	 var checkStatus = table.checkStatus('detailsgridTable');
-    	var detailsgridTable =  layui.table.cache.detailsgridTable1;
+    	var detailsgridTable =  layui.table.cache.detailsgridTable;
 //         debugger;
-//    	alert(typeof(detailsgridTable));
+    	alert(typeof(detailsgridTable));
          if('undefined' != typeof(detailsgridTable)){
         	 var details = [];
          	for (var i = 0; i < detailsgridTable.length; i++) {
