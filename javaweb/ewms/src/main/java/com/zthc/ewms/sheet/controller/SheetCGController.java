@@ -1,5 +1,28 @@
 package com.zthc.ewms.sheet.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.joda.time.DateTime;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.alibaba.fastjson.JSONObject;
 import com.hckj.base.mvc.BaseController;
 import com.zthc.ewms.base.page.LayuiPage;
@@ -8,7 +31,13 @@ import com.zthc.ewms.base.resp.HttpResponse;
 import com.zthc.ewms.base.util.StringUtils;
 import com.zthc.ewms.sheet.controller.guard.SheetCGControllerGuard;
 import com.zthc.ewms.sheet.entity.file.AttachFile;
-import com.zthc.ewms.sheet.entity.guard.*;
+import com.zthc.ewms.sheet.entity.guard.ManageOrder;
+import com.zthc.ewms.sheet.entity.guard.Sheet;
+import com.zthc.ewms.sheet.entity.guard.SheetCGCondition;
+import com.zthc.ewms.sheet.entity.guard.SheetCondition;
+import com.zthc.ewms.sheet.entity.guard.SheetDetail;
+import com.zthc.ewms.sheet.entity.guard.SheetDetailCondition;
+import com.zthc.ewms.sheet.entity.guard.SheetJSDDetails;
 import com.zthc.ewms.sheet.entity.order.Order;
 import com.zthc.ewms.sheet.entity.order.OrderDetails;
 import com.zthc.ewms.sheet.entity.order.OrderHistory;
@@ -33,23 +62,6 @@ import com.zthc.ewms.system.user.service.UserService;
 
 import drk.system.AppConfig;
 import drk.system.Log;
-
-import org.joda.time.DateTime;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/sheet/wzjs")
@@ -387,6 +399,34 @@ public class SheetCGController extends SheetCGControllerGuard {
             log.errorPrintStacktrace(e);
         }
         return ret;
+    }
+    /**
+     * 获取当前环节名称
+     *
+     * @param condition
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "/getActivityName.json", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object>  getActivityName(SheetCGCondition condition,String taskId, HttpServletRequest request,
+    		HttpServletResponse response) {
+    	log.debug("进入获取当前环节名称方法,当前方法名:getActivityName");
+//    	String taskId = request.getParameter("taskId");
+    	String activityName = "";
+    Map<String,Object> hashMap = new HashMap<String, Object>();
+    hashMap.put("activityName","");
+    	if(taskId != null){
+    		LayuiPage<Map<String, Object>> historicActivityInstances = activitiService.historyActInstanceList(taskId, 0, 100);
+    		List<Map<String,Object>> data = historicActivityInstances.getData();
+    		for (Map<String, Object> map : data) {
+    			if(map.get("endTime") == null){
+    				hashMap.put("activityName", map.get("activityName").toString());
+    			}
+    		}
+    	}
+    	return hashMap;
     }
 
 

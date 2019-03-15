@@ -27,7 +27,7 @@
                 <button id="submit" class="btnfbs"> 提交</button>
                 <button id="review" class="btnfbs"> 审核</button>
                 <button id="reject" class="btnfbs" style="display:none"> 驳回</button>
-                <span >
+                <span hidden="hidden">
                     打印类型： <select id="printType" lay-filter="printType" name="printType">
                           <option value=""></option>
                               <c:forEach items="${printTypes}" var="printType" varStatus="t">

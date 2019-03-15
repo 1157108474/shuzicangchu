@@ -99,89 +99,102 @@ layui.use(['laydate', 'form', 'table', 'layer', 'element'], function () {
             }
         }
     });
-
+    var flag = true;
     // 添加明细
     $("#add").on("click", function (e) {
-        parent.layui.$("#reloadStatus").val(1);
-        var checkStatus = table.checkStatus('detailGridTable');
-        var length = checkStatus.data.length;
-        if (length < 1) {
-            //正上方
-            layer.msg('请至少选择一条记录添加');
-        } else {
-            var data = checkStatus.data;
-            var details = [];
-            for (var i = 0; i < length; i++) {
+//    	alert(flag);
+    	if(flag){
+    		flag = false;
+    		parent.layui.$("#reloadStatus").val(1);
+            var checkStatus = table.checkStatus('detailGridTable');
+            var length = checkStatus.data.length;
+            if (length < 1) {
+                //正上方
+                layer.msg('请至少选择一条记录添加');
+                flag = true;
+            } else {
+                var data = checkStatus.data;
+                var details = [];
+                for (var i = 0; i < length; i++) {
 
-                //提交前验证
-                if (data[i].jscount > data[i].isCount) {
-                    layer.alert("接收数量不能大于可接收数量,请重新填写接收数量!");
-                    return false;
-                }
-                if (isNaN(data[i].jscount || data[i].jscount == '0')) {
-                    layer.alert("接收数量不是有效数字,请重新填写接收数量!");
-                    return false;
-                }
-                if (data[i].jscount == "" || data[i].jscount == null) {
-                    layer.alert("接收数量为空,请填写接收数量!");
-                    return false;
-                }
-                if (!/^[0-9]+.?[0-9]*$/.test(data[i].jscount) || data[i].jscount == "0") {
-                    layer.alert("接收数量不是有效数字,请重新填写接收数量!");
-                    return false;
-                }
-
-                var obj = {
-                    sheetId: parent.layui.$("#id").val(),
-                    sheetDetailId: data[i].id,
-                    categoryId: data[i].sparescateId,
-                    materialId: data[i].materialId,
-                    materialCode: data[i].materialCode,
-                    materialName: data[i].materialName,
-                    materialBrand: data[i].materialBrand,
-                    materialModel: data[i].materialModel,
-                    materialSpecification: data[i].materialSpecification,
-                    description: data[i].description,
-                    detailUnitName: data[i].baseunit,
-                    noTaxPrice: data[i].baseunitprice,
-                    noTaxSum: data[i].baseunitprice.mul(data[i].jscount),
-                    taxPrice: data[i].baseunitprice.mul(1 + data[i].taxRate),
-                    taxSum: data[i].baseunitprice.mul(1 + data[i].taxRate).mul(data[i].jscount),
-                    taxRate: data[i].taxRate,
-                    detailCount: data[i].jscount,
-                    isEquipment: $("#isEquipment" + data[i].id).val(),
-                    enableSn: $("#enableSn" + data[i].id).val(),
-                    ztId: data[i].stockorgid,
-                    ownerType: data[i].consignment,
-                    providerDepId: data[i].providerdepid,
-                    extendString10:data[i].erprownum,
-                    extendString1: data[i].extendstring1
-                };
-                details.push(obj);
-            }
-
-
-            $.ajax({
-                type: "POST",
-                url: "../detail/addWZJSDetails",
-                dataType: "json",
-                data: {details: JSON.stringify(details)},
-                success: function (ret) {
-                    if (ret.status == '1') {
-                        layer.msg('添加成功', function () {
-                            var index = parent.layer.getFrameIndex(window.name);
-                            parent.layer.close(index);
-                        });
-                    } else {
-                        layer.alert('添加失败：' + ret.message);
+                    //提交前验证
+                    if (data[i].jscount > data[i].isCount) {
+                        layer.alert("接收数量不能大于可接收数量,请重新填写接收数量!");
+                        flag = true;
+                        return false;
                     }
-                },
-                error: function (XMLHttpRequest) {
-                    layer.alert("请求出错：" + XMLHttpRequest.status + XMLHttpRequest.statusText);
+                    if (isNaN(data[i].jscount || data[i].jscount == '0')) {
+                        layer.alert("接收数量不是有效数字,请重新填写接收数量!");
+                        flag = true;
+                        return false;
+                    }
+                    if (data[i].jscount == "" || data[i].jscount == null) {
+                        layer.alert("接收数量为空,请填写接收数量!");
+                        flag = true;
+                        return false;
+                    }
+                    if (!/^[0-9]+.?[0-9]*$/.test(data[i].jscount) || data[i].jscount == "0") {
+                        layer.alert("接收数量不是有效数字,请重新填写接收数量!");
+                        flag = true;
+                        return false;
+                    }
+
+                    var obj = {
+                        sheetId: parent.layui.$("#id").val(),
+                        sheetDetailId: data[i].id,
+                        categoryId: data[i].sparescateId,
+                        materialId: data[i].materialId,
+                        materialCode: data[i].materialCode,
+                        materialName: data[i].materialName,
+                        materialBrand: data[i].materialBrand,
+                        materialModel: data[i].materialModel,
+                        materialSpecification: data[i].materialSpecification,
+                        description: data[i].description,
+                        detailUnitName: data[i].baseunit,
+                        noTaxPrice: data[i].baseunitprice,
+                        noTaxSum: data[i].baseunitprice.mul(data[i].jscount),
+                        taxPrice: data[i].baseunitprice.mul(1 + data[i].taxRate),
+                        taxSum: data[i].baseunitprice.mul(1 + data[i].taxRate).mul(data[i].jscount),
+                        taxRate: data[i].taxRate,
+                        detailCount: data[i].jscount,
+                        isEquipment: $("#isEquipment" + data[i].id).val(),
+                        enableSn: $("#enableSn" + data[i].id).val(),
+                        ztId: data[i].stockorgid,
+                        ownerType: data[i].consignment,
+                        providerDepId: data[i].providerdepid,
+                        extendString10:data[i].erprownum,
+                        extendString1: data[i].extendstring1
+                    };
+                    details.push(obj);
                 }
-            });
-        }
-        return false;
+
+
+                $.ajax({
+                    type: "POST",
+                    url: "../detail/addWZJSDetails",
+                    dataType: "json",
+                    data: {details: JSON.stringify(details)},
+                    success: function (ret) {
+                        if (ret.status == '1') {
+                            layer.msg('添加成功', function () {
+                                var index = parent.layer.getFrameIndex(window.name);
+                                parent.layer.close(index);
+                            });
+                        } else {
+                            layer.alert('添加失败：' + ret.message);
+                        }
+                    },
+                    error: function (XMLHttpRequest) {
+                        layer.alert("请求出错：" + XMLHttpRequest.status + XMLHttpRequest.statusText);
+                    }
+                });
+            }
+            return false;
+    	}else{
+//            flag = true;
+            return false;
+    	}
+        
 
     });
 

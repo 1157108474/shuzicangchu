@@ -331,7 +331,7 @@ public class SheetApplyController extends SheetControllerGuard {
             param.put("descripTion", "%%" + obj.getDescripTion().trim() + "%%");
         }
         condition.setQueryCriteria(queryCriteria);
-        condition.setOrderBys(" order by materialCode ASC");
+//        condition.setOrderBys(" order by materialCode ASC");
         try {
             ret = this.sheetApplyService.publicDetails("NoPlanDetail", "RN", param, condition);
         } catch (Exception e) {

@@ -332,7 +332,7 @@ layui.config({
         if (check == "") {
             layer.alert("请先填写订单编号！");
         }else if(extendInt6 == ""){
-        	layer.alert("请选择打印类型！");
+        	layer.alert("请选择物资类型！");
         }else {
             if (sheetId == "") {
                 // 先判断当前单据是否已保存,如果未保存,先执行保存

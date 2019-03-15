@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.apache.poi.ss.usermodel.Row;
@@ -25,7 +27,6 @@ import com.zthc.ewms.base.util.FileUtils;
 import com.zthc.ewms.base.util.StringUtils;
 import com.zthc.ewms.sheet.dao.SheetCGDao;
 import com.zthc.ewms.sheet.dao.SheetDao;
-import com.zthc.ewms.sheet.entity.guard.SheetCKDETAIL;
 import com.zthc.ewms.sheet.entity.guard.SheetDetail;
 import com.zthc.ewms.sheet.entity.guard.SheetDetailCondition;
 import com.zthc.ewms.sheet.entity.guard.SheetExcel;
@@ -224,6 +225,7 @@ public class SheetDetailService extends SheetDetailServiceGuard {
         Sheet sheet = workbook.getSheetAt(0);
         //获取最大行数
         int rownum = sheet.getPhysicalNumberOfRows();
+        Map<String,WareHouse> wareHouseMap = new HashMap<>();
         SheetExcel sheetExcel;
         StringBuffer strBuilder = new StringBuffer();
         for (int i = 1; i < rownum; i++) {
@@ -235,7 +237,7 @@ public class SheetDetailService extends SheetDetailServiceGuard {
                     String storehouseCode = ExcelImport.getValue(sheet.getRow(i).getCell(4));
                     if (StringUtils.isNotEmpty(materialCode) || StringUtils.isNotEmpty(storehouseCode)) {
                         //获取库存excel
-                        sheetExcel = getSheetExcel(sheet.getRow(i), userId, ztId);
+                        sheetExcel = getSheetExcel(sheet.getRow(i), userId, ztId,wareHouseMap);
                         //保存解析数据
                         saveDetailExcel(sheetExcel, userId, departId, ztId);
                     }
@@ -332,7 +334,7 @@ public class SheetDetailService extends SheetDetailServiceGuard {
      * @return
      */
     @Transactional
-    public SheetExcel getSheetExcel(Row row, Integer userId, Integer ztId) {
+    public SheetExcel getSheetExcel(Row row, Integer userId, Integer ztId,Map<String,WareHouse> wareHouseMap) {
         SheetExcel sheetExcel = new SheetExcel();
 
         //库存组织、业务实体
@@ -381,7 +383,17 @@ public class SheetDetailService extends SheetDetailServiceGuard {
             }
             //没有默认库位，新增默认库位
             if (!bool) {
-                location = this.sheetRKDETAILService.addWareHouse(defaultStoreHouse, wareHouse.getId(), ztId, userId);
+                for (String key : wareHouseMap.keySet()) {
+                    if(key.equals(storehouseCode)){
+                        bool = true;
+                        location = wareHouseMap.get(key);
+                        break;
+                    }
+                }
+                if(!bool){
+                    location = this.sheetRKDETAILService.addWareHouse(defaultStoreHouse, wareHouse.getId(), ztId, userId);
+                    wareHouseMap.put(storehouseCode,location);
+                }
             }
         }
         Assert.notNull(location, "库位不能为空");
@@ -573,9 +585,9 @@ public class SheetDetailService extends SheetDetailServiceGuard {
         sheetRKDETAILService.addSonDetail(sheetRkSonDetail);
     }
     @Transactional
-	public void editSheetDetails(List<SheetDetail> detailList) {
-		for (SheetDetail sheetDetail : detailList) {
-			sheetCGDao.editSheetDetails(sheetDetail);
-		}
-	}
+   	public void editSheetDetails(List<SheetDetail> detailList) {
+   		for (SheetDetail sheetDetail : detailList) {
+   			sheetCGDao.editSheetDetails(sheetDetail);
+   		}
+   	}
 }

@@ -27,7 +27,7 @@ public class SheetApplyDao extends SheetApplyDaoGuard {
         LayuiPage<T> ret = new LayuiPage<>();
         String hql_count = "select count("+key+") ";
         String append = " from "+ className +"  where 1=1 "+condition.getQueryCriteria();
-        List<T> list = baseDao.findByHql( append + condition.getOrderBys(), param, condition.getPageNum(),
+        List<T> list = baseDao.findByHql( append , param, condition.getPageNum(),
                 condition.getPageTotal());
         Long total = baseDao.countByHql(hql_count + append, param);
         ret.setCount(total);

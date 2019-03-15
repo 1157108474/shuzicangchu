@@ -8,7 +8,6 @@ layui.config({
     var vipTable = layui.vip_table;
     var $ = layui.$;
     var element = layui.element;
-
     //明细列表
     var noPlanDetailGr = table.render({
         elem: '#noPlanDetailGrid'
@@ -21,7 +20,7 @@ layui.config({
         , limits: [10, 20, 30]  //数据分页条
         , where: {
             ztId: $("#ztId").val(),
-            officeId : $("#officeId").val()
+            officesId : $("#officeId").val()
         }
         , id: "noPlanDetailGridTable"
         , cols: [

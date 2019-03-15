@@ -85,46 +85,49 @@ layui.use(['laydate', 'form', 'layer', 'table', 'laytpl','element'], function ()
     });
     $("#review").on("click", function () {//审核
 //    	 var checkStatus = table.checkStatus('detailsgridTable');
-    	var detailsgridTable =  layui.table.cache.detailsgridTable;
-         debugger;
-//    	alert(detailsgridTable[0].materialCode);
-    	var details = [];
-    	for (var i = 0; i < detailsgridTable.length; i++) {
-    		var obj = {
-    				id:detailsgridTable[i].id,
-    			sheetId:detailsgridTable[i].sheetId,
-            	hanliang: detailsgridTable[i].hanliang,
-            	inpre: detailsgridTable[i].inpre,
-            	jielun1: detailsgridTable[i].jielun1,
-//            	yanshou1: detailsgridTable[i].yanshou1,
-            	ysyq: detailsgridTable[i].ysyq,
-            	outpi: detailsgridTable[i].outpi,
-            	szyb: detailsgridTable[i].szyb,
-            	outpre: detailsgridTable[i].outpre,
-            	jielun2: detailsgridTable[i].jielun2,
-//            	yanshou2: detailsgridTable[i].yanshou2,
-    		}
-    		 details.push(obj);
-    	}
-    	$.ajax({
-            type: "POST",
-            url: "../detail/updateWZJSDetails",
-            dataType: "json",
-            data: {details: JSON.stringify(details)},
-            success: function (ret) {
-                if (ret.status == '1') {
-                    layer.msg('添加成功', function () {
-                        var index = parent.layer.getFrameIndex(window.name);
-                        parent.layer.close(index);
-                    });
-                } else {
-                    layer.alert('添加失败：' + ret.message);
-                }
-            },
-            error: function (XMLHttpRequest) {
-                layer.alert("请求出错：" + XMLHttpRequest.status + XMLHttpRequest.statusText);
-            }
-        });
+    	var detailsgridTable =  layui.table.cache.detailsgridTable1;
+//         debugger;
+//    	alert(typeof(detailsgridTable));
+         if('undefined' != typeof(detailsgridTable)){
+        	 var details = [];
+         	for (var i = 0; i < detailsgridTable.length; i++) {
+         		var obj = {
+         				id:detailsgridTable[i].id,
+         			sheetId:detailsgridTable[i].sheetId,
+                 	hanliang: detailsgridTable[i].hanliang,
+                 	inpre: detailsgridTable[i].inpre,
+                 	jielun1: detailsgridTable[i].jielun1,
+//                 	yanshou1: detailsgridTable[i].yanshou1,
+                 	ysyq: detailsgridTable[i].ysyq,
+                 	outpi: detailsgridTable[i].outpi,
+                 	szyb: detailsgridTable[i].szyb,
+                 	outpre: detailsgridTable[i].outpre,
+                 	jielun2: detailsgridTable[i].jielun2,
+//                 	yanshou2: detailsgridTable[i].yanshou2,
+         		}
+         		 details.push(obj);
+         	}
+         	$.ajax({
+                 type: "POST",
+                 url: "../detail/updateWZJSDetails",
+                 dataType: "json",
+                 data: {details: JSON.stringify(details)},
+                 success: function (ret) {
+                     if (ret.status == '1') {
+                         layer.msg('添加成功', function () {
+                             var index = parent.layer.getFrameIndex(window.name);
+                             parent.layer.close(index);
+                         });
+                     } else {
+                         layer.alert('添加失败：' + ret.message);
+                     }
+                 },
+                 error: function (XMLHttpRequest) {
+                     layer.alert("请求出错：" + XMLHttpRequest.status + XMLHttpRequest.statusText);
+                 }
+             });
+         }
+    	
         nextPart();
         //先判断是否已经审核过、是否是最后最后环节
         /* $.post("/system/activitiListener/isTaskTrue.json",{'taskId':taskId},

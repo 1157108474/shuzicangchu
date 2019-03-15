@@ -13,9 +13,11 @@ import com.zthc.ewms.system.log.entity.SystemLogEnums;
 import com.zthc.ewms.system.log.service.LogService;
 import com.zthc.ewms.system.user.entity.guard.User;
 import com.zthc.ewms.system.user.service.UserService;
+
 import drk.system.Log;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.engine.*;
 import org.activiti.engine.delegate.Expression;
@@ -43,6 +45,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -726,13 +729,19 @@ public class ActivitiListenController {
 
     @RequestMapping(value = "/historyActInstanceList.json")
     @ResponseBody
-    public LayuiPage<Map<String, Object>> historyActInstanceList(FormTemplateCondition condition, HttpServletRequest request, HttpServletResponse response) {
+    public LayuiPage<Map<String, Object>> historyActInstanceList(FormTemplateCondition condition,Model model, HttpServletRequest request, HttpServletResponse response) {
         log.debug("进入流转历史historyActInstanceList方法");
         String taskId = request.getParameter("taskId");
         int page = condition.getPageNum();
         int size = condition.getPageTotal();
         int startNo = (page - 1) * size;
         LayuiPage<Map<String, Object>> historicActivityInstances = activitiService.historyActInstanceList(taskId, startNo, size);
+        List<Map<String,Object>> data = historicActivityInstances.getData();
+        for (Map<String, Object> map : data) {
+			if(map.get("endTime")==null){	
+				model.addAttribute("activityName", map.get("activityName"));
+			}
+		}
         return historicActivityInstances;
     }
 

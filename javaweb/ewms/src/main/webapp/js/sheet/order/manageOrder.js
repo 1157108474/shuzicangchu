@@ -84,15 +84,16 @@ layui.config({
 
 
     table.on('tool(ordergrid)', function (obj) {
+    	var taskId = $("#taskId").val();
         var data = obj.data;
         if (obj.event === 'edit') {
             parent.tab.tabAdd({
-                href: data.url + "?oper=edit", //地址
+                href: data.url + "?oper=edit"+"&taskId="+taskId, //地址
                 title: "编辑物资接收单" + data.code
             });
         } else if (obj.event === 'show') {
             parent.tab.tabAdd({
-                href: data.url + "?oper=show", //地址
+                href: data.url + "?oper=show"+"&taskId="+taskId, //地址
                 title: "查看物资接收单" + data.code
             });
         } else if (obj.event === 'delete') {
