@@ -313,7 +313,8 @@ public class WareHouseController extends WareHouseControllerGuard {
                 }
             }
             String name = request.getParameter("name");
-            ret = this.service.listLocation(parentId, ztId, name, parentCode, condition);
+            String code = request.getParameter("code");
+            ret = this.service.listLocation(parentId, ztId, name,code, parentCode, condition);
         } catch (Exception e) {
             log.error("获取数据列表出错！");
             log.errorPrintStacktrace(e);

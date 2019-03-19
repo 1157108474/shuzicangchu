@@ -29,7 +29,7 @@ layui.config({
                 , {field: 'extendString1', title: '供应商', align: "center", width: 200}
                 , {field: 'statusName', title: '单据状态', align: "center", width: 80}
                 , {field: 'personName', title: '制单人', align: "center", width: 120}
-                , {field: 'createDate', title: '制单日期', align: "center", width: 150,
+                , {field: 'createDate', title: '制单日期', align: "center", width: 200,
                 templet: function (d) {
                     return datetimeformat(d.createDate)
                 }}

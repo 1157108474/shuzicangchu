@@ -11,7 +11,7 @@ layui.config({
     //明细列表
     var noPlanDetailGr = table.render({
         elem: '#noPlanDetailGrid'
-        , url: '/sheet/apply/listNoPlanDetail.json'
+        , url: ''//'/sheet/apply/listNoPlanDetail.json'
         , cellMinWidth: 80
         , height: "full-150"
         , method: 'post'
@@ -26,7 +26,7 @@ layui.config({
         , cols: [
             [{type: "checkbox", fixed: "left", width: 50}
                 , {field: 'applyCount', title: '申领数量', align: "center", width: 100, edit: 'text',event: 'count'}
-                , {field: 'address', title: '使用地址', align: "center", width: 120, edit: 'text'}
+                , {field: 'address', title: '用途', align: "center", width: 120, edit: 'text'}
                 , {field: 'storeCount', title: '库存数量', align: "center", width: 100}
                 , {field: 'storeuseCount', title: '库存可用数量', align: "center", width: 120}
                 , {field: 'detailUnitName', title: '单位', align: "center", width: 80}
@@ -35,7 +35,7 @@ layui.config({
             ]
         ]
         , done: function (res, curr, count) {
-            layer.tips('点击输入申领数量、使用地址！', '.laytable-cell-1-applyCount', {
+            layer.tips('点击输入申领数量、用途！', '.laytable-cell-1-applyCount', {
                 time: 2000
             });
         }
@@ -43,6 +43,7 @@ layui.config({
     //查询计划明细
     form.on("submit(formSubmit)", function (data) {
         table.reload('noPlanDetailGridTable', {
+        	url:'/sheet/apply/listNoPlanDetail.json',
             page: {
                 curr: 1 //重新从第 1 页开始
             },
@@ -80,7 +81,7 @@ layui.config({
                 applyCount = rows[i].applyCount;//获取申领数量
                 address = rows[i].address;//获取地址
                 if (null == address || address == "") {
-                    layer.msg("请填写使用地址");
+                    layer.msg("请填写用途");
                     return;
                 }
                 if (null == applyCount || applyCount == "") {
@@ -104,7 +105,7 @@ layui.config({
                     detailUnitName: rows[i].detailUnitName,
                     //detailunit: rows[i].DETAILUNIT,
                     detailCount: applyCount,//申领数量
-                    extendString2: address,//使用地址
+                    extendString2: address,//用途
                     ztId: $("#ztId").val()
                 };
                 details.push(obj);

@@ -24,7 +24,7 @@ layui.config({
             [{type: 'numbers', title: '序号', fixed: "left", width: 50}
                 , {field: 'action', title: '操作', fixed: "left", width: 150, toolbar: '#bar'}
                 , {field: 'code', title: '单据编号', fixed: "left", align: "center", width: 170}
-                , {field: 'ztidName', title: '库存组织', align: "center", width: 220}
+//                , {field: 'ztidName', title: '库存组织', align: "center", width: 220}
                 , {field: 'usedDepName', title: '使用部门', align: "center", width: 170}
                 , {field: 'departOfficeName', title: '上级审批部门', align: "center", width: 170}
                 , {field: 'ckCode', title: '出库单号', align: "center", width: 170}
@@ -41,7 +41,7 @@ layui.config({
 
                 , {field: 'personName', title: '制单人', align: "center", width: 100}
                 , {
-                field: 'createDate', title: '制单日期', align: "center", width: 170, templet: function (d) {
+                field: 'createDate', title: '制单日期', align: "center", width: 200, templet: function (d) {
                     return vipTable.datetimeformat(d.createDate);
                 }
             }, {field: 'memo', title: '备注', align: "center", width: 200}

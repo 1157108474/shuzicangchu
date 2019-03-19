@@ -31,7 +31,7 @@ layui.config({
                 , {field: 'detailCount', title: '申领数量', align: "center", width: 100}
                 , {field: 'ckCount', title: '已出库数量', align: "center", width: 100}
                 , {field: 'detailUnitName', title: '单位', align: "center", width: 80}
-                , {field: 'extendString2', title: '使用地址', align: "center", width: 160}
+                , {field: 'extendString2', title: '用途', align: "center", width: 160}
                 , {field: 'snCode', title: '计划编号', align: "center", width: 150}
                 , {field: 'description', title: '物料描述', align: "center", width: 320}
             ]

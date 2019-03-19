@@ -42,6 +42,7 @@ layui.use(['table', 'layer'], function () {
             },
             where:{
                 name:$("#name").val(),
+                code:$("#code").val(),
                 parentId: 0,
                 ran:ran++
             }

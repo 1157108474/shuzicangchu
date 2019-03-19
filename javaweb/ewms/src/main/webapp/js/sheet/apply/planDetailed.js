@@ -27,7 +27,7 @@ layui.config({
         , cols: [
             [{type: "checkbox", fixed: "left", width: 50}
                 , {field: 'applyCount', title: '申领数量', align: "center", width: 120, edit: 'text',event: 'count'}
-                , {field: 'address', title: '使用地址', align: "center", width: 120, edit: 'text'}
+                , {field: 'address', title: '用途', align: "center", width: 120, edit: 'text'}
                 , {field: 'planCount', title: '计划数量', align: "center", width: 80}
                 , {field: 'haveslCount', title: '已申领数量', align: "center", width: 100}
                 , {field: 'storeCount', title: '库存数量', align: "center", width: 80}
@@ -45,7 +45,7 @@ layui.config({
             ]
         ]
         , done: function (res, curr, count) {
-            layer.tips('点击输入申领数量、使用地址！', '.laytable-cell-1-applyCount', {
+            layer.tips('点击输入申领数量、用途！', '.laytable-cell-1-applyCount', {
                 time: 2000
             });
         }
@@ -92,7 +92,7 @@ layui.config({
                 applyCount = rows[i].applyCount;//获取申领数量
                 address = rows[i].address;//获取地址
                 if (null == address || address == "") {
-                    layer.msg("请填写使用地址");
+                    layer.msg("请填写用途");
                     return;
                 }
                 if (isNaN(applyCount) || applyCount == '0' || applyCount <= 0) {
@@ -124,7 +124,7 @@ layui.config({
                     detailUnitName: rows[i].unIt,
                     extendDate1: rows[i].planDate,
                     detailCount: applyCount,//申领数量
-                    extendString2: address,//使用地址
+                    extendString2: address,//用途
                     ztId: $("#ztId").val()
                 };
                 details.push(obj);

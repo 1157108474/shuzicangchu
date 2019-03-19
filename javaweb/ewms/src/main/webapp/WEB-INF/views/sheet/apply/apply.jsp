@@ -73,7 +73,7 @@
                             </td>
                             <td class="bill-td">
                                 <div class="layui-form-item">
-                                    <label class="layui-form-label">使用单位：</label>
+                                    <label class="layui-form-label">中心/部门：</label>
                                     <div class="layui-input-block">
                                         <input type="hidden" name="usedDepartId" id="usedDepartId" class="layui-input layui-disabled" disabled value="${sheet.usedDepartId}">
                                         <input type="text" name="useUnitName" id="useUnitName"

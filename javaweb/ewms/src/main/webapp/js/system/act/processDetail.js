@@ -84,15 +84,114 @@ layui.use(['laydate', 'form', 'layer', 'table', 'laytpl','element'], function ()
         }
     });
     $("#review").on("click", function () {//审核
-//    	 var checkStatus = table.checkStatus('detailsgridTable');
+    	
     	var detailsgridTable =  layui.table.cache.detailsgridTable;
 //         debugger;
-    	alert(typeof(detailsgridTable));
+//    	alert(typeof(detailsgridTable));
          if('undefined' != typeof(detailsgridTable)){
+        	 var flag = "";
+        	 var dytype = $("#dytype").val();
+        	 var activityName = $("#activityName").val();
+        	 alert(activityName);
+//           alert("打印类型----"+dytype);
+           if(activityName != null&&activityName != ''){
+           if(dytype==='1'){
+           	
+           		if(activityName==='仪电中心'||activityName==='生产运营指挥中心'||activityName==='热动中心'||activityName==='甲醇制造中心'||activityName==='综合办公室'||activityName==='机械动力部'||activityName==='技术质量部'||activityName==='蒙大能源环保'||activityName==='安全环保部'||activityName==='公共工程'||activityName==='供销中心'||activityName==='财务部'||activityName==='计划发展部'||activityName==='党群工作部'){
+           			flag = 11;
+           		}else if(activityName==='采购员'){
+           			flag = 12;
+           		}
+           	
+       	}else if(dytype==='2'){
+ 	      		if(activityName==='仪电中心'||activityName==='生产运营指挥中心'||activityName==='热动中心'||activityName==='甲醇制造中心'||activityName==='综合办公室'||activityName==='机械动力部'||activityName==='技术质量部'||activityName==='蒙大能源环保'||activityName==='安全环保部'||activityName==='公共工程'||activityName==='供销中心'||activityName==='财务部'||activityName==='计划发展部'||activityName==='党群工作部'){
+ 	      		    flag = 21;
+ 	      		}else if(activityName==='采购员'){
+ 	      			flag = 22;
+ 	      		}
+       	}else if(dytype==='3'){
+//       		
+ 		  		if(activityName==='仪电中心'||activityName==='生产运营指挥中心'||activityName==='热动中心'||activityName==='甲醇制造中心'||activityName==='综合办公室'||activityName==='机械动力部'||activityName==='技术质量部'||activityName==='蒙大能源环保'||activityName==='安全环保部'||activityName==='公共工程'||activityName==='供销中心'||activityName==='财务部'||activityName==='计划发展部'||activityName==='党群工作部'){
+ 		  			flag = 31;
+ 		  		}else if(activityName==='采购员'){
+ 		  			flag = 32;
+ 		  		}
+       	}else{
+       		if(activityName==='仪电中心'||activityName==='生产运营指挥中心'||activityName==='热动中心'||activityName==='甲醇制造中心'||activityName==='综合办公室'||activityName==='机械动力部'||activityName==='技术质量部'||activityName==='蒙大能源环保'||activityName==='安全环保部'||activityName==='公共工程'||activityName==='供销中心'||activityName==='财务部'||activityName==='计划发展部'||activityName==='党群工作部'){
+       				flag = 41;
+       		}else if(activityName==='采购员'){
+       			flag = 42;
+       		}
+       	}
+           
+     }
+        	 
+        	 
         	 var details = [];
          	for (var i = 0; i < detailsgridTable.length; i++) {
+         		if(flag === 11){
+         			if(detailsgridTable[i].jielun1 == null || detailsgridTable[i].jielun1 == ''){
+         				layer.alert('请填写物料编码位'+detailsgridTable[i].materialCode+'的验收结论');
+         				return;
+         			}
+         		}else if(flag === 12){
+         			if(detailsgridTable[i].jielun2 == null || detailsgridTable[i].jielun2 == ''){
+         				layer.alert('请填写物料编码位'+detailsgridTable[i].materialCode+'的验收结论');
+         				return;
+         			}
+         		}else if(flag === 21){
+         			if(detailsgridTable[i].hanliang == null || detailsgridTable[i].hanliang == ''){
+         				layer.alert('请填写物料编码位'+detailsgridTable[i].materialCode+'的主要指标/含量');
+         				return;
+         			}
+         			if(detailsgridTable[i].inpre == null || detailsgridTable[i].inpre == ''){
+         				layer.alert('请填写物料编码位'+detailsgridTable[i].materialCode+'的进场原材料检验报告');
+         				return;
+         			}
+         			if(detailsgridTable[i].jielun1 == null || detailsgridTable[i].jielun1 == ''){
+         				layer.alert('请填写物料编码位'+detailsgridTable[i].materialCode+'的验收结论');
+         				return;
+         			}
+         		}else if(flag === 22){
+         			if(detailsgridTable[i].ysyq == null || detailsgridTable[i].ysyq == ''){
+         				layer.alert('请填写物料编码位'+detailsgridTable[i].materialCode+'的一书一签！');
+         				return;
+         			}
+         			if(detailsgridTable[i].outpi == null || detailsgridTable[i].outpi == ''){
+         				layer.alert('请填写物料编码位'+detailsgridTable[i].materialCode+'的出场/生产批号！');
+         				return;
+         			}
+         			if(detailsgridTable[i].outpre == null || detailsgridTable[i].outpre == ''){
+         				layer.alert('请填写物料编码位'+detailsgridTable[i].materialCode+'的出场检查报告/合格证！');
+         				return;
+         			}
+         		}else if(flag === 31){
+         			if(detailsgridTable[i].jielun1 == null || detailsgridTable[i].jielun1 == ''){
+         				layer.alert('请填写物料编码位'+detailsgridTable[i].materialCode+'的验收结论！');
+         				return;
+         			}
+         		}else if(flag === 32){
+         			if(detailsgridTable[i].outpi == null || detailsgridTable[i].outpi == ''){
+         				layer.alert('请填写物料编码位'+detailsgridTable[i].materialCode+'的出场/生产批号！');
+         				return;
+         			}
+         			if(detailsgridTable[i].szyb == null || detailsgridTable[i].szyb == ''){
+         				layer.alert('请填写物料编码位'+detailsgridTable[i].materialCode+'的三证一标！');
+         				return;
+         			}
+         		}else if(flag === 41){
+         			if(detailsgridTable[i].jielun1 == null || detailsgridTable[i].jielun1 == ''){
+         				layer.alert('请填写物料编码位'+detailsgridTable[i].materialCode+'的验收结论');
+         				return;
+         			}
+         		}else if(flag === 42){
+         			if(detailsgridTable[i].jielun2 == null || detailsgridTable[i].jielun2 == ''){
+         				layer.alert('请填写物料编码位'+detailsgridTable[i].materialCode+'的验收结论');
+         				return;
+         			}
+         		}
          		var obj = {
-         				id:detailsgridTable[i].id,
+         			id:detailsgridTable[i].id,
          			sheetId:detailsgridTable[i].sheetId,
                  	hanliang: detailsgridTable[i].hanliang,
                  	inpre: detailsgridTable[i].inpre,

@@ -97,6 +97,12 @@ public class SheetQueryController {
             //wareHouse = wareHouseService.getStores(depart.getZtId());
             wareHouse = wareHouseService.getStores(depart.getId());
             for (WareHouse wh : wareHouse) {
+            	if(wh.getName().contains(".")){
+            		String[] split = wh.getName().split("\\.");
+            		if("Õ£”√".equals(split[1])){
+            			continue;
+            		}
+            	}
                 wareHouseList.put(wh.getId(), wh.getName() + "(" + depart.getName() + ")");
             }
         }
@@ -134,6 +140,12 @@ public class SheetQueryController {
             //wareHouse = wareHouseService.getStores(depart.getZtId());
             wareHouse = wareHouseService.getStores(depart.getId());
             for (WareHouse wh : wareHouse) {
+            	if(wh.getName().contains(".")){
+            		String[] split = wh.getName().split("\\.");
+            		if("Õ£”√".equals(split[1])){
+            			continue;
+            		}
+            	}
                 wareHouseList.put(wh.getId(), wh.getName() + "(" + depart.getName() + ")");
             }
         }
@@ -157,6 +169,12 @@ public class SheetQueryController {
         for (Depart depart : listDepart) {
             wareHouse = wareHouseService.getStores(depart.getId());
             for (WareHouse wh : wareHouse) {
+            	if(wh.getName().contains(".")){
+            		String[] split = wh.getName().split("\\.");
+            		if("Õ£”√".equals(split[1])){
+            			continue;
+            		}
+            	}
                 wareHouseList.put(wh.getId(), wh.getName() + "(" + depart.getName() + ")");
             }
         }

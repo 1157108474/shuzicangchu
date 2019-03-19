@@ -308,7 +308,8 @@ public class SheetApplyController extends SheetControllerGuard {
         log.debug("进入获取无计划明细列表方法");
         LayuiPage<NoPlanDetail> ret = null;
         //查询条件
-        String queryCriteria = " and storeCount<>0 and storeuseCount>0 ";
+//        String queryCriteria = " and storeCount<>0 and storeuseCount>0 ";
+        String queryCriteria = " and storeCount<>0  ";
         Map<String, Object> param = new HashMap<>();
         //ZTID
         if (!StringUtils.isEmpty(obj.getZtId())) {

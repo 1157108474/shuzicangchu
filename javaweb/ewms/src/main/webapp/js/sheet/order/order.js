@@ -24,26 +24,8 @@ layui.config({
     , {field: 'detailUnitName', title: '单位', align: "center", width: 140}
     , {field: 'detailCount', title: '接收数量', align: "center", width: 120}
     , {field: 'thCount', title: '退货数量', align: "center", width: 120}
-    , {field: 'ownerName', title: '是否寄售', align: "center", width: 120}
-    , {
-    field: 'isEquipment', title: '是否设备', align: "center", width: 120, templet: function (d) {
-        if (d.isEquipment == 1) {
-            return "是";
-        } else {
-            return "否";
-        }
-    }
-}
-    , {
-    field: 'enableSn', title: '是否启用序列号', align: "center", width: 145, templet: function (d) {
-        if (d.enableSn == 1) {
-            return "启用";
-        } else {
-            return "不启用";
-        }
-    }
-}
     , {field: 'noTaxPriceDuble', title: '单价', align: "center", width: 120}
+   
 //    , {field: 'hanliang', title: '主要指标/含量', align: "center", width: 130, edit: 'text', event: 'countCheck'}
 //    , {field: 'inpre', title: '进场原材料检验报告', align: "center", width: 150, edit: 'text', event: 'countCheck'}
 //    , {field: 'jielun1', title: '验收结论', align: "center", width: 150, edit: 'text', event: 'countCheck'}
@@ -67,12 +49,12 @@ layui.config({
         data: {taskId : taskId},
         success: function (ret) {
 //        	alert(ret.activityName);
-        	
-        	if(ret.activityName != null&&ret.activityName != ''){
-        		if(ret.activityName==='仪电中心'||ret.activityName==='生产运营指挥中心'||ret.activityName==='热动中心'||ret.activityName==='甲醇制造中心'||ret.activityName==='综合办公室'||ret.activityName==='机械动力部'||ret.activityName==='技术质量部'||ret.activityName==='蒙大能源环保'||ret.activityName==='安全环保部'||ret.activityName==='公共工程'||ret.activityName==='供销中心'||ret.activityName==='财务部'||ret.activityName==='计划发展部'||ret.activityName==='党群工作部'){
-        			
-        		}
-        	}
+        	$("#activityName").val(ret.activityName);
+//        	if(ret.activityName != null&&ret.activityName != ''){
+//        		if(ret.activityName==='仪电中心'||ret.activityName==='生产运营指挥中心'||ret.activityName==='热动中心'||ret.activityName==='甲醇制造中心'||ret.activityName==='综合办公室'||ret.activityName==='机械动力部'||ret.activityName==='技术质量部'||ret.activityName==='蒙大能源环保'||ret.activityName==='安全环保部'||ret.activityName==='公共工程'||ret.activityName==='供销中心'||ret.activityName==='财务部'||ret.activityName==='计划发展部'||ret.activityName==='党群工作部'){
+//        			
+//        		}
+//        	}
 //        	if(shenpi != 'shenpi'){
 //          }
           var dytype = $("#dytype").val();
@@ -144,6 +126,27 @@ layui.config({
       	}
           
     }
+          
+          str.push({field: 'ownerName', title: '是否寄售', align: "center", width: 120});
+          str.push({
+              field: 'isEquipment', title: '是否设备', align: "center", width: 120, templet: function (d) {
+                  if (d.isEquipment == 1) {
+                      return "是";
+                  } else {
+                      return "否";
+                  }
+              }
+          });
+          str.push({
+              field: 'enableSn', title: '是否启用序列号', align: "center", width: 145, templet: function (d) {
+                  if (d.enableSn == 1) {
+                      return "启用";
+                  } else {
+                      return "不启用";
+                  }
+              }
+          });
+          
           //明细列表
           var detailsgr = table.render({
               elem: '#detailsgrid'

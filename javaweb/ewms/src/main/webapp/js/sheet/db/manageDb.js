@@ -22,12 +22,12 @@ layui.config({
         , cols: [
             [{type: 'numbers', title: '序号',fixed: "left", width: 50}
                 ,{field: 'action', title: '操作', fixed: "left",  width: 110, toolbar: '#barDemo'}
-                , {field: 'code', title: '单据编号', fixed: "left", align: "center", width: 145}
+                , {field: 'code', title: '单据编号', fixed: "left", align: "center", width: 180}
                 , {field: 'outOrgName', title: '调出库存组织', align: "center", width: 250}
                 , {field: 'intoOrgName', title: '调入库存组织', align: "center", width: 250}
                 , {field: 'statusName', title: '单据状态', align: "center", width: 90}
                 , {field: 'personName', title: '制单人', align: "center", width: 95}
-                , {field: 'createDate', title: '制单日期', align: "center", width: 155,
+                , {field: 'createDate', title: '制单日期', align: "center", width: 200,
                 templet: function (d) {
                     return datetimeformat(d.createDate)
                 }}

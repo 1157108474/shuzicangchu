@@ -35,7 +35,7 @@ layui.config({
                 }
             }
                 , {
-                field: 'createDate', title: '制单日期', align: "center", width: 150,
+                field: 'createDate', title: '制单日期', align: "center", width: 200,
                 templet: function (d) {
                     return datetimeformat(d.createDate)
                 }

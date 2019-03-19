@@ -28,7 +28,7 @@ layui.config({
         , cols: [
             [{type: 'numbers', title: '序号', fixed: "left", width: 50}
                 , {field: 'action', title: '操作', fixed: "left", width: 120, toolbar: '#bar'}
-                , {field: 'code', title: '单据编号', fixed: "left", align: "center", width: 150}
+                , {field: 'code', title: '单据编号', fixed: "left", align: "center", width: 170}
                 // , {field: 'officeName', title: '上级审批部门', align: "center", width: 180}
                 , {field: 'applyunitName', title: '申请单位', align: "center", width: 180}
                 , {field: 'statusName', title: '单据状态', align: "center", width: 100}
@@ -36,7 +36,7 @@ layui.config({
                 , {field: 'extendString2', title: '库存组织', align: "center", width: 260}
                 , {field: 'personName', title: '制单人', align: "center", width: 100}
                 , {
-                field: 'createDate', title: '制单日期', align: "center", width: 100, templet: function (d) {
+                field: 'createDate', title: '制单日期', align: "center", width: 200, templet: function (d) {
                     return vipTable.dateformat(d.createDate);
                 }
             }

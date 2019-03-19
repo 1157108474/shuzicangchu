@@ -31,12 +31,12 @@ layui.config({
                 , {field: 'action', title: '操作', fixed: "left",  width: 160, toolbar: '#bar'}
                 , {field: 'code', title: '单据编号', fixed: "left", align: "center", width: 180}
                 , {field: 'typeName', title: '出库类型', align: "center", width: 180}
-                , {field: 'orgName', title: '库存组织', align: "center",width: 260}
+//                , {field: 'orgName', title: '库存组织', align: "center",width: 260}
                 , {field: 'useDepName', title: '申领部门', align: "center", width: 160}
                 , {field: 'renewalCostStr', title: '更新成本', align: "center", width: 120}
                 , {field: 'statusName', title: '单据状态', align: "center", width: 100}
                 , {field: 'personName', title: '制单人', align: "center", width: 100}
-                , {field: 'createDate', title: '制单日期', align: "center", width: 100, templet: function (d) {
+                , {field: 'createDate', title: '制单日期', align: "center", width: 200, templet: function (d) {
                 return vipTable.dateformat(d.createDate);
             }}
             ]

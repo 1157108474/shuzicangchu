@@ -135,9 +135,9 @@ public class WareHouseService extends WareHouseServiceGuard {
     }
 
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
-    public LayuiPage<WareHouse> listLocation(Integer parentId, Integer ztId, String name, String parentCode,
+    public LayuiPage<WareHouse> listLocation(Integer parentId, Integer ztId, String name,String code, String parentCode,
                                              WareHouseCondition condition) {
-        return this.dao.listLocation(parentId, ztId, name, parentCode, condition);
+        return this.dao.listLocation(parentId, ztId, name,code, parentCode, condition);
     }
 
     /**

@@ -187,7 +187,7 @@ public class WareHouseDao extends WareHouseDaoGuard {
         return ret;
     }
 
-    public LayuiPage<WareHouse> listLocation(Integer parentId, Integer ztId, String name, String parentCode,
+    public LayuiPage<WareHouse> listLocation(Integer parentId, Integer ztId, String name,String code, String parentCode,
                                              WareHouseCondition condition) {
         LayuiPage<WareHouse> ret = new LayuiPage<>();
         String hql_data = "select new WareHouse(l.id,l.code,l.name,o.name,p.id,p.code) ";
@@ -211,6 +211,10 @@ public class WareHouseDao extends WareHouseDaoGuard {
         if (!StringUtils.isEmpty(name)) {
             append += " and l.name like :name";
             param.put("name", "%" + name + "%");
+        }
+        if (!StringUtils.isEmpty(code)) {
+        	append += " and l.code like :code";
+        	param.put("code", "%" + code + "%");
         }
         // ≈≈–Ú
         String order = " order by l.code";
