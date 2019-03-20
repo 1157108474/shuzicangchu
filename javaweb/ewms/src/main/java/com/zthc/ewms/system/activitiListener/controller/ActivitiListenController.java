@@ -732,8 +732,8 @@ public class ActivitiListenController {
     public LayuiPage<Map<String, Object>> historyActInstanceList(FormTemplateCondition condition,Model model, HttpServletRequest request, HttpServletResponse response) {
         log.debug("进入流转历史historyActInstanceList方法");
         String taskId = request.getParameter("taskId");
-        int page = condition.getPageNum();
         int size = condition.getPageTotal();
+        int page = condition.getPageNum();
         int startNo = (page - 1) * size;
         LayuiPage<Map<String, Object>> historicActivityInstances = activitiService.historyActInstanceList(taskId, startNo, size);
         List<Map<String,Object>> data = historicActivityInstances.getData();

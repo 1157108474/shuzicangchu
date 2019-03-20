@@ -15,6 +15,7 @@
             <h2 class="layui-colla-title">查询条件</h2>
             <div class="layui-colla-content layui-show">
                 <form class="layui-form " action="">
+                <input type="hidden" id="taskId" name="taskId" value="${taskId}">
                     <table   >
                         <tr>
                             <td >

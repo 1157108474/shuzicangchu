@@ -122,7 +122,7 @@ public class PrintController {
             type = printWZJS(printType, model, id,request,response,taskId);
         } else if (type.equals("JSRK")) {
             //打印接收入库
-            printJSRK(model, id);
+            printJSRK(model, id,taskId,request,response);
         } else if (type.equals("DBRK")) {
             //打印调拨入库
             printDBRK(model, id);
@@ -348,10 +348,15 @@ public class PrintController {
      *
      * @param model
      * @param id
+     * @param response 
+     * @param request 
+     * @param taskId 
      * @return
      */
-    private void printJSRK(Model model, Integer id) {
-        SheetRKD sheet = this.sheetService.getRkSheetOne(id);
+    private void printJSRK(Model model, Integer id, String taskId, HttpServletRequest request, HttpServletResponse response) {
+    	LayuiPage<Map<String, Object>> historicActivityInstances = activitiService.historyActInstanceList(taskId,0,100);
+        List<Map<String,Object>> data = historicActivityInstances.getData();
+    	SheetRKD sheet = this.sheetService.getRkSheetOne(id);
         if (!StringUtils.isEmpty(sheet)) {
             sheet.setCreateDateStr(new DateTime(sheet.getCreatedate()).toString("yyyy年MM月dd日 HH:mm:ss"));
         }
@@ -366,7 +371,20 @@ public class PrintController {
                 details.add(rkDetailPrint);
             }
         }
-
+        model.addAttribute("fqrName", data.get(0).get("assignee"));//发起人
+        model.addAttribute("depName", data.get(data.size()-1).get("assignee"));//最后审批节点（部门负责人）
+        for (Map<String, Object> map : data) {
+			if("采购员".equals(map.get("activityName"))){
+				model.addAttribute("cgyName", map.get("assignee"));
+			}
+			if("仓储主管".equals(map.get("activityName"))||"库房负责人".equals(map.get("activityName"))){
+				model.addAttribute("cczgName", map.get("assignee"));
+			}
+			if("采购主管".equals(map.get("activityName"))){
+				model.addAttribute("cgzgName", map.get("assignee"));
+			}
+		}
+        
 
         model.addAttribute("details", details);
     }

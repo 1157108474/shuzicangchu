@@ -404,15 +404,16 @@ layui.config({
     });
 
     $("#print").on("click", function (e) {
+    	var taskId = $("#taskId").val();
         var printType = $("#printType").val();
         var typeId = $("#check").val();
         if (typeId == "790") {
-            vipTable.openPage("打印入库单", "/system/print/sheet/DBRK-" + $("#id").val() + "?printType=203", '850px', '500px');
+            vipTable.openPage("打印入库单", "/system/print/sheet/DBRK-" + $("#id").val() + "?printType=203&taskId="+taskId, '850px', '500px');
         } else {
             if (printType == '') {
                 layer.alert("请选择打印类型");
             } else {
-                vipTable.openPage("打印入库单", "/system/print/sheet/JSRK-" + $("#id").val() + "?printType=165", '850px', '500px');
+                vipTable.openPage("打印入库单", "/system/print/sheet/JSRK-" + $("#id").val() + "?printType=165&taskId="+taskId, '850px', '500px');
             }
         }
     });

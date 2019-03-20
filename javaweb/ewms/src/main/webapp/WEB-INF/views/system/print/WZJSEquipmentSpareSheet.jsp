@@ -36,9 +36,9 @@
                 <td colspan="10">验收时间: ${sheet.createDateStr}</td>
             </tr>
             <tr>
-                <td colspan="3">供应商单位：${sheet.extendString1}</td>
-                <td colspan="4">合同编号：</td>
-                <td colspan="3">订单编号：${sheet.code}</td>
+                <td colspan="2">供应商单位：${sheet.extendString1}</td>
+                <td colspan="4">订单编号：${sheet.orderNum}</td>
+                <td colspan="4">接收单号：${sheet.code}</td>
             </tr>
             <tr class="my_tr center_tr">
                 <td rowspan="2">序号</td>

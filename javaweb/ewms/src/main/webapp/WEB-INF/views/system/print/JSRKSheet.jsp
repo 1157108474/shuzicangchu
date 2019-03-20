@@ -80,11 +80,7 @@
                 <td></td>
             </tr>
             <tr class="my_tr">
-                <td colspan="2">部门负责人：</td>
-                <td colspan="2">采购主管：</td>
-                <td colspan="3">仓储主管：</td>
-                <td colspan="2">采购员：</td>
-                <td colspan="2">入库经办人：</td>
+                <td colspan="13">部门负责人：${depName }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;采购主管：${cgzgName }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;仓储主管：${cczgName }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;采购员：${cgyName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;入库经办人：${fqrName}</td>
             </tr>
         </table>
         <iframe id="printf" src="" width="0" height="0" frameborder="0"></iframe>

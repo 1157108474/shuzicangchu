@@ -72,7 +72,7 @@ layui.config({
 
     //监听工具条
     table.on('tool(rkgrid)', function (obj) {
-
+    	var taskId = $("#taskId").val();
         var data = obj.data;
         if (obj.event === 'edit') {
             parent.tab.tabAdd({
