@@ -1,12 +1,14 @@
 package com.zthc.ewms.sheet.entity.query;
 
 import com.zthc.ewms.base.util.NumberUtils;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 import java.util.Date;
 
 @Entity
@@ -51,6 +53,12 @@ public class VCgddEntity {
      **/
     @Column(name = "stockorgid", columnDefinition = "Integer NULL COMMENT '库房组织ID'")
     private Integer stockorgid;
+    /**----已接收数量---**/
+    @Column(name="isCount", columnDefinition="number(18,9) NULL COMMENT '可接收数量'")
+    private Double isCount;
+    /**----未接收数量---**/
+    @Column(name="noCount", columnDefinition="number(18,9) NULL COMMENT '可接收数量'")
+    private Double noCount;
     /**
      * ----库房组织编码---
      **/
@@ -289,7 +297,25 @@ public class VCgddEntity {
     @Column(name = "consignmentname", columnDefinition = "nvarchar2(64) NULL COMMENT '是否寄售'")
     private String consignmentname;
 
-    public Integer getId() {
+    
+    
+    public Double getNoCount() {
+		return noCount;
+	}
+
+	public void setNoCount(Double noCount) {
+		this.noCount = noCount;
+	}
+
+	public Double getIsCount() {
+		return isCount;
+	}
+
+	public void setIsCount(Double isCount) {
+		this.isCount = isCount;
+	}
+
+	public Integer getId() {
         return id;
     }
 

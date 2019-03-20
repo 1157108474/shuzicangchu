@@ -62,9 +62,12 @@ layui.config({
 
         if(check.isDot(value)){
             if(!check.isAllowDecimal(data.detailUnitName)){
-                layer.alert(data.detailUnitName+"单位不允许填小数");
-                data[field] = 0;
-                return;
+            	if("米"!=data.detailUnitName && "吨"!=data.detailUnitName){
+            		layer.alert(data.detailUnitName+"单位不允许填小数");
+                    data[field] = 0;
+                    return;
+            	}
+                
             }
         }
     });

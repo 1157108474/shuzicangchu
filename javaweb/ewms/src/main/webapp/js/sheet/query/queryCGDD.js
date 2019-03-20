@@ -28,7 +28,9 @@ layui.config({
                 , {field: 'ffcode', title: '发放号', align: "center", width: 80}
                 , {field: 'ordertype', title: '订单类型', align: "center", width: 105}
                 , {field: 'stockorgcode', title: '库存组织编码', align: "center", width: 120}
-                , {field: 'stockorgname', title: '库存组织名称', align: "center", width: 280}
+//                , {field: 'stockorgname', title: '库存组织名称', align: "center", width: 280}
+                , {field: 'isCount', title: '已接收', align: "center", width: 110}
+                , {field: 'noCount', title: '未接收', align: "center", width: 110}
                 , {field: 'materialcode', title: '物料编码', align: "center", width: 110}
                 , {field: 'description', title: '物料描述', align: "center", width: 150}
                 , {field: 'detailunit', title: '单位', align: "center", width: 80}

@@ -73,9 +73,12 @@ layui.config({
 
         if(check.isDot(value)){
             if(!check.isAllowDecimal(data.unIt)){
-                layer.alert(data.unIt+"单位不允许填小数");
-                data[field] = 0;
-                return;
+            	if("米"!=data.unIt && "吨"!=data.unIt){
+            		layer.alert(data.unIt+"单位不允许填小数");
+                    data[field] = 0;
+                    return;
+            	}
+                
             }
         }
     });

@@ -265,7 +265,6 @@ public class PrintController {
     private String printWZJS(Integer printType, Model model, Integer id, HttpServletRequest request, HttpServletResponse response, String taskId) {
     	LayuiPage<Map<String, Object>> historicActivityInstances = activitiService.historyActInstanceList(taskId,0,100);
         List<Map<String,Object>> data = historicActivityInstances.getData();
-        
         OrderPrint sheet = this.sheetService.getOrderPrintSheetOne(id);
         if (sheet != null) {
             sheet.setCreateDateStr(new DateTime(sheet.getCreateDate()).toString("yyyy年MM月dd日 HH:mm:ss"));
@@ -275,70 +274,76 @@ public class PrintController {
         model.addAttribute("userName", userName);
         List<SheetDetail> details = this.detailService.printDetails(id, null, "SheetDetail");
         model.addAttribute("details", details);
-
-        if (printType.equals(PrintEnums.WZJSEnum.EQUIPMENT_SPARE.getType())) {
-        	for (Map<String, Object> map : data) {
-    			if("机械动力部技术验收".equals(map.get("activityName")) || "技术质量部技术验收".equals(map.get("activityName"))){
-    				model.addAttribute("shenpi2", map.get("assignee"));
-    				model.addAttribute("comment2", map.get("comment"));
-    				model.addAttribute("activityName", map.get("activityName"));
-    			}
-    		}
-        	if(data.size()>0){
-				model.addAttribute("fqr", data.get(0).get("assignee"));
-				if(data.size()>3){//
-					
-					if(data.get(0).get("assignee").toString().equals(data.get(data.size()-4).get("assignee").toString())){
-						model.addAttribute("shenpi1", data.get(data.size()-3).get("assignee"));
-//						model.addAttribute("shenpi2", data.get(data.size()-2).get("assignee"));
-						model.addAttribute("comment1", data.get(data.size()-3).get("comment"));
-//						model.addAttribute("comment2", data.get(data.size()-2).get("comment"));
-//						model.addAttribute("assignee2", data.get(data.size()-2).get("assignee"));
-						
-					}else{
-						model.addAttribute("shenpi1", data.get(data.size()-2).get("assignee"));
-						model.addAttribute("comment1", data.get(data.size()-2).get("comment"));
-					}
-				}else{
-					model.addAttribute("shenpi1", data.get(data.size()-2).get("assignee"));
-					model.addAttribute("comment1", data.get(data.size()-2).get("comment"));
+		if(data.size()>0){
+			for (Map<String, Object> map : data) {
+				if("机械动力部技术验收".equals(map.get("activityName")) || "技术质量部技术验收".equals(map.get("activityName"))){
+					model.addAttribute("shenpi2", map.get("assignee"));
+					model.addAttribute("comment2", map.get("comment"));
+					model.addAttribute("activityName", map.get("activityName"));
 				}
-				model.addAttribute("zuihou", data.get(data.size()-1).get("assignee"));
-				model.addAttribute("commentz", data.get(data.size()-1).get("comment"));
+				if("制单人".equals(map.get("activityName"))){
+					model.addAttribute("fqr", map.get("assignee"));
+				}
+				if("仪电中心".equals(map.get("activityName")) || "生产运营指挥中心".equals(map.get("activityName")) || "热动中心".equals(map.get("activityName")) || "机械动力部".equals(map.get("activityName")) || "蒙大能源环保".equals(map.get("activityName")) || "公共工程".equals(map.get("activityName")) || "供销中心".equals(map.get("activityName")) || "财务部".equals(map.get("activityName")) || "计划发展部".equals(map.get("activityName")) || "甲醇制造中心".equals(map.get("activityName")) || "综合办公室".equals(map.get("activityName")) || "技术质量部".equals(map.get("activityName")) || "安全环保部".equals(map.get("activityName")) || "党群工作部".equals(map.get("activityName"))){
+					model.addAttribute("shenpi1", map.get("assignee"));
+					model.addAttribute("comment1", map.get("comment"));
+				}
+				if("采购员".equals(map.get("activityName"))){
+					model.addAttribute("zuihou", map.get("assignee"));
+					model.addAttribute("commentz", map.get("comment"));
+				}
 			}
+		}
+        
+        if (printType.equals(PrintEnums.WZJSEnum.EQUIPMENT_SPARE.getType())) {
+        	
+//        	if(data.size()>0){
+//				if(data.size()>3){//
+//					
+//					if(data.get(0).get("assignee").toString().equals(data.get(data.size()-4).get("assignee").toString())){
+//						model.addAttribute("shenpi1", data.get(data.size()-3).get("assignee"));
+//						model.addAttribute("comment1", data.get(data.size()-3).get("comment"));
+//						
+//					}else{
+//						model.addAttribute("shenpi1", data.get(data.size()-2).get("assignee"));
+//						model.addAttribute("comment1", data.get(data.size()-2).get("comment"));
+//					}
+//				}else{
+//					model.addAttribute("shenpi1", data.get(data.size()-2).get("assignee"));
+//					model.addAttribute("comment1", data.get(data.size()-2).get("comment"));
+//				}
+//				model.addAttribute("zuihou", data.get(data.size()-1).get("assignee"));
+//				model.addAttribute("commentz", data.get(data.size()-1).get("comment"));
+//			}
             return "WZJSEquipmentSpare";
         } else if (printType.equals(PrintEnums.WZJSEnum.ORIGINAL_AUXILIARY.getType())) {
-			if(data.size()>0){
-				model.addAttribute("fqr", data.get(0).get("assignee"));
-//				if(data.size()>2){//
-					
-//				}else{
-				model.addAttribute("shenpi1", data.get(data.size()-2).get("assignee"));
-				model.addAttribute("comment1", data.get(data.size()-2).get("comment"));
-//				}
-				model.addAttribute("zuihou", data.get(data.size()-1).get("assignee"));
-				model.addAttribute("commentz", data.get(data.size()-1).get("comment"));
-			}
+//			if(data.size()>0){
+//				model.addAttribute("fqr", data.get(0).get("assignee"));
+//				model.addAttribute("shenpi1", data.get(data.size()-2).get("assignee"));
+//				model.addAttribute("comment1", data.get(data.size()-2).get("comment"));
+//				model.addAttribute("zuihou", data.get(data.size()-1).get("assignee"));
+//				model.addAttribute("commentz", data.get(data.size()-1).get("comment"));
+//			}
             
 				
             return "WZJSoriginalAuxiliary";
         } else if (printType.equals(PrintEnums.WZJSEnum.SAFETY_MATERIALS.getType())) {
-        	if(data.size()>0){
-				model.addAttribute("fqr", data.get(0).get("assignee"));
-				model.addAttribute("shenpi1", data.get(data.size()-2).get("assignee"));
-				model.addAttribute("comment1", data.get(data.size()-2).get("comment"));
-				model.addAttribute("zuihou", data.get(data.size()-1).get("assignee"));
-				model.addAttribute("commentz", data.get(data.size()-1).get("comment"));
-			}
+//        	if(data.size()>0){
+//				model.addAttribute("fqr", data.get(0).get("assignee"));
+//				model.addAttribute("shenpi1", data.get(data.size()-2).get("assignee"));
+//				model.addAttribute("comment1", data.get(data.size()-2).get("comment"));
+//				model.addAttribute("zuihou", data.get(data.size()-1).get("assignee"));
+//				model.addAttribute("commentz", data.get(data.size()-1).get("comment"));
+//			}
             return "WZJSafetyMaterials";
         } else {
-        	if(data.size()>0){
-				model.addAttribute("fqr", data.get(0).get("assignee"));
-				model.addAttribute("shenpi1", data.get(data.size()-2).get("assignee"));
-				model.addAttribute("comment1", data.get(data.size()-2).get("comment"));
-				model.addAttribute("zuihou", data.get(data.size()-1).get("assignee"));
-				model.addAttribute("commentz", data.get(data.size()-1).get("comment"));
-			}
+//        	if(data.size()>0){
+//				model.addAttribute("fqr", data.get(0).get("assignee"));
+//				model.addAttribute("shenpi1", data.get(data.size()-2).get("assignee"));
+//				model.addAttribute("comment1", data.get(data.size()-2).get("comment"));
+//				model.addAttribute("zuihou", data.get(data.size()-1).get("assignee"));
+//				model.addAttribute("commentz", data.get(data.size()-1).get("comment"));
+//			}
             return "WZJOtherMaterials";
         }
     }
@@ -364,29 +369,35 @@ public class PrintController {
         List<RkDetailPrint> rkDetailPrints = this.detailService.printDetails(id, null, "RkDetailPrint");
 
         List<RkDetailPrint> details = new ArrayList<>();
-        String str = "";
-        for (RkDetailPrint rkDetailPrint : rkDetailPrints) {
-            if(!rkDetailPrint.getExtendString1().equals(str)){
-                str= rkDetailPrint.getExtendString1();
-                details.add(rkDetailPrint);
-            }
-        }
-        model.addAttribute("fqrName", data.get(0).get("assignee"));//发起人
-        model.addAttribute("depName", data.get(data.size()-1).get("assignee"));//最后审批节点（部门负责人）
+//        String str = "";
+//        for (RkDetailPrint rkDetailPrint : rkDetailPrints) {
+//            if(!rkDetailPrint.getExtendString1().equals(str)){
+//                str= rkDetailPrint.getExtendString1();
+//                details.add(rkDetailPrint);
+//            }
+//        }
+//        model.addAttribute("fqrName", data.get(0).get("assignee"));//发起人
+//        model.addAttribute("depName", data.get(data.size()-1).get("assignee"));//最后审批节点（部门负责人）
         for (Map<String, Object> map : data) {
+        	if("库管员".equals(map.get("activityName"))){
+        		model.addAttribute("fqrName", map.get("assignee"));//发起人
+			}
 			if("采购员".equals(map.get("activityName"))){
 				model.addAttribute("cgyName", map.get("assignee"));
 			}
-			if("仓储主管".equals(map.get("activityName"))||"库房负责人".equals(map.get("activityName"))){
+			if("库房负责人".equals(map.get("activityName"))||"库房负责人".equals(map.get("activityName"))){
 				model.addAttribute("cczgName", map.get("assignee"));
 			}
 			if("采购主管".equals(map.get("activityName"))){
 				model.addAttribute("cgzgName", map.get("assignee"));
 			}
+			if("部门负责人审核".equals(map.get("activityName"))){
+				model.addAttribute("depName", map.get("assignee"));
+			}
 		}
         
 
-        model.addAttribute("details", details);
+        model.addAttribute("details", rkDetailPrints);
     }
 
 }
