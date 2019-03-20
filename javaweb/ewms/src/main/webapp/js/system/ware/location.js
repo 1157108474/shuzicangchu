@@ -38,7 +38,6 @@ layui.use(['table', 'layer'], function () {
     });
 
     var reload = function(){
-
         table.reload('locationListReload', {
             url:"listLocation"
             ,page: {
@@ -46,6 +45,7 @@ layui.use(['table', 'layer'], function () {
             },
             where:{
                 name:$("#name").val(),
+                code:$("#code").val(),
                 parentId: $("#parentId").val(),
                 ran:ran++
             }

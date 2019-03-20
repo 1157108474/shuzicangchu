@@ -43,7 +43,6 @@ layui.use(['laydate', 'form', 'table', 'layer', 'element'], function () {
 
     //¼àÌý¹¤¾ßÌõ
     table.on('tool(detailList)', function (obj) {
-
         var data = obj.data;
         var storeID = $("#storeId").val();
         if (obj.event === 'location') {

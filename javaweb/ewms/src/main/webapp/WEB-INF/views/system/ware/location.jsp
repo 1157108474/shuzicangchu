@@ -28,9 +28,32 @@
         <input id="parentCode" value="${parentCode}" type="hidden">
         <input id="ztId" value="${ztid}" type="hidden">
         <div class="layui-form-item bill-search">
-            <label class="layui-form-label">名称：</label>
-            <input type="text" id="name">
-            <button class="layui-btn layui-btn-warm bill-td-button" id="search">查询</button>
+            <table>
+					<tr>
+						<td>
+							<div class="layui-form-item">
+								<label class="layui-form-label">编码：</label>
+								<div class="layui-input-block">
+									<input type="text" id="code" style="width: 150px"
+										class="layui-input">
+								</div>
+							</div>
+						<td>
+						<td>
+							<div class="layui-form-item">
+								<label class="layui-form-label">名称：</label>
+								<div class="layui-input-block">
+									<input type="text" id="name" style="width: 150px"
+										class="layui-input">
+								</div>
+							</div>
+						</td>
+						<td class="bill-td">
+							<button class="layui-btn layui-btn-warm bill-td-button"
+								id="search">查询</button>
+						</td>
+					</tr>
+				</table>
         </div>
         <div style="margin-left: 10px;">
             <table id="locationList" lay-filter="locationList"></table>
