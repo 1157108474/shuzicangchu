@@ -1,8 +1,10 @@
 package com.zthc.ewms.sheet.entity.ck;
 
+import org.apache.fop.util.DOM2SAX;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+
 import java.util.Date;
 
 /**  
@@ -61,7 +63,7 @@ public class VCKList {
 
 	/**----可出库数量---**/
 	@Column(name="UNSECOUNT", columnDefinition="Integer NULL COMMENT '可出库数量'")
-	private Integer unsecount;
+	private Double unsecount;
 
 	/**----供应商---**/
 	@Column(name="PROVIDERNAME", columnDefinition="nvarchar(255) NULL COMMENT '供应商'")
@@ -76,7 +78,7 @@ public class VCKList {
 
 	/**----库存数量---**/
 	@Column(name="STORECOUNT", columnDefinition="Integer NULL COMMENT '库存数量'")
-	private Integer storecount;
+	private Double storecount;
 
 
 	/**----ztId---**/
@@ -230,11 +232,11 @@ public class VCKList {
 		this.storelocationcode = storelocationcode;
 	}
 
-	public Integer getUnsecount() {
+	public Double getUnsecount() {
 		return unsecount;
 	}
 
-	public void setUnsecount(Integer unsecount) {
+	public void setUnsecount(Double unsecount) {
 		this.unsecount = unsecount;
 	}
 
@@ -262,11 +264,11 @@ public class VCKList {
 		this.detailUnitName = detailUnitName;
 	}
 
-	public Integer getStorecount() {
+	public Double getStorecount() {
 		return storecount;
 	}
 
-	public void setStorecount(Integer storecount) {
+	public void setStorecount(Double storecount) {
 		this.storecount = storecount;
 	}
 

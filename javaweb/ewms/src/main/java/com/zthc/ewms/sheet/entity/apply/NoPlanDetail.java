@@ -42,7 +42,7 @@ public class NoPlanDetail {
 	private Integer storeuseCount;
 	/**----ø‚¥Ê¡ø---**/
 	@Column(name="storeCount", columnDefinition="Integer NULL COMMENT 'ø‚¥Ê¡ø'")
-	private Integer storeCount;
+	private Double storeCount;
 	/**----ZTID---**/
 	@Column(name="ztId", columnDefinition="Integer NULL COMMENT 'ZTID'")
 	private Integer ztId;
@@ -116,11 +116,11 @@ public class NoPlanDetail {
 		this.storeuseCount = storeuseCount;
 	}
 
-	public Integer getStoreCount() {
+	public Double getStoreCount() {
 		return storeCount;
 	}
 
-	public void setStoreCount(Integer storeCount) {
+	public void setStoreCount(Double storeCount) {
 		this.storeCount = storeCount;
 	}
 

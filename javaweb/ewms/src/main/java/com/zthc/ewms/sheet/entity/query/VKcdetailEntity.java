@@ -20,7 +20,7 @@ public class VKcdetailEntity {
     private Long providerdepid;
     private String providername;
     private String ztidname;
-    private Long storecount;
+    private Double storecount;
     private String housename;
     private String flname;
     private String storelocationcode;
@@ -167,11 +167,11 @@ public class VKcdetailEntity {
 
     @Basic
     @Column(name = "STORECOUNT")
-    public Long getStorecount() {
+    public Double getStorecount() {
         return storecount;
     }
 
-    public void setStorecount(Long storecount) {
+    public void setStorecount(Double storecount) {
         this.storecount = storecount;
     }
 
