@@ -38,6 +38,9 @@ public class SqNum {
 	/**----申请单位ID---**/
 	@Column(name="applyDepartId", columnDefinition="Integer NULL COMMENT '申请单位ID'")
 	private Integer applyDepartId;
+	/**----申请单位名称---**/
+	@Column(name="applyDepartName", columnDefinition="nvarchar(200) NULL COMMENT '申请单位名称'")
+	private String applyDepartName;
 	/**----使用单位名称---**/
 	@Column(name="usedDep", columnDefinition="nvarchar(200) NULL COMMENT 'usedDep'")
 	private String usedDep;
@@ -76,6 +79,15 @@ public class SqNum {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+
+	public String getApplyDepartName() {
+		return applyDepartName;
+	}
+
+	public void setApplyDepartName(String applyDepartName) {
+		this.applyDepartName = applyDepartName;
 	}
 
 	public String getNAME() {

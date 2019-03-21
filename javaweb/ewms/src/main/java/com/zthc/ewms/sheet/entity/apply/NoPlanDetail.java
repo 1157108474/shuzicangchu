@@ -39,7 +39,7 @@ public class NoPlanDetail {
 	private Integer officesId;
 	/**----库存可用量---**/
 	@Column(name="storeuseCount", columnDefinition="Integer NULL COMMENT '库存可用量'")
-	private Integer storeuseCount;
+	private Double storeuseCount;
 	/**----库存量---**/
 	@Column(name="storeCount", columnDefinition="Integer NULL COMMENT '库存量'")
 	private Double storeCount;
@@ -108,11 +108,11 @@ public class NoPlanDetail {
 		this.officesId = officesId;
 	}
 
-	public Integer getStoreuseCount() {
+	public Double getStoreuseCount() {
 		return storeuseCount;
 	}
 
-	public void setStoreuseCount(Integer storeuseCount) {
+	public void setStoreuseCount(Double storeuseCount) {
 		this.storeuseCount = storeuseCount;
 	}
 
