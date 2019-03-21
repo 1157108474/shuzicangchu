@@ -261,7 +261,7 @@ layui.config({
     $("#openApply").on("click", function (e) {
         if ($("#ckType select").val() == '449') {
             var url = "/sheet/apply/openApply.htm?ztId=" + $("#ztId").val();
-            vipTable.openPage("申领单号", url, "980px", "520px");
+            vipTable.openPage("申领单号", url, "1080px", "520px");
         } else {
             return false;
         }

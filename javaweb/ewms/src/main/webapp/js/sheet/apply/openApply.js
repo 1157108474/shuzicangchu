@@ -21,7 +21,7 @@ layui.config({
         , cols: [[
             {field: 'code', align: 'center', title: '申领单号', width: 180}
             , {field: 'usedDep', align: 'center', title: '使用单位', width: 150}
-            , {field: 'applyDepartName', align: 'center', title: '申请单位（中心/部门）', width: 150}
+            , {field: 'applyDepartName', align: 'center', title: '申请单位（中心/部门）', width: 260}
             , {field: 'extendString1', align: 'center', title: '用途', width: 150}
             , {field: 'memo', align: 'center', title: '备注', width: 150}
             , {field: 'createDate', align: 'center', title: '创建时间', width: 150, templet: function (d) {
