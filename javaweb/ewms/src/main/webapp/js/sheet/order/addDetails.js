@@ -93,7 +93,7 @@ layui.use(['laydate', 'form', 'table', 'layer', 'element'], function () {
         }
         if(check.isDot(value)){
             if(!check.isAllowDecimal(data.detailunit)){
-            	if('吨'!=data.detailunit && '米'!=data.detailunit){
+            	if('吨'!=data.detailunit && '米'!=data.detailunit && '公斤'!=data.detailunit && '升'!=data.detailunit){
             		layer.alert(data.detailunit+"单位不允许填小数");
                     data[field] = 0;
                     return;

@@ -203,17 +203,17 @@ public class RkDetail {
      * ----接收数量---
      **/
     @Column(name = "jsCount", columnDefinition = "Integer NULL COMMENT '可接收数量'")
-    private Integer jsCount;
+    private Double jsCount;
     /**
      * ----已入库数量---
      **/
     @Column(name = "kCount", columnDefinition = "Integer NULL COMMENT '可接收数量'")
-    private Integer kCount;
+    private Double kCount;
     /**
      * ----可接收数量---
      **/
     @Column(name = "isCount", columnDefinition = "Integer NULL COMMENT '可接收数量'")
-    private Integer isCount;
+    private Double isCount;
 
     @Column(name = "providerName", columnDefinition = "nvarchar2(255) NULL COMMENT '供应商名称'")
     private String providerName;
@@ -563,27 +563,27 @@ public class RkDetail {
         this.extendString1 = extendString1;
     }
 
-    public Integer getJsCount() {
+    public Double getJsCount() {
         return jsCount;
     }
 
-    public void setJsCount(Integer jsCount) {
+    public void setJsCount(Double jsCount) {
         this.jsCount = jsCount;
     }
 
-    public Integer getkCount() {
+    public Double getkCount() {
         return kCount;
     }
 
-    public void setkCount(Integer kCount) {
+    public void setkCount(Double kCount) {
         this.kCount = kCount;
     }
 
-    public Integer getIsCount() {
+    public Double getIsCount() {
         return isCount;
     }
 
-    public void setIsCount(Integer isCount) {
+    public void setIsCount(Double isCount) {
         this.isCount = isCount;
     }
 

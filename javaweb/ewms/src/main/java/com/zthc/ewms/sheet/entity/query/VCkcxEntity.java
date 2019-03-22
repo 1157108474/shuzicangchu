@@ -1,6 +1,10 @@
 package com.zthc.ewms.sheet.entity.query;
 
+import java.util.Date;
+
 import javax.persistence.*;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "V_CKCX")
@@ -30,6 +34,10 @@ public class VCkcxEntity {
     private Long ztid;
     private String url;
     private String kindName;
+    /**----创建时间---**/
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@Column(name="submittime", columnDefinition="date NULL COMMENT '创建时间'")
+	private Date submittime;
 
     @Id
     @Column(name = "ID")
@@ -37,7 +45,27 @@ public class VCkcxEntity {
         return id;
     }
 
-    public void setId(long id) {
+    
+   
+
+
+	public Date getSubmittime() {
+		return submittime;
+	}
+
+
+
+
+
+	public void setSubmittime(Date submittime) {
+		this.submittime = submittime;
+	}
+
+
+
+
+
+	public void setId(long id) {
         this.id = id;
     }
 

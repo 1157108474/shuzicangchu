@@ -45,6 +45,7 @@ layui.config({
             });
         }
     });
+    
     //查询计划明细
     form.on("submit(formSubmit)", function (data) {
         table.reload('zjckdetailsTable', {

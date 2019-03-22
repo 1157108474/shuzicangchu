@@ -9,9 +9,11 @@ import com.zthc.ewms.system.dept.entity.guard.Depart;
 import com.zthc.ewms.system.user.entity.guard.UserEnums;
 import com.zthc.ewms.system.user.service.UserScopeService;
 import com.zthc.ewms.system.user.service.UserService;
+
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -88,6 +90,17 @@ public class VCkcxEntityDao extends VCkcxEntityDaoGuard {
             param.put("materialcode","%" + obj.getMaterialcode().trim() + "%");
         }
 
+        if (!StringUtils.isEmpty(condition.getStartTime()) && StringUtils.isEmpty(condition.getEndTime())) {
+            Date start = sdf.parse(condition.getStartTime() + " 00:00:00");
+            hql += " and submittime >= :starttime ";
+            param.put("starttime", start);
+        } else if (!StringUtils.isEmpty(condition.getStartTime()) && !StringUtils.isEmpty(condition.getEndTime())) {
+            Date start = sdf.parse(condition.getStartTime() + " 00:00:00");
+            Date end = sdf.parse(condition.getEndTime() + " 23:59:59");
+            hql += " and submittime BETWEEN :starttime and :endtime ";
+            param.put("starttime", start);
+            param.put("endtime", end);
+        }
         String totalsql = " select count(*) " + hql;
         // ≈≈–Ú
         hql += " order by id ";

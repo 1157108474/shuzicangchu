@@ -5,6 +5,7 @@ layui.use(['laydate', 'form', 'table', 'layer', 'element'], function () {
     var table = layui.table;
     var $ = layui.$;
     var element = layui.element;
+    var laydate = layui.laydate;
     form.on("submit(formSubmit)", function (data) {
         reload(data);
         return false;
@@ -32,6 +33,9 @@ layui.use(['laydate', 'form', 'table', 'layer', 'element'], function () {
                 , {field: 'detailcount', title: '数量', align: "center", width: 100}
                 , {field: 'kindName', title: '类型', align: "center", width: 100}
                 , {field: 'description', title: '物料说明', align: "center", width: 200}
+                , {field: 'submittime', align: 'center', title: '创建时间', width: 200, templet: function (d) {
+                    return datetimeformat(d.submittime);
+                }}
             ]
         ]
     });
@@ -45,12 +49,22 @@ layui.use(['laydate', 'form', 'table', 'layer', 'element'], function () {
                 ztid: $("#ztid").val(),
                 code: $("#code").val(),
                 storeid: $("#storeid").val(),
+                startTime: $("#startTime").val(),
+                endTime: $("#endTime").val(),
                 useddepartid:$("#usedDepartId").val(),
                 materialname:$("#materialname").val(),
                 materialcode:$("#materialcode").val()
             }
         });
     };
+    laydate.render({
+        elem: '#startTime'
+        , type: 'date'
+    });
+    laydate.render({
+        elem: '#endTime'
+        , type: 'date'
+    });
     //监听工具条
     table.on('tool(querygrid)', function (obj) {
         var data = obj.data;

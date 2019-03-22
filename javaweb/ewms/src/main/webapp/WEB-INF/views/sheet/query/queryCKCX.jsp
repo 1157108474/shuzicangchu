@@ -59,6 +59,22 @@
                             </td>
                         </tr>
                         <tr>
+                         <td >
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">出库时间：</label>
+                                    <div class="layui-input-block form-label">
+                                        <div style="float: left;width: 80px">
+                                            <input type="text"  class="layui-input startTime" id="startTime" name="startTime"
+                                                   placeholder="yyyy-MM-dd">
+                                        </div>
+                                        <div style="width: 20px;float: left;text-align: center;">至</div>
+                                        <div style="float: left;width: 80px">
+                                            <input type="text"  class="layui-input endTime" id="endTime" name="endTime"
+                                                   placeholder="yyyy-MM-dd">
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
                             <td>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">库房：</label>
