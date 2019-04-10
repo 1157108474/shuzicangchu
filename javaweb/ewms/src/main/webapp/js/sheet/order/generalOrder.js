@@ -23,7 +23,7 @@ layui.use(['laydate', 'form', 'table', 'layer', 'element'], function () {
             , {field: 'issuecode', align: 'center', title: '发放号', width: 100}
         ]]
         , page: true   //开启分页
-        , limit: 10   //默认十条数据一页
+        , limit: 30   //默认十条数据一页
         , limits: [10, 20, 30]  //数据分页条
         , id: 'orderListReload'
     });

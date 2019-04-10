@@ -237,7 +237,7 @@
             </div>
         </div>
     </div>
-    <script type="text/html" id="bar">
+<!--  <script type="text/html" id="bar">
         <a lay-event="showLog" style="color:#1E9FFF">²é¿´</a>
     </script>
 
@@ -247,7 +247,7 @@
         <a href="javascript:void(0)" onclick="deleteFile( '{{d.id}}','{{ d.filePath }}' )" style="color:#1E9FFF">É¾³ý</a>
         {{# } }}
     </script>
-
+-->    
 </div>
 </body>
 <script type="text/javascript" src="/js/jquery.js"></script>

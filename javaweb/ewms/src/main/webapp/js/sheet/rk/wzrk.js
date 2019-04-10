@@ -18,13 +18,13 @@ layui.config({
         , height: "full-160"
         , method: 'post'
         , page: true   //开启分页
-        , limit: 10   //默认十五条数据一页
+        , limit: 30   //默认十五条数据一页
         , limits: [10, 20, 30]  //数据分页条
         , where: {ran: ran++, sheetId: $("#id").val()}
         , id: "detailsgridTable"
         , cols: [
             [{type: "checkbox", fixed: "left", width: 50}
-                , {title: '操作', align: "center", fixed: "left", toolbar: '#bar', width: 120}
+                /*, {title: '操作', align: "center", fixed: "left", toolbar: '#bar', width: 120}*/
                 , {field: 'materialCode', title: '物料编码', align: "center", width: 140}
                 , {field: 'description', title: '物料描述', align: "center", width: 140}
                 , {field: 'detailUnitName', title: '单位', align: "center", width: 100}

@@ -9,12 +9,11 @@
 </head>
 <body>
 <div id="formbody" class="formbody">
-
     <div id="km_toolbar" class="mini-toolbar" style="height:20px;">
         <div style="float:left">
             <div style="float:left"></div>
             <div style="float:left;margin-left:15px;">
-                <button id="saveSheet" class="btnfbs"  style="display:none"> 保存</button>
+                <button id="saveSheet" class="btnfbs" style="display:none"> 保存</button>
                 <button id="submit" class="btnfbs" style="display:none"> 提交</button>
                 <button id="review" class="btnfbs" style="display:none"> 审核</button>
                 <button id="reject" class="btnfbs"  style="display:none"> 驳回</button>
@@ -28,7 +27,7 @@
             <span style="padding-left:10px;">
                 单据编号：<label id="code">${sheet.code}</label>
                 制单部门：<label>${sheet.ztidName}</label>
-                制单人：<label>${sheet.personName}</label>
+                制单人：    <label>${sheet.personName}</label>
                 制单时间：<label >${sheet.createDateStr}</label>
             </span>
             <input id="id" value="${sheet.id}"  type="hidden"/>

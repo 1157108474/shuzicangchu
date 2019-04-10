@@ -17,7 +17,7 @@ layui.use(['laydate', 'form', 'table', 'layer', 'element'], function () {
         , height :"full-60"  //自适应高度
         , method: 'post'
         , page: true   //开启分页
-        , limit: 20   //默认十条数据一页
+        , limit: 30   //默认十条数据一页
         , limits: [10, 20, 30]  //数据分页条
         , id: 'manageRoleTable'
         , cols: [[
@@ -60,7 +60,7 @@ layui.use(['laydate', 'form', 'table', 'layer', 'element'], function () {
         , height :"full-136"  //自适应高度
         , method: 'post'
         , page: true   //开启分页
-        , limit: 10   //默认十条数据一页
+        , limit: 30   //默认十条数据一页
         , limits: [10, 20, 30, 50]  //数据分页条
         , id: 'manageUserTable'
         , cols: [[

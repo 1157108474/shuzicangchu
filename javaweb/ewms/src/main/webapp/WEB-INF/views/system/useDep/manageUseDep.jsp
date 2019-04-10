@@ -7,22 +7,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-
     <title>使用单位管理</title>
     <link rel="stylesheet" href="/plugins/layui/css/layui.css" media="all"/>
     <style type="text/css">
         .form-label {
             width: 150px !important;
         }
-
         .form-div-input {
             margin-left: 180px !important;
         }
     </style>
 </head>
 <body>
-
 <div class="admin-main">
     <blockquote class="layui-elem-quote" style="margin-left: 10px;margin-top: 10px;height: 28px">
         <div style="float: left">
@@ -34,7 +30,7 @@
         <div style="float: right">
             使用单位名称:
             <input name="name" id="name" autocomplete="on"  class="mini-textbox"
-                   style="width:150px;display:inline; " type="text">
+                   style="width:150px;display:inline;" type="text">
             <button class="layui-btn" lay-submit lay-filter="formSubmit">立即查询</button>
         </div>
     </blockquote>

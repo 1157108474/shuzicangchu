@@ -93,7 +93,6 @@ public class ExcelExport {
         font.setFontName("黑体");
         font.setFontHeightInPoints((short) 16);//设置字体大小
         HSSFSheet sheet = workBook.createSheet();
-
         HSSFRow row = sheet.createRow(0);
         HSSFCellStyle style = workBook.createCellStyle();
         style.setFont(font);

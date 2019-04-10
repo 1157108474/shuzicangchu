@@ -1,11 +1,11 @@
-ï»¿
+
 layui.use(['laydate', 'form', 'layer', 'table'], function () {
 
     var form = layui.form,
         $ = layui.jquery,
         table = layui.table;
 
-    //æ•°æ®åˆ—è¡¨
+    //Êı¾İÁĞ±í
     var tableIns = table.render({
         elem: '#manageFromTem',
         url: 'formTemplateList.json',
@@ -13,32 +13,32 @@ layui.use(['laydate', 'form', 'layer', 'table'], function () {
         page: true,
         height: "full-125",
         limits: [10, 20, 30, 40],
-        limit: 20,
+        limit: 30,
         id: "manageFromTemTable",
         method: 'post',
         cols: [[
             {type: "checkbox", fixed: "left", width: 50},
-            {title: 'åºå·', templet: '#indexTpl', align: "center", width: 60},
-            {field: 'formTemCard', title: 'å•æ®ç¼–ç ', align: 'center', width: 180},
-            {field: 'formTemName', title: 'å•æ®åç§°', align: 'center', width: 220},
-            {field: 'formTemPre', title: 'å•æ®å‰ç¼€', align: 'center', width: 180},
+            {title: 'ĞòºÅ', templet: '#indexTpl', align: "center", width: 60},
+            {field: 'formTemCard', title: 'µ¥¾İ±àÂë', align: 'center', width: 180},
+            {field: 'formTemName', title: 'µ¥¾İÃû³Æ', align: 'center', width: 220},
+            {field: 'formTemPre', title: 'µ¥¾İÇ°×º', align: 'center', width: 180},
             {
-                field: 'formTemSta', title: 'çŠ¶æ€', align: 'center', width: 100, templet: function (d) {
+                field: 'formTemSta', title: '×´Ì¬', align: 'center', width: 100, templet: function (d) {
                 if (d.formTemSta == 1) {
-                    return "ç¦ç”¨"
+                    return "½ûÓÃ"
                 } else {
-                    return "å¯ç”¨"
+                    return "ÆôÓÃ"
                 }
             }},
-            {field: 'formTemCom', title: 'è¯´æ˜', align: 'center', width: 120}
+            {field: 'formTemCom', title: 'ËµÃ÷', align: 'center', width: 120}
         ]],
         page: true
     });
 
 
-    //æ·»åŠ 
+    //Ìí¼Ó
     function addNews(tem_dic) {
-        var tit = 'æ·»åŠ å•æ®',
+        var tit = 'Ìí¼Óµ¥¾İ',
             url = 'addFormTemplate.htm?tem_dic='+tem_dic;
         layui.layer.open({
             type: 2,
@@ -48,11 +48,11 @@ layui.use(['laydate', 'form', 'layer', 'table'], function () {
             content: url
         });
     }
-    //æ·»åŠ 
+    //Ìí¼Ó
     $("#add").on("click", function () {
         var tem_dic = $("#tem_dicid").val();
         if(tem_dic==null||tem_dic==undefined||tem_dic==""){
-            layer.msg('è¯·å…ˆé€‰æ‹©å…·ä½“çš„å•æ®ã€‚', {
+            layer.msg('ÇëÏÈÑ¡Ôñ¾ßÌåµÄµ¥¾İ¡£', {
                 anim: 6
             });
         }else{
@@ -60,12 +60,12 @@ layui.use(['laydate', 'form', 'layer', 'table'], function () {
         }
     });
 
-    //ç¼–è¾‘
+    //±à¼­
     $("#edit").on("click", function () {
         var checkStatus = table.checkStatus('manageFromTemTable'),
             data = checkStatus.data;
         if (data.length == 1) {
-            tit = 'ä¿®æ”¹å•æ®';
+            tit = 'ĞŞ¸Äµ¥¾İ';
             url = 'editFormTemplate.htm?id='+data[0].id;
             layui.layer.open({
                 type: 2,
@@ -75,42 +75,42 @@ layui.use(['laydate', 'form', 'layer', 'table'], function () {
                 content: url
             });
         } else {
-            layer.msg('è¯·é€‰æ‹©ä¸€æ¡æ•°æ®ã€‚', {
+            layer.msg('ÇëÑ¡ÔñÒ»ÌõÊı¾İ¡£', {
                 anim: 6
             });
         }
     });
-    //æŸ¥çœ‹
+    //²é¿´
     $("#showRole").on("click", function (e) {
         var checkStatus = table.checkStatus('manageFromTemTable');
         data = checkStatus.data;
         if (data.length == 1) {
             layer.open({
                 type: 2,
-                title: 'æŸ¥çœ‹ä¿¡æ¯',
+                title: '²é¿´ĞÅÏ¢',
                 area: ['450px', '450px'],
                 fixed: false,
                 content: '/system/role/showRole.htm?r.id=' + data[0].id
             });
         } else {
-            layer.msg('è¯·é€‰æ‹©ä¸€æ¡æ•°æ®ã€‚', {
+            layer.msg('ÇëÑ¡ÔñÒ»ÌõÊı¾İ¡£', {
                 offset: 't',
                 anim: 6
             });
         }
     });
     window.clickDic = function(){
-        //å¯ä»¥è¢«å¤–éƒ¨å¼•ç”¨
+        //¿ÉÒÔ±»Íâ²¿ÒıÓÃ
         table.reload('manageFromTemTable', {
             page: {
-                curr: 1 //é‡æ–°ä»ç¬¬ 1 é¡µå¼€å§‹
+                curr: 1 //ÖØĞÂ´ÓµÚ 1 Ò³¿ªÊ¼
             },
             where: {
                 id: $("#tem_dicid").val()
             }
         });
     }
-    //æ‰¹é‡åˆ é™¤
+    //ÅúÁ¿É¾³ı
     $("#delete").click(function () {
         var checkStatus = table.checkStatus('manageFromTemTable');
         var  data = checkStatus.data;
@@ -119,7 +119,7 @@ layui.use(['laydate', 'form', 'layer', 'table'], function () {
             for (var i in data) {
                 ids.push(data[i].id);
             }
-            layer.confirm('ç¡®å®šåˆ é™¤é€‰ä¸­çš„å•æ®ï¼Ÿ', {icon: 3, title: 'æç¤ºä¿¡æ¯'}, function (index) {
+            layer.confirm('È·¶¨É¾³ıÑ¡ÖĞµÄµ¥¾İ£¿', {icon: 3, title: 'ÌáÊ¾ĞÅÏ¢'}, function (index) {
                 $.post("delFromTem.json?ids=" + ids , function (data) {
                     tableIns.reload();
                     layer.msg(data);
@@ -127,7 +127,7 @@ layui.use(['laydate', 'form', 'layer', 'table'], function () {
                 })
             })
         } else {
-            layer.msg('è¯·é€‰æ‹©ä¸€æ¡æ•°æ®ã€‚', {
+            layer.msg('ÇëÑ¡ÔñÒ»ÌõÊı¾İ¡£', {
                 offset: 't',
                 anim: 6
             });

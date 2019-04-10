@@ -1,4 +1,4 @@
-ï»¿layui.use(['form', 'table', 'layer'], function () {
+layui.use(['form', 'table', 'layer'], function () {
     var layer = layui.layer;
     var form = layui.form;
     var table = layui.table;
@@ -17,7 +17,7 @@
             onClick: onClick
         }
     };
-    //æ‹¼è£…æ ‘å½¢ç»“æ„
+    //Æ´×°Ê÷ĞÎ½á¹¹
     $(document).ready(function () {
         $.ajax({
             type: "post",
@@ -25,44 +25,44 @@
             dataType: "json",
             success: function (ret) {
                 var treeObj=$.fn.zTree.init($("#treeDemo"), setting, ret);
-                //å±•å¼€tree
+                //Õ¹¿ªtree
                 treeObj.expandAll(true);
             },
             error: function (XMLHttpRequest) {
-                layer.alert("è¯·æ±‚å‡ºé”™ï¼š" + XMLHttpRequest.status + XMLHttpRequest.statusText);
+                layer.alert("ÇëÇó³ö´í£º" + XMLHttpRequest.status + XMLHttpRequest.statusText);
             }
         });
     });
 
-    //ç”¨æˆ·æ•°æ®åˆ—è¡¨
+    //ÓÃ»§Êı¾İÁĞ±í
     var tableIns =table.render({
-        elem: '#manageUser'  //ç»‘å®štable id
-        , url: '/system/user/listNoRoleUser.json'  //æ•°æ®è¯·æ±‚è·¯å¾„
+        elem: '#manageUser'  //°ó¶¨table id
+        , url: '/system/user/listNoRoleUser.json'  //Êı¾İÇëÇóÂ·¾¶
         , cellMinWidth: 80
-        , height: 'full-60'  //è‡ªé€‚åº”é«˜åº¦
+        , height: 'full-60'  //×ÔÊÊÓ¦¸ß¶È
         , method: 'post'
-        , page: true   //å¼€å¯åˆ†é¡µ
-        , limit: 15   //é»˜è®¤åæ¡æ•°æ®ä¸€é¡µ
-        , limits: [10, 20, 30, 50]  //æ•°æ®åˆ†é¡µæ¡
+        , page: true   //¿ªÆô·ÖÒ³
+        , limit: 30   //Ä¬ÈÏÊ®ÌõÊı¾İÒ»Ò³
+        , limits: [10, 20, 30, 50]  //Êı¾İ·ÖÒ³Ìõ
         , where: {
             roleCode: $("#roleCode").val()
         }
         , id: 'manageUserTable'
         , cols: [[
             {checkbox: true, fixed: 'left'}
-            , {field: 'code', align: 'center', title: 'å‘˜å·¥ç¼–å·', width: 100}
-            , {field: 'name', align: 'center', title: 'å§“å', width: 100}
-            , {field: 'parent', align: 'center', title: 'æ‰€å±éƒ¨é—¨', minWidth: 180,templet: function (d) {
+            , {field: 'code', align: 'center', title: 'Ô±¹¤±àºÅ', width: 100}
+            , {field: 'name', align: 'center', title: 'ĞÕÃû', width: 100}
+            , {field: 'parent', align: 'center', title: 'ËùÊô²¿ÃÅ', minWidth: 180,templet: function (d) {
                 if (null==d.parent ) {
                     return '';
                 } else {
                     return d.parent.name;
                 }
             }}
-            , {field: 'status', align: 'center', title: 'çŠ¶æ€', width: 80 ,templet: "#showStatus"}
+            , {field: 'status', align: 'center', title: '×´Ì¬', width: 80 ,templet: "#showStatus"}
         ]]
     });
-    //æœç´¢
+    //ËÑË÷
     $("#btnSearch").click(function () {
         var json = [];
         if ('name' == $("#select select").val()) {
@@ -74,23 +74,23 @@
         json['roleCode'] = $("#roleCode").val();
         table.reload("manageUserTable", {
             page: {
-                curr: 1 //é‡æ–°ä»ç¬¬ 1 é¡µå¼€å§‹
+                curr: 1 //ÖØĞÂ´ÓµÚ 1 Ò³¿ªÊ¼
             }
             , where: json
         })
     });
-    //tree-ç‚¹å‡»æŸ¥çœ‹æ–¹æ³•
+    //tree-µã»÷²é¿´·½·¨
     function onClick(event, treeId, treeNode, clickFlag) {
          table.reload("manageUserTable", {
              page: {
-                 curr: 1 //é‡æ–°ä»ç¬¬ 1 é¡µå¼€å§‹
+                 curr: 1 //ÖØĞÂ´ÓµÚ 1 Ò³¿ªÊ¼
              }
              , where:{
                  departId:treeNode.id
              }
          })
     }
-    //ä¿å­˜
+    //±£´æ
     $("#addNews").click(function () {
         var checkStatus = table.checkStatus('manageUserTable');
         var data = checkStatus.data;
@@ -101,7 +101,7 @@
             }
             var roleCode = $("#roleCode").val();
             var url ="/system/role/saveRoleUsers.json?roleCode="+roleCode+"&ids="+ids;
-            layer.confirm('ç¡®å®šæ·»åŠ é€‰ä¸­çš„ç”¨æˆ·ï¼Ÿ', {icon: 3, title: 'æç¤ºä¿¡æ¯'}, function (index) {
+            layer.confirm('È·¶¨Ìí¼ÓÑ¡ÖĞµÄÓÃ»§£¿', {icon: 3, title: 'ÌáÊ¾ĞÅÏ¢'}, function (index) {
                 $.post(url, function (data) {
                     layer.msg(data.message);
                     layer.close(index);
@@ -111,7 +111,7 @@
                 })
             })
         } else {
-            layer.msg('è¯·é€‰æ‹©ä¸€æ¡æ•°æ®ã€‚', {
+            layer.msg('ÇëÑ¡ÔñÒ»ÌõÊı¾İ¡£', {
                 offset: 't',
                 anim: 6
             });

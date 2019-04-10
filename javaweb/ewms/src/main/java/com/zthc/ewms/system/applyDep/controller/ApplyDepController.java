@@ -123,7 +123,7 @@ public class ApplyDepController {
         log.debug("进入获取申请单位方法,当前方法名:applyDepList");
         LayuiPage<ApplyDep> ret = null;
         try {
-            ret = this.service.listApplyDep(applyDep, condition);
+            ret = service.listApplyDep(applyDep, condition);
         } catch (Exception e) {
             log.error("获取申请单位列表失败");
             log.errorPrintStacktrace(e);

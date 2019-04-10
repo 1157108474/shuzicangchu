@@ -27,6 +27,7 @@ import com.zthc.ewms.base.util.FileUtils;
 import com.zthc.ewms.base.util.StringUtils;
 import com.zthc.ewms.sheet.dao.SheetCGDao;
 import com.zthc.ewms.sheet.dao.SheetDao;
+import com.zthc.ewms.sheet.entity.apply.ManageApplyAndDetail;
 import com.zthc.ewms.sheet.entity.guard.SheetDetail;
 import com.zthc.ewms.sheet.entity.guard.SheetDetailCondition;
 import com.zthc.ewms.sheet.entity.guard.SheetExcel;
@@ -186,7 +187,10 @@ public class SheetDetailService extends SheetDetailServiceGuard {
     public <T> List<T> printDetails(Integer id, String where, String className) {
         return this.dao.printDetails(id, where, className);
     }
-
+    @Transactional
+    public List<ManageApplyAndDetail> printSheetDetails() {
+		return this.dao.printSheetDetails();
+	}
     @Transactional
     public List<OrderDetails> printOrderDetail(String orderNum) {
         return this.dao.printOrderDetails(orderNum);
@@ -590,4 +594,6 @@ public class SheetDetailService extends SheetDetailServiceGuard {
    			sheetCGDao.editSheetDetails(sheetDetail);
    		}
    	}
+
+	
 }

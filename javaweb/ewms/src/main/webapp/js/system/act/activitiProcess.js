@@ -12,7 +12,7 @@ layui.use(['laydate', 'form', 'layer', 'table', 'laytpl', 'element'], function (
         //cellMinWidth: 95,
         height: "full-58",
         limits: [10, 20, 30, 40],
-        limit: 20,
+        limit: 30,
         id: "activitiProcessingTable",
         method: 'post',
         cols: [[

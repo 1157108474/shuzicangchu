@@ -17,7 +17,7 @@ layui.config({
         , height: "full-70"
         , method: 'post'
         , page: true   //开启分页
-        , limit: 10   //默认十五条数据一页
+        , limit: 30   //默认十五条数据一页
         , limits: [10, 20, 30]  //数据分页条
         , id: "detailsgridTable"
         , where: {//初始条件
@@ -26,14 +26,14 @@ layui.config({
         }
         , cols: [
             [{type: "checkbox", fixed: "left", width: 50}
-                , {field: 'action', title: '编辑', align: "center", width: 100, toolbar: '#bar'}
+                /*, {field: 'action', title: '编辑', align: "center", width: 100, toolbar: '#bar'}*/
                 , {field: 'materialCode', title: '物料编码', align: "center", width: 150}
+                , {field: 'description', title: '物料描述', align: "center", width: 320}
                 , {field: 'detailCount', title: '申领数量', align: "center", width: 100}
                 , {field: 'ckCount', title: '已出库数量', align: "center", width: 100}
                 , {field: 'detailUnitName', title: '单位', align: "center", width: 80}
                 , {field: 'extendString2', title: '用途', align: "center", width: 160}
                 , {field: 'snCode', title: '计划编号', align: "center", width: 150}
-                , {field: 'description', title: '物料描述', align: "center", width: 320}
             ]
         ]
     });

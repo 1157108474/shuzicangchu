@@ -10,6 +10,7 @@ import com.zthc.ewms.system.useDep.entity.UseDepCondition;
 import drk.util.TextUtil;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -54,30 +55,24 @@ public class UseDepDao {
      * @param condition
      * @return
      */
+    @Transactional
     public LayuiPage<UseDep> listUseDep(UseDep useDep, UseDepCondition condition){
-
         LayuiPage<UseDep> ret = new LayuiPage<>();
         String hql_left = " select new UseDep(u.id,u.code,u.name,o.name,u.organizationType,u.ztId,o.name,o.code,u.status,u.memo)";
         String hql = "from UseDep u,Organization o ";
         hql += " where 1 = 1 and (u.deleted is null or u.deleted !=2) ";
         Map<String,Object> param = new HashMap<>();
-
         if(!StringUtils.isEmpty(useDep.getName())){
             hql += " and u.name like :name ";
             param.put("name","%%" + useDep.getName().trim() + "%%");
         }
-
         //hql += "and (u.ztId = o.id or u.organizationId = o.id) order by u.id DESC";
         hql += "and u.organizationId = o.id order by u.id DESC";
-
         String totalsql = " select count(u.id) "+hql;
-
         List<UseDep> useDepList = baseDao.findByHql(hql_left+hql,param,condition.getPageNum(),condition.getPageTotal());
         Long total = baseDao.countByHql(totalsql,param);
-
         ret.setData(useDepList);
         ret.setCount(total);
-
         return ret;
     }
 
@@ -326,7 +321,12 @@ public class UseDepDao {
             }
             return res;
         }
-
+     /**
+      * 根据ztId返回申请单位列表
+      *
+      * @param ztId
+      * @return
+      */
     public List<OfficesScope> listOfficesScopes (Integer scopeId,Integer ztId) {
         String hql = " from OfficesScope a inner join UseDep b on a.officesId = b.id where a.scopeType = 3 and  a.scopeId = :scopeId " +
                 "and  b.ztId = :ztId and b.organizationType = 2";

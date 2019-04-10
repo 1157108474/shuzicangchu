@@ -1,4 +1,4 @@
-ï»¿layui.use(['laydate', 'form', 'layer', 'table', 'laytpl', 'element'], function () {
+layui.use(['laydate', 'form', 'layer', 'table', 'laytpl', 'element'], function () {
     var laydate = layui.laydate;
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
@@ -7,7 +7,7 @@
         table = layui.table,
         element = layui.element;
 
-    //æ•°æ®åˆ—è¡¨
+    //Êı¾İÁĞ±í
     var tableIns = table.render({
         elem: '#activitiListen',
         url: 'findProcessingByperson.json?isAdmin=admin',
@@ -15,30 +15,30 @@
         page: true,
         height: "full-125",
         limits: [10, 20, 30, 40],
-        limit: 20,
+        limit: 30,
         id: "activitiListenTable",
         method: 'post',
         cols: [[
             {type: "checkbox", fixed: "left", width: 50},
             {
-                field: 'code', title: 'å•æ®ç¼–å·', align: "center", event: "getId", templet: function (d) {
+                field: 'code', title: 'µ¥¾İ±àºÅ', align: "center", event: "getId", templet: function (d) {
                 return "<a class='layui-table-link' href='javascript:;'>" + d.code + "</a>";
             }
             },
             /*
-                        {field: 'code', title: 'å•æ®ç¼–å·', align: "center",minWidth:120,event:"getId"},
+                        {field: 'code', title: 'µ¥¾İ±àºÅ', align: "center",minWidth:120,event:"getId"},
             */
-            {field: 'sheetName', title: 'å•æ®åç§°', align: "center", minWidth: 120},
-            {field: 'submitMan', title: 'ç”³è¯·äºº', align: "center", minWidth: 120},
-            {field: 'name', title: 'å®¡æ ¸ç¯èŠ‚', align: "center", minWidth: 120},
-            {field: 'assignee', title: 'å¤„ç†äºº', align: "center", minWidth: 120},
-            {field: 'createTime', title: 'æäº¤æ—¶é—´', align: "center", minWidth: 120},
-            {field: 'status', title: 'å•æ®çŠ¶æ€', align: "center", minWidth: 120},
-            /*{field: 'id', title: 'ä»»åŠ¡id', align: "center",minWidth:120},*/
+            {field: 'sheetName', title: 'µ¥¾İÃû³Æ', align: "center", minWidth: 120},
+            {field: 'submitMan', title: 'ÉêÇëÈË', align: "center", minWidth: 120},
+            {field: 'name', title: 'ÉóºË»·½Ú', align: "center", minWidth: 120},
+            {field: 'assignee', title: '´¦ÀíÈË', align: "center", minWidth: 120},
+            {field: 'createTime', title: 'Ìá½»Ê±¼ä', align: "center", minWidth: 120},
+            {field: 'status', title: 'µ¥¾İ×´Ì¬', align: "center", minWidth: 120},
+            /*{field: 'id', title: 'ÈÎÎñid', align: "center",minWidth:120},*/
         ]],
         page: true
     });
-//ç»‘å®šæ—¥æœŸæ§ä»¶
+//°ó¶¨ÈÕÆÚ¿Ø¼ş
     laydate.render({
         elem: '#startTime'
         , theme: 'molv'
@@ -47,24 +47,24 @@
         elem: '#endTime'
         , theme: 'molv'
     });
-    //æœç´¢
+    //ËÑË÷
     form.on("submit(formSubmit)", function (data) {
         table.reload('activitiListenTable', {
             page: {
-                curr: 1 //é‡æ–°ä»ç¬¬ 1 é¡µå¼€å§‹
+                curr: 1 //ÖØĞÂ´ÓµÚ 1 Ò³¿ªÊ¼
             },
             where: {
                 temCode: $("#temCode").val(),
                 temName: $("#temName").val(),
                 startTime: $("#startTime").val(),
                 endTime: $("#endTime").val(),
-                status: $("#status select").val()//å•æ®çŠ¶æ€
+                status: $("#status select").val()//µ¥¾İ×´Ì¬
 
             }
         });
         return false;
     });
-    //é‡ç½®
+    //ÖØÖÃ
     $('#reset').on('click', function () {
         $("#temCode").val("");
         $(".temName").val("");
@@ -72,33 +72,33 @@
         $(".endTime").val("");
     });
 
-    //å®¡æ ¸
+    //ÉóºË
     $("#audit").on("click", function () {
         var checkStatus = table.checkStatus('activitiListenTable'),
             data = checkStatus.data;
         if (data.length == 1) {
             /*$.post("/system/activitiListener/isTaskTrue.json",{'taskId':data[0].id},
                 function(obj) {
-                    if(obj){//æ˜¯ï¼ˆæç¤ºç‚¹å‡»ç›´æ¥åŠç»“ï¼‰
-                        layer.alert("è¯¥ç¯èŠ‚ä¸ºæœ€åä»»åŠ¡ç¯èŠ‚ï¼Œè¯·ç›´æ¥åŠç»“ã€‚");
-                    }else{//ä¸æ˜¯æœ€åç¯èŠ‚*/
+                    if(obj){//ÊÇ£¨ÌáÊ¾µã»÷Ö±½Ó°ì½á£©
+                        layer.alert("¸Ã»·½ÚÎª×îºóÈÎÎñ»·½Ú£¬ÇëÖ±½Ó°ì½á¡£");
+                    }else{//²»ÊÇ×îºó»·½Ú*/
             thisPart(data[0].id);
             /*}
         },"JSON");*/
         } else {
-            layer.msg('è¯·é€‰æ‹©ä¸€æ¡æ•°æ®ã€‚', {
+            layer.msg('ÇëÑ¡ÔñÒ»ÌõÊı¾İ¡£', {
                 anim: 6
             });
         }
     });
-    //å¦æ´¾
+    //ÁíÅÉ
     $("#another").on("click", function () {
         var checkStatus = table.checkStatus('activitiListenTable'),
             data = checkStatus.data;
         if (data.length == 1) {
             layer.open({
                 type: 2,
-                title: 'å¦æ´¾äººå‘˜é€‰æ‹©',
+                title: 'ÁíÅÉÈËÔ±Ñ¡Ôñ',
                 fixed: false,
                 area: ['60%', '80%'],
                 content: "system/activitiListener/thisPartAssent.htm?taskId=" + data[0].id,
@@ -107,12 +107,12 @@
                 }
             });
         } else {
-            layer.msg('è¯·é€‰æ‹©ä¸€æ¡æ•°æ®ã€‚', {
+            layer.msg('ÇëÑ¡ÔñÒ»ÌõÊı¾İ¡£', {
                 anim: 6
             });
         }
     });
-    //å¯¼å‡º
+    //µ¼³ö
     $("#export").on("click", function () {
         alert("=====");
         var temCode = $("#temCode").val();
@@ -129,7 +129,7 @@
             },
             function (data) {
                 if (data) {
-                    layer.msg('å¯¼å‡ºæ–‡ä»¶D:/æµç¨‹ç›‘æ§.xlsæˆåŠŸï¼');
+                    layer.msg('µ¼³öÎÄ¼şD:/Á÷³Ì¼à¿Ø.xls³É¹¦£¡');
                 }
             }, "JSON");
     });
@@ -137,10 +137,10 @@
     function thisPart(taskId) {
         layer.open({
             type: 2,
-            title: 'ç¯èŠ‚äººå‘˜é€‰æ‹©',
+            title: '»·½ÚÈËÔ±Ñ¡Ôñ',
             fixed: false,
             area: ['60%', '90%'],
-            content: "system/activitiListener/findNextPart.htm?taskId=" + taskId + "&&comment=ç®¡ç†å‘˜å®¡æ ¸&&isAdmin=true",
+            content: "system/activitiListener/findNextPart.htm?taskId=" + taskId + "&&comment=¹ÜÀíÔ±ÉóºË&&isAdmin=true",
             end: function () {
                 tableIns.reload();
             }
@@ -148,20 +148,20 @@
     }
 
     layui.table.on('tool(activitiListen)', function (obj) {
-        // ä»£ç å—
+        // ´úÂë¿é
         var data = obj.data;
         $.post("/system/activitiButton/isCompletedTask.htm", {'taskId': data.id},
             function (obj) {
-                if (obj) {//å·²å®Œæˆçš„ä»»åŠ¡
+                if (obj) {//ÒÑÍê³ÉµÄÈÎÎñ
                     parent.tab.tabAdd({
-                        href: "/system/activitiButton/getOnePro.htm?taskId=" + data.id, //åœ°å€
-                        title: "å®¡æ‰¹é¡µé¢" + data.id,
+                        href: "/system/activitiButton/getOnePro.htm?taskId=" + data.id, //µØÖ·
+                        title: "ÉóÅúÒ³Ãæ" + data.id,
                         id: data.id
                     });
                 } else {
                     parent.tab.tabAdd({
-                        href: data.url + "?taskId=" + data.id, //åœ°å€
-                        title: "å®¡æ‰¹é¡µé¢" + data.id,
+                        href: data.url + "?taskId=" + data.id, //µØÖ·
+                        title: "ÉóÅúÒ³Ãæ" + data.id,
                         id: data.id
                     });
                 }

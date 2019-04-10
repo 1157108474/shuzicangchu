@@ -184,14 +184,14 @@
 <script type="text/javascript" src="/js/sheet/apply/apply.js"></script>
 <script type="text/javascript" src="/js/system/act/processDetail.js"></script>
 
-<script type="text/html" id="bar">
+<!-- <script type="text/html" id="bar">
     <c:forEach items="${buttons}" var="curbtn" varStatus="b">
 
         <c:if test="${curbtn.code=='editDetails'}">
             <a  class="layui-btn layui-btn-xs"  lay-event="editDetails" id="editDetails">±à¼­</a>
         </c:if>
     </c:forEach>
-</script>
+</script> -->
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" >
     $(function () {

@@ -597,6 +597,56 @@ public class SheetQueryController {
         return vKcsubdetailEntityService.getDetailunitname(obj, condition);
     }
 
+    
+    
+    /**
+     * 申领单明细导出Excel
+     * @return 
+     */
+    @RequestMapping(value = "/exportApplyExcel.htm")
+    public String exportApplyExcel() throws ParseException, IOException {
+        
+        return "sheet/query/applyExcel";
+    }
+    /**
+     * 申领单明细导出Excel
+     * @return 
+     */
+    @RequestMapping(value = "/applyExcel.json")
+    public void applyExcel(@ModelAttribute("VRkcxEntity") VRkcxEntity obj, VRkcxEntityCondition condition,
+                              HttpServletRequest request, HttpServletResponse response, Model model) throws ParseException, IOException {
+        HttpSession session = request.getSession();
+        Object requestUserId = session.getAttribute("userId");
+        Integer userId = (null == requestUserId ? 0 : Integer.valueOf(requestUserId.toString()));
+        List<VRkcxEntity> list = vRkcxEntityService.RKExcelList(userId, obj, condition);
+        String[] gridTitles = {"单据编号", "物料编码", "物料名称", "物料规格", "物料型号", "含税单价", "入库数量", "库房", "库位", "物料说明", "入库时间"};
+        String[] coloumsKey = {"code", "materialcode", "materialname", "materialspecification",
+                "materialmodel", "taxprice", "subdetailcount", "housename", "storelocationname", "description", "submittime"};
+        String userName = "物资入库表";
+        HSSFWorkbook workBook = new ExcelExport().getExcelContent(userName,list, gridTitles, coloumsKey);
+
+        //输出Excel文件
+        OutputStream output = response.getOutputStream();
+        response.reset();
+
+        String userAgent = request.getHeader("User-Agent");
+        // 针对IE或者以IE为内核的浏览器：
+        if (userAgent.contains("MSIE") || userAgent.contains("Trident")) {
+            userName = java.net.URLEncoder.encode(userName, "UTF-8");
+        } else {
+            // 非IE浏览器的处理：
+            userName = new String(userName.getBytes("UTF-8"), "ISO-8859-1");
+        }
+        //添加导出时间
+        String dt = DateUtils.dateTimeNow();
+        userName += dt;
+        // 设置response的Header
+        response.setHeader("Content-disposition", String.format("attachment; filename=\"%s\"", userName + ".xls"));
+        response.setContentType("application/vnd.ms-excel;charset=utf-8");
+        response.setCharacterEncoding("UTF-8");
+        workBook.write(output);
+        output.close();
+    }
 
 
     /**

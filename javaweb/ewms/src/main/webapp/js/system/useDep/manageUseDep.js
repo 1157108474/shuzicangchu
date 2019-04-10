@@ -24,9 +24,9 @@ layui.use(['laydate', 'form', 'table', 'layer', 'element'], function () {
             , {
                 field: 'organizationType', align: 'center', title: '组织类型', width: 70, templet: function (d) {
                     if (d.organizationType == 1) {
-                        return "区队"
+                        return "区队";
                     } else {
-                        return "科室"
+                        return "科室";
                     }
                 }
             }
@@ -42,13 +42,17 @@ layui.use(['laydate', 'form', 'table', 'layer', 'element'], function () {
                 }
             }
             , {field: 'memo', align: 'center', title: '备注'}
-
         ]]
         , page: true   //开启分页
-        , limit: 20   //默认二十条数据一页
+        , limit: 30   //默认二十条数据一页
         , limits: [10, 20, 30, 40]  //数据分页条
         , id: 'useDepListReload'
     });
+
+    var resetSezrch = function () {
+        $("#name").val('');
+    };
+    
     var reload = function (data) {
 
         table.reload('useDepListReload', {
@@ -58,10 +62,6 @@ layui.use(['laydate', 'form', 'table', 'layer', 'element'], function () {
             where: {name:$("#name").val()}
 
         })
-    };
-
-    var resetSezrch = function () {
-        $("#name").val('');
     };
 
     //编辑

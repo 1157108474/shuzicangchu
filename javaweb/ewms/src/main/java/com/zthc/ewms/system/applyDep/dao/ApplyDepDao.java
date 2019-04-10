@@ -56,27 +56,37 @@ public class ApplyDepDao {
      * @return
      */
     public LayuiPage<ApplyDep> listApplyDep(ApplyDep applyDep, ApplyDepCondition condition) {
-        LayuiPage<ApplyDep> ret = new LayuiPage<>();
+//        LayuiPage<ApplyDep> ret = new LayuiPage<>();
+//        String hql_left = " select new ApplyDep(a.id,a.code,a.name,a.subjectsGroup,a.subjectsGroupDescription,a.ztId,o.code,o.name,a.status,a.demo) ";
+//     String hql = "from ApplyDep a,Organization o ";
+//     hql += " where 1 = 1 and a.deleted != 2 ";
+//       Map<String, Object> param = new HashMap<>();
+//        if (!StringUtils.isEmpty(applyDep.getName())) {
+//           hql += " and a.name like :name ";
+//          param.put("name", "%%" + applyDep.getName().trim() + "%%");
+//        }
+//       hql += "and a.ztId = o.ztId or a.ztId = o.id order by a.id DESC ";
+//       String totalsql = " select count(a.id) " + hql;
+//      List<ApplyDep> applyDepList = baseDao.findByHql(hql_left + hql, param, condition.getPageNum(), condition.getPageTotal());
+//      Long total = baseDao.countByHql(totalsql, param);
+//     ret.setData(applyDepList);
+//     ret.setCount(total);
+//    return ret;
+    	LayuiPage<ApplyDep> ret = new LayuiPage<>();
         String hql_left = " select new ApplyDep(a.id,a.code,a.name,a.subjectsGroup,a.subjectsGroupDescription,a.ztId,o.code,o.name,a.status,a.demo) ";
         String hql = "from ApplyDep a,Organization o ";
-        hql += " where 1 = 1 and a.deleted != 2 ";
+        hql += " where 1 = 1 and a.ztId = o.ztId or a.ztId = o.id and a.deleted != 2 ";
         Map<String, Object> param = new HashMap<>();
-
         if (!StringUtils.isEmpty(applyDep.getName())) {
             hql += " and a.name like :name ";
-            param.put("name", "%%" + applyDep.getName().trim() + "%%");
+            param.put("name", "%" + applyDep.getName().trim() + "%");
         }
-
-        hql += "and a.ztId = o.ztId or a.ztId = o.id order by a.id DESC ";
-
+        hql += " order by a.id DESC ";
         String totalsql = " select count(a.id) " + hql;
-
         List<ApplyDep> applyDepList = baseDao.findByHql(hql_left + hql, param, condition.getPageNum(), condition.getPageTotal());
         Long total = baseDao.countByHql(totalsql, param);
-
         ret.setData(applyDepList);
         ret.setCount(total);
-
         return ret;
     }
 
@@ -126,9 +136,13 @@ public class ApplyDepDao {
      */
     public List<ApplyDep> listApplyDepZt(Integer ztId) {
 //        String hql = " from ApplyDep where 1 = 1 and ztId = :ztid and status = 1 and deleted != 2 order by id DESC";
+      //String hql = " from ApplyDep where 1 = 1  and status = 1 and deleted != 2 order by id DESC";
+        //Query query = baseDao.createQuery(hql);
+        //query.setParameter("ztId", ztId);
+        //return query.list();
         String hql = " from ApplyDep where 1 = 1  and status = 1 and deleted != 2 order by id DESC";
         Query query = baseDao.createQuery(hql);
-//        query.setParameter("ztid", ztId);
+//        query.setParameter("ztId", ztId);
         return query.list();
     }
 

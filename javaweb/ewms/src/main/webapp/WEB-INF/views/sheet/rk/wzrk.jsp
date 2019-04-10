@@ -227,12 +227,12 @@
             </div>
         </div>
     </div>
-    <script type="text/html" id="bar">
+ <!--   <script type="text/html" id="bar">
         {{# if($("#sheetStatus").val() == 39 && (d.creator == $("#loginUserId").val() || d.creator == $("#taskUserId").val())){ }}
         <a lay-event="edit" style="color:#1E9FFF">±à¼­</a>
         {{# } }}
     </script>
-
+ -->  
 </div>
 </body>
 <script type="text/javascript" src="/js/jquery.js"></script>

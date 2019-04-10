@@ -12,7 +12,7 @@ layui.use(['form', 'layer', 'table', 'laytpl', 'element'], function () {
         ,height: "full-60"
         ,method: 'post'
         ,page: true   //开启分页
-        ,limit:15   //默认十五条数据一页
+        ,limit:30   //默认十五条数据一页
         ,limits:[15,30,45]  //数据分页条
         ,id: "manageButtonTable"
         ,where:{menuCode:$("#menuCode").val()}//初始条件

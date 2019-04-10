@@ -38,7 +38,7 @@
 
   <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
     <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-    <property name="url" value="jdbc:oracle:thin:@140.143.60.230:1521:orcl"/><!--60.174.234.117-->
+    <property name="url" value="jdbc:oracle:thin:@140.143.60.230:1521:orcl"/><!-- 60.174.234.117 -->
       <property name="username" value="ewms"/>
       <property name="password" value="ewms"/>
     <property name="initialSize" value="${initialSize}"/>
@@ -46,6 +46,16 @@
     <property name="maxIdle" value="${maxIdle}"/>
     <property name="minIdle" value="${minIdle}"/>
   </bean>
+  <!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+    <property name="url" value="jdbc:oracle:thin:@10.6.100.1:1521:orcl"/>60.174.234.117
+      <property name="username" value="ewms"/>
+      <property name="password" value="Yxszck1234"/>
+    <property name="initialSize" value="${initialSize}"/>
+    <property name="maxActive" value="${maxActive}"/>
+    <property name="maxIdle" value="${maxIdle}"/>
+    <property name="minIdle" value="${minIdle}"/>
+  </bean> -->
 
   <!-- 配置SessionFactory -->
   <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">

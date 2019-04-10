@@ -22,7 +22,7 @@ layui.config({
         , height: "full-98"
         , method: "post"
         , page: true   //开启分页
-        , limit: 10   //默认十五条数据一页
+        , limit: 30   //默认十五条数据一页
         , limits: [10, 20, 30]  //数据分页条
         , id: "detailGridReload"
         , cols: [

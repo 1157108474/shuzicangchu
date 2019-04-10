@@ -50,7 +50,7 @@ layui.config({
         , method: 'POST'
         , height: "full-260"
         , page: true   //开启分页
-        , limit: 20   //默认十五条数据一页
+        , limit: 30   //默认十五条数据一页
         , limits: [10, 20, 30]  //数据分页条
         , id: 'subdetailsgridReload'
 

@@ -6,7 +6,6 @@
     <title>新增物资申领单</title>
     <link rel="stylesheet" href="/plugins/layui/css/layui.css" media="all"/>
     <link rel="stylesheet" href="/css/public.css" media="all"/>
-
 </head>
 <body>
 <div id="formbody" class="formbody">
@@ -139,7 +138,6 @@
     <a lay-event="edit" class="layui-btn layui-btn-xs">编辑</a>
     <a lay-event="delete" class="layui-btn layui-btn-danger layui-btn-xs">删除</a>
     {{# } }}
-
 </script>
 </html>
 

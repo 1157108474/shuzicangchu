@@ -1,4 +1,4 @@
-ï»¿ layui.use(['laydate', 'form', 'layer', 'table', 'laytpl','element'], function () {
+ layui.use(['laydate', 'form', 'layer', 'table', 'laytpl','element'], function () {
     var laydate = layui.laydate;
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
@@ -9,7 +9,7 @@
         element = layui.element;
 
 
-    //æ•°æ®åˆ—è¡¨
+    //Êı¾İÁĞ±í
     var tableIns = table.render({
         elem: '#activitiProcessed',
         url: 'findProcessedByperson.json',
@@ -17,22 +17,22 @@
         page: true,
         height: "full-125",
         limits: [10, 20, 30, 40],
-        limit: 20,
+        limit: 30,
         id: "activitiProcessedTable",
         method: 'post',
         cols: [[
             {type: "checkbox", fixed: "left", width: 50},
             {
-                field: 'code', title: 'å•æ®ç¼–å·', align: "center",width:210, event: "getId", templet: function (d) {
+                field: 'code', title: 'µ¥¾İ±àºÅ', align: "center",width:210, event: "getId", templet: function (d) {
                 return "<a class='layui-table-link' href='javascript:;'>" + d.code + "</a>";
             }
             },
-            {field: 'sheetName', title: 'å•æ®åç§°', align: "center",width:150},
-            {field: 'submitMan', title: 'æäº¤äºº', align: "center",width:150},
-            {field: 'name', title: 'å®¡æ ¸ç¯èŠ‚', align: "center",width:130},
-            {field: 'assignee', title: 'å¤„ç†äºº', align: "center",width:150},
-            {field: 'endTime', title: 'æäº¤æ—¶é—´', align: "center",width:160},
-            {field: 'status', title: 'å•æ®çŠ¶æ€', align: "center",width:120}
+            {field: 'sheetName', title: 'µ¥¾İÃû³Æ', align: "center",width:150},
+            {field: 'submitMan', title: 'Ìá½»ÈË', align: "center",width:150},
+            {field: 'name', title: 'ÉóºË»·½Ú', align: "center",width:130},
+            {field: 'assignee', title: '´¦ÀíÈË', align: "center",width:150},
+            {field: 'endTime', title: 'Ìá½»Ê±¼ä', align: "center",width:160},
+            {field: 'status', title: 'µ¥¾İ×´Ì¬', align: "center",width:120}
         ]],
         page: true
     });
@@ -45,22 +45,22 @@
          , theme: 'molv'
      });
     layui.table.on('tool(activitiProcessed)', function(obj){
-        // ä»£ç å—
+        // ´úÂë¿é
         var data = obj.data;
         parent.tab.tabAdd({
             href:data.url+"?taskId="+data.id+"&&oper=show",
-            title: "å®¡æ‰¹é¡µé¢"+data.id,
+            title: "ÉóÅúÒ³Ãæ"+data.id,
             id:data.id
         });
         /*parent.tab.tabAdd({
-            href: "/system/activitiButton/getOnePro.htm?taskId="+data.id, //åœ°å€
-            title: "å®¡æ‰¹æŸ¥çœ‹"
+            href: "/system/activitiButton/getOnePro.htm?taskId="+data.id, //µØÖ·
+            title: "ÉóÅú²é¿´"
         });*/
     });
      form.on("submit(formSubmit)", function (data) {
          table.reload('activitiProcessedTable', {
              page: {
-                 curr: 1 //é‡æ–°ä»ç¬¬ 1 é¡µå¼€å§‹
+                 curr: 1 //ÖØĞÂ´ÓµÚ 1 Ò³¿ªÊ¼
              },
              where: {
                  temCode:$("#temCode").val(),
@@ -77,7 +77,7 @@
          $(".startTime").val("");
          $(".endTime").val("");
      });
-    //æ—¶é—´æˆ³çš„å¤„ç†
+    //Ê±¼ä´ÁµÄ´¦Àí
     layui.laytpl.toDateString = function(d, format){
         var date = new Date(d || new Date())
             ,ymd = [
@@ -100,7 +100,7 @@
             .replace(/mm/g, hms[1])
             .replace(/ss/g, hms[2]);
     };
-    //æ•°å­—å‰ç½®è¡¥é›¶
+    //Êı×ÖÇ°ÖÃ²¹Áã
     layui.laytpl.digit = function(num, length, end){
         var str = '';
         num = String(num);

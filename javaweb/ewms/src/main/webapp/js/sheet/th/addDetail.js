@@ -23,7 +23,7 @@ layui.use(['form', 'table', 'layer'], function () {
         , height: "full-220"
         , method: "post"
         , page: true   //开启分页
-        , limit: 5   //默认十五条数据一页
+        , limit: 30   //默认十五条数据一页
         , limits: [5, 10, 15]  //数据分页条
         , id: "detailGridReload"
         , cols: [

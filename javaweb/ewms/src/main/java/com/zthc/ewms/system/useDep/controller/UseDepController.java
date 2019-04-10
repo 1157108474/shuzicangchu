@@ -167,9 +167,7 @@ public class UseDepController {
         log.debug("进入获取使用单位方法,当前方法名:useDepList");
         LayuiPage<UseDep> ret = null;
         try {
-
-            ret = this.service.listUseDep(useDep, condition);
-
+            ret = service.listUseDep(useDep, condition);
         } catch (Exception e) {
             log.error("获取使用单位列表失败");
             log.errorPrintStacktrace(e);

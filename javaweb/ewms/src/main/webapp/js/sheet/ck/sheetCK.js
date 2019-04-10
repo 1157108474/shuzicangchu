@@ -18,12 +18,13 @@ layui.config({
         , method: 'post'
         , where: {sheetId: $("#id").val()}
         , page: true   //开启分页
-        , limit: 10   //默认十五条数据一页
+        , limit: 30   //默认十五条数据一页
         , limits: [10, 20, 30]  //数据分页条
         , id: "detailsgridTable"
         , cols: [
             [{type: "checkbox", fixed: "left", width: 50}
                 , {field: 'materialCode', title: '物料编码', align: "center", width: 120}
+                , {field: 'description', title: '物料描述', align: "center", width: 320}
                 , {field: 'detailUnitName', title: '计量单位', align: "center", width: 180}
                 , {field: 'detailCount', title: '出库数量', align: "center", width: 100}
                 , {field: 'houseCode', title: '库房编码', align: "center", width: 120}
@@ -31,7 +32,6 @@ layui.config({
                 , {field: 'extendstring1', title: '计划编号', align: "center", width: 100}
                 , {field: 'noTaxPriceDouble', title: '不含税单价', align: "center", width: 100}
                 , {field: 'noTaxSumDouble', title: '不含税金额', align: "center", width: 100}
-                , {field: 'description', title: '物料描述', align: "center", width: 320}
             ]
         ]
     });

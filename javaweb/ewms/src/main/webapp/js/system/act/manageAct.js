@@ -1,4 +1,4 @@
-ï»¿layui.use(['laydate', 'form', 'layer', 'table', 'laytpl','element'], function () {
+layui.use(['laydate', 'form', 'layer', 'table', 'laytpl','element'], function () {
     var laydate = layui.laydate;
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
@@ -7,7 +7,7 @@
         table = layui.table,
         element = layui.element;
 
-    //æ•°æ®åˆ—è¡¨
+    //Êı¾İÁĞ±í
     var tableIns = table.render({
         elem: '#manageModel',
         url: 'model.json',
@@ -15,24 +15,24 @@
         page: false,
         height: "full-125",
         limits: [10, 20, 30, 40],
-        limit: 20,
+        limit: 30,
         id: "manageModelTable",
         method: 'post',
         cols: [[
             {type: "checkbox", fixed: "left", width: 50},
-            {title: 'åºå·', templet: '#indexTpl', align: "center", width: 80},
-            {field: 'name', title: 'æµç¨‹åç§°', align: "center", width: 250},
-            {field: 'version', title: 'æµç¨‹ç‰ˆæœ¬', align: 'center', width: 250},
+            {title: 'ĞòºÅ', templet: '#indexTpl', align: "center", width: 80},
+            {field: 'name', title: 'Á÷³ÌÃû³Æ', align: "center", width: 250},
+            {field: 'version', title: 'Á÷³Ì°æ±¾', align: 'center', width: 250},
             {
                 field: 'createTime',
-                title: 'åˆ›å»ºæ—¶é—´',
+                title: '´´½¨Ê±¼ä',
                 align: 'center',
                 width: 300,
                 templet: '<div>{{ layui.laytpl.toDateString(d.createTime) }}</div>'
             }
         ]],
     });
-    //ç»‘å®šæ—¥æœŸæ§ä»¶
+    //°ó¶¨ÈÕÆÚ¿Ø¼ş
     laydate.render({
         elem: '#startTime'
         , theme: 'molv'
@@ -41,26 +41,26 @@
         elem: '#endTime'
         , theme: 'molv'
     });
-    //æœç´¢
+    //ËÑË÷
    /* $('#btnSearch').on('click', function () {
         table.reload('manageModel', {
             page: {
-                curr: 1 //é‡æ–°ä»ç¬¬ 1 é¡µå¼€å§‹
+                curr: 1 //ÖØĞÂ´ÓµÚ 1 Ò³¿ªÊ¼
             },
             where: {
-                roleName: $(".roleName").val(),  //è§’è‰²åç§°
-                startTime: $(".startTime").val(),  //å¼€å§‹æ—¶é—´
-                endTime: $(".endTime").val()  //ç»“æŸæ—¶é—´
+                roleName: $(".roleName").val(),  //½ÇÉ«Ãû³Æ
+                startTime: $(".startTime").val(),  //¿ªÊ¼Ê±¼ä
+                endTime: $(".endTime").val()  //½áÊøÊ±¼ä
             }
         });
     });*/
 
-    //éƒ¨ç½²
+    //²¿Êğ
     $("#deploy").on("click", function () {
         var checkStatus = table.checkStatus('manageModelTable'),
             data = checkStatus.data;
         if (data.length == 1) {
-            layer.confirm('ç¡®å®šéƒ¨ç½²å½“å‰çš„æµç¨‹ï¼Ÿ', {icon: 3, title: 'æç¤ºä¿¡æ¯'}, function (index) {
+            layer.confirm('È·¶¨²¿Êğµ±Ç°µÄÁ÷³Ì£¿', {icon: 3, title: 'ÌáÊ¾ĞÅÏ¢'}, function (index) {
                 $.post("modelDeploy.htm" ,{'id':data[0].id,'depId':data[0].id}, function (data) {
                     table.reload('manageModelTable', {
                         where: {
@@ -73,30 +73,30 @@
             })
            // layer.close(index);
         } else {
-            layer.msg('è¯·é€‰æ‹©ä¸€æ¡æ•°æ®ã€‚', {
+            layer.msg('ÇëÑ¡ÔñÒ»ÌõÊı¾İ¡£', {
                 anim: 6
             });
         }
 
     });
-    //ç¼–è¾‘
+    //±à¼­
     $("#edit").on("click", function () {
         var checkStatus = table.checkStatus('manageModelTable'),
             data = checkStatus.data;
         if (data.length == 1) {
             parent.tab.tabAdd({
                 href:"/manageModeler.html?modelId="+data[0].id,
-                title: "ç¼–è¾‘"+ $('#act_dicName').val()+"æµç¨‹",
+                title: "±à¼­"+ $('#act_dicName').val()+"Á÷³Ì",
                 id:data[0].id
             });
            // window.open("/manageModeler.html?modelId="+data[0].id);
         } else {
-            layer.msg('è¯·é€‰æ‹©ä¸€æ¡æ•°æ®ã€‚', {
+            layer.msg('ÇëÑ¡ÔñÒ»ÌõÊı¾İ¡£', {
                 anim: 6
             });
         }
     });
-    //æ–°å¢
+    //ĞÂÔö
     $("#add").on("click", function () {
         var actId = $("#act_dicid").val();
         if (actId != "") {
@@ -107,16 +107,16 @@
                         console.log(data);
                         parent.tab.tabAdd({
                             href:"/model/create.htm?id="+actId,
-                            title: "æ–°å¢"+$(".roleName").val()+"æµç¨‹",
+                            title: "ĞÂÔö"+$(".roleName").val()+"Á÷³Ì",
                             id:data.id
                         });
                         /*window.open("/model/create.htm?id="+actId);*/
                     }else{
-                        layer.msg('è¯¥ä¸šåŠ¡æµç¨‹å·²å­˜åœ¨å·¥ä½œæµï¼');
+                        layer.msg('¸ÃÒµÎñÁ÷³ÌÒÑ´æÔÚ¹¤×÷Á÷£¡');
                     }
                 },"JSON");
         } else {
-            layer.msg('è¯·é€‰æ‹©å…·ä½“ä¸šåŠ¡æµç¨‹ã€‚', {
+            layer.msg('ÇëÑ¡Ôñ¾ßÌåÒµÎñÁ÷³Ì¡£', {
                 anim: 6
             });
         }
@@ -125,7 +125,7 @@
     $("#current").on("click", function () {
         table.reload('manageModelTable', {
             /*page: {
-                curr: 1 //é‡æ–°ä»ç¬¬ 1 é¡µå¼€å§‹
+                curr: 1 //ÖØĞÂ´ÓµÚ 1 Ò³¿ªÊ¼
             },*/
             where: {
                 id: $("#act_dicid").val()
@@ -134,10 +134,10 @@
     });
 
     window.clickDic = function(){
-        //å¯ä»¥è¢«å¤–éƒ¨å¼•ç”¨
+        //¿ÉÒÔ±»Íâ²¿ÒıÓÃ
         table.reload('manageModelTable', {
             /*page: {
-                curr: 1 //é‡æ–°ä»ç¬¬ 1 é¡µå¼€å§‹
+                curr: 1 //ÖØĞÂ´ÓµÚ 1 Ò³¿ªÊ¼
             },*/
             where: {
                 id: $("#act_dicid").val()
@@ -145,7 +145,7 @@
         });
     }
 
-    //æ—¶é—´æˆ³çš„å¤„ç†
+    //Ê±¼ä´ÁµÄ´¦Àí
     layui.laytpl.toDateString = function(d, format){
         var date = new Date(d || new Date())
             ,ymd = [
@@ -169,7 +169,7 @@
             .replace(/ss/g, hms[2]);
     };
 
-//æ•°å­—å‰ç½®è¡¥é›¶
+//Êı×ÖÇ°ÖÃ²¹Áã
     layui.laytpl.digit = function(num, length, end){
         var str = '';
         num = String(num);

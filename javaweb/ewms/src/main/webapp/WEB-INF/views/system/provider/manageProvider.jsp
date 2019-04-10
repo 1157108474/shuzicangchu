@@ -11,9 +11,7 @@
     <link rel="stylesheet" href="/plugins/layui/css/layui.css" media="all"/>
 </head>
 <body>
-
 <div class="admin-main">
-
     <blockquote class="layui-elem-quote" style="margin-left: 10px;margin-top: 5px;height: 28px">
         <div style="float: left">
             <a href="javascript:void(0);" class="layui-btn add" id="add">ÐÂÔö</a>
@@ -30,7 +28,6 @@
     </blockquote>
     <div style="clear: both;"></div>
     <div style="margin-left: 10px;">
-
         <table id="providerList" lay-filter="providerList"></table>
     </div>
 </div>

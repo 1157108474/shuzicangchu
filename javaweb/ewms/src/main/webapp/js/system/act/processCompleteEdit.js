@@ -1,4 +1,4 @@
-ï»¿layui.use(['laydate', 'form', 'layer', 'table', 'laytpl','element'], function () {
+layui.use(['laydate', 'form', 'layer', 'table', 'laytpl','element'], function () {
     var laydate = layui.laydate;
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
@@ -9,28 +9,28 @@
         element = layui.element;
 
 
-    //æ•°æ®åˆ—è¡¨
+    //Êı¾İÁĞ±í
     var tableIns = table.render({
         elem: '#processComplete',
         url:'../../system/activitiListener/processCompleteEdit.json?taskId='+$("#taskId").val(),
         cellMinWidth: 95,
         height: "full-125",
         limits: [10, 20, 30, 40],
-        limit: 20,
+        limit: 30,
         id: "processCompleteTable",
         method: 'post',
         cols: [[
-            {title: 'åºå·',templet: '#indexTpl',align: "center",width: 50},
-            {field: 'id', title: 'ä»»åŠ¡ID', align: "center",minWidth:120},
-            {field: 'name', title: 'ç¯èŠ‚åç§°', align: "center",minWidth:120},
-            {field: 'assignee', title: 'åŠç†äºº', align: "center",minWidth:120},
-            {field: 'endTime', title: 'åŠç†æ—¶é—´', align: "center",minWidth:120,templet:function (d){
+            {title: 'ĞòºÅ',templet: '#indexTpl',align: "center",width: 50},
+            {field: 'id', title: 'ÈÎÎñID', align: "center",minWidth:120},
+            {field: 'name', title: '»·½ÚÃû³Æ', align: "center",minWidth:120},
+            {field: 'assignee', title: '°ìÀíÈË', align: "center",minWidth:120},
+            {field: 'endTime', title: '°ìÀíÊ±¼ä', align: "center",minWidth:120,templet:function (d){
                 return datetimeformat(d.endTime);
                 }
             }
         ]],
     });
-    //è¿”å›å¹´-æœˆ-æ—¥ æ—¶ï¼šåˆ†ï¼šç§’å‹çš„æ—¥æœŸ
+    //·µ»ØÄê-ÔÂ-ÈÕ Ê±£º·Ö£ºÃëĞÍµÄÈÕÆÚ
     function datetimeformat(longdate) {
         if (null == longdate || '' == longdate) {
             return '';
@@ -45,7 +45,7 @@
             return year + "-" + (month < 10 ? "0" + month : month) + "-" + (day < 10 ? "0" + day : day) + " " + (hour < 10 ? "0" + hour : hour) + ":" + (minute < 10 ? "0" + minute : minute) + ":" + (seconds < 10 ? "0" + seconds : seconds);
         }
     }
-//ç»‘å®šæ—¥æœŸæ§ä»¶
+//°ó¶¨ÈÕÆÚ¿Ø¼ş
     laydate.render({
         elem: '#startTime'
         , theme: 'molv'
@@ -54,7 +54,7 @@
         elem: '#endTime'
         , theme: 'molv'
     });
-    //æ—¶é—´æˆ³çš„å¤„ç†
+    //Ê±¼ä´ÁµÄ´¦Àí
     layui.laytpl.toDateString = function(d, format){
         var date = new Date(d || new Date())
             ,ymd = [
@@ -77,7 +77,7 @@
             .replace(/mm/g, hms[1])
             .replace(/ss/g, hms[2]);
     };
-    //æ•°å­—å‰ç½®è¡¥é›¶
+    //Êı×ÖÇ°ÖÃ²¹Áã
     layui.laytpl.digit = function(num, length, end){
         var str = '';
         num = String(num);

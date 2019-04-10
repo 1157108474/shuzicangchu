@@ -18,7 +18,7 @@ layui.config({
         , height: "full-140"
         , method: 'POST'
         , page: true   //开启分页
-        , limit: 20
+        , limit: 30
         , limits: [10, 20 ,30]  //数据分页条
         ,id: 'pdsheetgridTable'
         , cols: [

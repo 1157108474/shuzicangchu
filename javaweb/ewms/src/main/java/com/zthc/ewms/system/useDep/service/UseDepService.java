@@ -29,7 +29,7 @@ public class UseDepService {
     @Autowired
     private UserService userService;
     @Autowired
-    UserScopeService userScopeService;
+    private UserScopeService userScopeService;
     /**
      * ≈–∂œ «∑Ò÷ÿ∏¥
      * @param code

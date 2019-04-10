@@ -55,15 +55,20 @@ public class CuxwmsStub extends org.apache.axis2.client.Stub {
     public CuxwmsStub(
         org.apache.axis2.context.ConfigurationContext configurationContext)
         throws org.apache.axis2.AxisFault {
+//        this(configurationContext,
+//            "http://172.16.3.169:9099/org.gocom.esb.ws.route/cuxws/wms");
         this(configurationContext,
-            "http://172.16.3.169:9099/org.gocom.esb.ws.route/cuxws/wms");
+                "http://172.16.3.182:9099/org.gocom.esb.ws.route/cuxws/wms");
+        	 
     }
 
     /**
      * Default Constructor
      */
     public CuxwmsStub() throws org.apache.axis2.AxisFault {
-        this("http://172.16.3.169:9099/org.gocom.esb.ws.route/cuxws/wms");
+//        this("http://172.16.3.169:9099/org.gocom.esb.ws.route/cuxws/wms");
+        this("http://172.16.3.182:9099/org.gocom.esb.ws.route/cuxws/wms");
+        	  
     }
 
     /**
@@ -101,6 +106,9 @@ public class CuxwmsStub extends org.apache.axis2.client.Stub {
 
         __operation.setName(new javax.xml.namespace.QName(
                 "http://com/oracle/apps/cuxwms/Cuxwms.wsdl", "invokews"));
+        __operation.setName(new javax.xml.namespace.QName(
+        		"http://com/oracle/apps/ztwms/Ztwms.wsdl", "invokews"));
+        		 		
         _service.addOperation(__operation);
 
         _operations[0] = __operation;
@@ -123,8 +131,10 @@ public class CuxwmsStub extends org.apache.axis2.client.Stub {
 
         try {
             org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[0].getName());
+//            _operationClient.getOptions()
+//                            .setAction("http://com/oracle/apps/cuxwms/Cuxwms.wsdl/invokews");
             _operationClient.getOptions()
-                            .setAction("http://com/oracle/apps/cuxwms/Cuxwms.wsdl/invokews");
+            .setAction("http://com/oracle/apps/ztwms/Ztwms.wsdl/invokews");
             _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
             addPropertyToOperationClient(_operationClient,
@@ -140,12 +150,18 @@ public class CuxwmsStub extends org.apache.axis2.client.Stub {
             env = toEnvelope(getFactory(_operationClient.getOptions()
                                                         .getSoapVersionURI()),
                     invokews0,
-                    optimizeContent(
-                        new javax.xml.namespace.QName(
-                            "http://com/oracle/apps/cuxwms/Cuxwms.wsdl",
-                            "invokews")),
-                    new javax.xml.namespace.QName(
-                        "http://com/oracle/apps/cuxwms/Cuxwms.wsdl", "invokews"));
+//                    optimizeContent(
+//                        new javax.xml.namespace.QName(
+//                            "http://com/oracle/apps/cuxwms/Cuxwms.wsdl",
+//                            "invokews")),
+                            optimizeContent(
+                            		new javax.xml.namespace.QName(
+                            				"http://com/oracle/apps/ztwms/Ztwms.wsdl",
+                            				"invokews")),
+//                    new javax.xml.namespace.QName(
+//                        "http://com/oracle/apps/cuxwms/Cuxwms.wsdl", "invokews"));
+            new javax.xml.namespace.QName(
+            		"http://com/oracle/apps/ztwms/Ztwms.wsdl", "invokews"));
 
             //adding SOAP soap_headers
             _serviceClient.addHeadersToEnvelope(env);
@@ -236,8 +252,10 @@ public class CuxwmsStub extends org.apache.axis2.client.Stub {
         final CuxwmsCallbackHandler callback)
         throws java.rmi.RemoteException {
         org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[0].getName());
+//        _operationClient.getOptions()
+//                        .setAction("http://com/oracle/apps/cuxwms/Cuxwms.wsdl/invokews");
         _operationClient.getOptions()
-                        .setAction("http://com/oracle/apps/cuxwms/Cuxwms.wsdl/invokews");
+        .setAction("http://com/oracle/apps/ztwms/Ztwms.wsdl/invokews");
         _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
         addPropertyToOperationClient(_operationClient,
@@ -252,11 +270,16 @@ public class CuxwmsStub extends org.apache.axis2.client.Stub {
         env = toEnvelope(getFactory(_operationClient.getOptions()
                                                     .getSoapVersionURI()),
                 invokews0,
-                optimizeContent(
-                    new javax.xml.namespace.QName(
-                        "http://com/oracle/apps/cuxwms/Cuxwms.wsdl", "invokews")),
-                new javax.xml.namespace.QName(
-                    "http://com/oracle/apps/cuxwms/Cuxwms.wsdl", "invokews"));
+//                optimizeContent(
+//                    new javax.xml.namespace.QName(
+//                        "http://com/oracle/apps/cuxwms/Cuxwms.wsdl", "invokews")),
+//                new javax.xml.namespace.QName(
+//                    "http://com/oracle/apps/cuxwms/Cuxwms.wsdl", "invokews"));
+        optimizeContent(
+        		new javax.xml.namespace.QName(
+        				"http://com/oracle/apps/ztwms/Ztwms.wsdl", "invokews")),
+        				new javax.xml.namespace.QName(
+        						"http://com/oracle/apps/ztwms/Ztwms.wsdl", "invokews"));
 
         // adding SOAP soap_headers
         _serviceClient.addHeadersToEnvelope(env);
@@ -472,7 +495,8 @@ public class CuxwmsStub extends org.apache.axis2.client.Stub {
 
     //http://172.16.3.169:9099/org.gocom.esb.ws.route/cuxws/wms
     public static class Invokews implements org.apache.axis2.databinding.ADBBean {
-        public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://com/oracle/apps/cuxwms/Cuxwms.wsdl",
+//        public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://com/oracle/apps/cuxwms/Cuxwms.wsdl",
+        		public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://com/oracle/apps/ztwms/Ztwms.wsdl",
                 "invokews", "ns1");
 
         /**
@@ -637,8 +661,10 @@ public class CuxwmsStub extends org.apache.axis2.client.Stub {
                 xmlWriter);
 
             if (serializeType) {
+//                String namespacePrefix = registerPrefix(xmlWriter,
+//                        "http://com/oracle/apps/cuxwms/Cuxwms.wsdl");
                 String namespacePrefix = registerPrefix(xmlWriter,
-                        "http://com/oracle/apps/cuxwms/Cuxwms.wsdl");
+                		"http://com/oracle/apps/ztwms/Ztwms.wsdl");
 
                 if ((namespacePrefix != null) &&
                         (namespacePrefix.trim().length() > 0)) {
@@ -741,8 +767,11 @@ public class CuxwmsStub extends org.apache.axis2.client.Stub {
 
         private static String generatePrefix(
             String namespace) {
-            if (namespace.equals("http://com/oracle/apps/cuxwms/Cuxwms.wsdl")) {
-                return "ns1";
+//            if (namespace.equals("http://com/oracle/apps/cuxwms/Cuxwms.wsdl")) {
+//                return "ns1";
+//            }
+            if (namespace.equals("http://com/oracle/apps/ztwms/Ztwms.wsdl")) {
+            	return "ns1";
             }
 
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
@@ -1349,8 +1378,10 @@ public class CuxwmsStub extends org.apache.axis2.client.Stub {
                 xmlWriter);
 
             if (serializeType) {
+//                String namespacePrefix = registerPrefix(xmlWriter,
+//                        "http://com/oracle/apps/cuxwms/Cuxwms.wsdl");
                 String namespacePrefix = registerPrefix(xmlWriter,
-                        "http://com/oracle/apps/cuxwms/Cuxwms.wsdl");
+                		"http://com/oracle/apps/ztwms/Ztwms.wsdl");
 
                 if ((namespacePrefix != null) &&
                         (namespacePrefix.trim().length() > 0)) {
@@ -1411,8 +1442,11 @@ public class CuxwmsStub extends org.apache.axis2.client.Stub {
 
         private static String generatePrefix(
             String namespace) {
-            if (namespace.equals("http://com/oracle/apps/cuxwms/Cuxwms.wsdl")) {
-                return "ns1";
+//            if (namespace.equals("http://com/oracle/apps/cuxwms/Cuxwms.wsdl")) {
+//                return "ns1";
+//            }
+            if (namespace.equals("http://com/oracle/apps/ztwms/Ztwms.wsdl")) {
+            	return "ns1";
             }
 
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();

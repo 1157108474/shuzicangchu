@@ -4,10 +4,12 @@ import com.zthc.ewms.base.page.LayuiPage;
 import com.zthc.ewms.base.util.Condition;
 import com.zthc.ewms.base.util.StringUtils;
 import com.zthc.ewms.sheet.dao.guard.SheetDetailDaoGuard;
+import com.zthc.ewms.sheet.entity.apply.ManageApplyAndDetail;
 import com.zthc.ewms.sheet.entity.guard.SheetDetail;
 import com.zthc.ewms.sheet.entity.guard.SheetDetailCondition;
 import com.zthc.ewms.sheet.entity.guard.SheetStock;
 import com.zthc.ewms.sheet.entity.order.OrderDetails;
+
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
@@ -247,6 +249,12 @@ public class SheetDetailDao extends SheetDetailDaoGuard {
         query.setParameter("id", id);
         return query.list();
     }
+    public List<ManageApplyAndDetail> printSheetDetails() {
+    	 String hql = " from ManageApplyAndDetail where statusname=:statusname  ";
+    	 Query query = baseDao.createQuery(hql);
+    	 query.setParameter("statusname", "ÒÑÍê³É");
+    	 return query.list();
+	}
 
     public List<OrderDetails> printOrderDetails(String orderNum) {
         String hql = " from OrderDetails where ordernum = :ordernum ";
@@ -283,4 +291,7 @@ public class SheetDetailDao extends SheetDetailDaoGuard {
     public void saveSheetStock(SheetStock obj) {
         baseDao.save(obj);
     }
+
+
+	
 }

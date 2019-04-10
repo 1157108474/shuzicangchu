@@ -4,6 +4,7 @@ import com.zthc.ewms.base.page.LayuiPage;
 import com.zthc.ewms.base.util.StringUtils;
 import com.zthc.ewms.sheet.entity.apply.ApplyPrint;
 import com.zthc.ewms.sheet.entity.apply.ManageApply;
+import com.zthc.ewms.sheet.entity.apply.ManageApplyAndDetail;
 import com.zthc.ewms.sheet.entity.guard.SheetCKD;
 import com.zthc.ewms.sheet.entity.guard.SheetCKDETAIL;
 import com.zthc.ewms.sheet.entity.guard.SheetDetail;
@@ -99,7 +100,11 @@ public class PrintController {
 
         }
     }
-
+    @RequestMapping(value = "sheet/apply", method = RequestMethod.GET)
+    public String printApply( HttpServletRequest request, HttpServletResponse response, Model model) throws IOException, ServletException {
+    	List<ManageApplyAndDetail> manageApplyAndDetail = this.detailService.printSheetDetails();
+    	return "system/print/apply";
+    }
     @RequestMapping(value = "sheet/{type}-{id}", method = RequestMethod.GET)
     public String printSheet(@PathVariable("type") String type, @PathVariable("id") Integer id, HttpServletRequest
             request, HttpServletResponse response, Model model) throws IOException, ServletException {

@@ -37,12 +37,8 @@
             <button class="layui-btn" lay-submit lay-filter="formSubmit">¡¢º¥≤È—Ø</button>
         </div>
     </blockquote>
-
-
     <div style="clear: both;"></div>
-
     <div style="margin-left: 10px;">
-
         <table id="applyDepList" lay-filter="applyDepList"></table>
     </div>
 </div>

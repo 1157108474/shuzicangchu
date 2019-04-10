@@ -12,7 +12,7 @@ layui.config({
         , url: '/sheet/ck/listCKOder.json'  //数据请求路径
         , cellMinWidth: 60
         , page: true   //开启分页
-        , limit: 10   //默认十五条数据一页
+        , limit: 30   //默认十五条数据一页
         , limits: [10, 20, 30]   //数据分页条
         , id: 'cKOrderReload'
         , height: 'full-50'

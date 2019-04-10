@@ -20,7 +20,7 @@ layui.use(['table', 'layer'], function () {
             //一个工具栏  具体请查看layui官网
         ]]
         ,page: true   //开启分页
-        ,limit:10   //默认十五条数据一页
+        ,limit:30   //默认十五条数据一页
         ,limits:[10,20,30]   //数据分页条
         ,id: 'locationListReload'
         , where: {parentId: $("#parentId").val(), parentCode: $("#parentCode").val(), ztId: $("#ztId").val()}
